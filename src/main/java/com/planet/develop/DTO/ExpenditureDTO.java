@@ -1,0 +1,24 @@
+package com.planet.develop.DTO;
+
+import com.planet.develop.Enum.EcoEnum;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Data
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class ExpenditureDTO {
+
+    private String userId; // 사용자 아이디
+    private double cost; // 비용
+    private LocalDateTime date; // 날짜
+    private String exType; // 유형
+    private String exWay; // 방법
+    private String memo; // 메모
+    private EcoEnum eco; // 친/반환경
+    private String ecoDetail; // 친/반환경 상세
+
+}
