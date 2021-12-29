@@ -31,9 +31,9 @@ public class Income {
     @JoinColumn(name="user_id")
     private User user;
 
-    public void addIncome(User user){
-        this.user=user;
-        user.getIncomes().add(this);
-    }
+//    public void addIncome(User user){
+//        this.user=user;
+//        user.getIncomes().add(this);
+//    }
 
 }

@@ -34,7 +34,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Mission> missions= new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<Income> incomes= new ArrayList<>();
+//    @OneToMany(mappedBy = "user")
+//    private List<Income> incomes= new ArrayList<>();
 
 }
