@@ -15,14 +15,6 @@ public interface ExpenditureService {
                 .userId(dto.getUserId())
                 .build();
 
-//        ExpenditureDetail detail = ExpenditureDetail.builder()
-//                .ecoDetail(dto.getEcoDetail())
-//                .eco(dto.getEco())
-//                .exType(dto.getExType())
-//                .exWay(dto.getExWay())
-//                .memo(dto.getMemo())
-//                .build();
-
         Expenditure entity = Expenditure.builder()
                 .eno(detail.getEno())
                 .cost(dto.getCost())
