@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.planet.develop.Service.ExpenditureTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-12-30T07:28:36" hostname="DESKTOP-KC736I6" time="0.618">
+  <properties/>
+  <testcase name="회원가입()" classname="com.planet.develop.Service.ExpenditureTest" time="0.618"/>
+  <system-out><![CDATA[16:28:25.879 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+16:28:25.912 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+16:28:26.004 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.planet.develop.Service.ExpenditureTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+16:28:26.027 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.planet.develop.Service.ExpenditureTest], using SpringBootContextLoader
+16:28:26.039 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.planet.develop.Service.ExpenditureTest]: class path resource [com/planet/develop/Service/ExpenditureTest-context.xml] does not exist
+16:28:26.040 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.planet.develop.Service.ExpenditureTest]: class path resource [com/planet/develop/Service/ExpenditureTestContext.groovy] does not exist
+16:28:26.041 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.planet.develop.Service.ExpenditureTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+16:28:26.043 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.planet.develop.Service.ExpenditureTest]: ExpenditureTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:28:26.146 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.planet.develop.Service.ExpenditureTest]
+16:28:26.311 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\Users\topjo\OneDrive\바탕 화면\PLANet\build\classes\java\main\com\planet\develop\DevelopApplication.class]
+16:28:26.313 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.planet.develop.DevelopApplication for test class com.planet.develop.Service.ExpenditureTest
+16:28:26.562 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.planet.develop.Service.ExpenditureTest]: using defaults.
+16:28:26.564 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+16:28:26.606 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@f27ea3, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@1ce61929, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@346939bf, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@4bf3798b, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@58670130, org.springframework.test.context.support.DirtiesContextTestExecutionListener@74e47444, org.springframework.test.context.transaction.TransactionalTestExecutionListener@9bd0fa6, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@59d2103b, org.springframework.test.context.event.EventPublishingTestExecutionListener@39dcf4b0, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@6e4de19b, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@f6c03cb, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@46f699d5, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@18518ccf, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@1991f767, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@768ccdc5]
+16:28:26.615 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@4ae33a11 testClass = ExpenditureTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@7a48e6e2 testClass = ExpenditureTest, locations = '{}', classes = '{class com.planet.develop.DevelopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@49964d75, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@19e4fcac, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@21fd5faa, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@65a15628, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@ee86bcb, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@7671cb68], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+16:28:26.732 [Test worker] DEBUG org.springframework.boot.ApplicationServletEnvironment - Activating profiles []
+16:28:26.734 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.6.1)
+
+2021-12-30 16:28:27.362  INFO 252 --- [    Test worker] c.p.develop.Service.ExpenditureTest      : Starting ExpenditureTest using Java 14.0.2 on DESKTOP-KC736I6 with PID 252 (started by topjo in C:\Users\topjo\OneDrive\바탕 화면\PLANet)
+2021-12-30 16:28:27.365  INFO 252 --- [    Test worker] c.p.develop.Service.ExpenditureTest      : No active profile set, falling back to default profiles: default
+2021-12-30 16:28:28.908  INFO 252 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-12-30 16:28:29.085  INFO 252 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 156 ms. Found 4 JPA repository interfaces.
+2021-12-30 16:28:30.496  INFO 252 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-12-30 16:28:30.645  INFO 252 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.1.Final
+2021-12-30 16:28:31.188  INFO 252 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-12-30 16:28:31.478  INFO 252 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-12-30 16:28:31.620  INFO 252 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-12-30 16:28:31.704  INFO 252 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MariaDB106Dialect
+2021-12-30 16:28:33.503  INFO 252 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-12-30 16:28:33.529  INFO 252 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-12-30 16:28:34.816  WARN 252 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-12-30 16:28:35.938  WARN 252 --- [    Test worker] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2021-12-30 16:28:36.443  INFO 252 --- [    Test worker] c.p.develop.Service.ExpenditureTest      : Started ExpenditureTest in 9.706 seconds (JVM running for 12.892)
+Hibernate: 
+    select
+        user0_.user_id as user_id1_5_0_,
+        user0_.point as point2_5_0_,
+        user0_.user_name as user_nam3_5_0_ 
+    from
+        user user0_ 
+    where
+        user0_.user_id=?
+Hibernate: 
+    select
+        grade0_.user_id as user_id1_2_0_,
+        grade0_.grade as grade2_2_0_ 
+    from
+        grade grade0_ 
+    where
+        grade0_.user_id=?
+2021-12-30 16:28:36.994  INFO 252 --- [    Test worker] c.p.develop.Service.UserServiceImpl      : user1@naver.com is already exist...
+Hibernate: 
+    select
+        user0_.user_id as user_id1_5_0_,
+        user0_.point as point2_5_0_,
+        user0_.user_name as user_nam3_5_0_ 
+    from
+        user user0_ 
+    where
+        user0_.user_id=?
+Hibernate: 
+    select
+        grade0_.user_id as user_id1_2_0_,
+        grade0_.grade as grade2_2_0_ 
+    from
+        grade grade0_ 
+    where
+        grade0_.user_id=?
+2021-12-30 16:28:37.001  INFO 252 --- [    Test worker] c.p.develop.Service.UserServiceImpl      : user2@naver.com is already exist...
+Hibernate: 
+    select
+        user0_.user_id as user_id1_5_0_,
+        user0_.point as point2_5_0_,
+        user0_.user_name as user_nam3_5_0_ 
+    from
+        user user0_ 
+    where
+        user0_.user_id=?
+Hibernate: 
+    select
+        grade0_.user_id as user_id1_2_0_,
+        grade0_.grade as grade2_2_0_ 
+    from
+        grade grade0_ 
+    where
+        grade0_.user_id=?
+2021-12-30 16:28:37.010  INFO 252 --- [    Test worker] c.p.develop.Service.UserServiceImpl      : user3@naver.com is already exist...
+Hibernate: 
+    select
+        user0_.user_id as user_id1_5_0_,
+        user0_.point as point2_5_0_,
+        user0_.user_name as user_nam3_5_0_ 
+    from
+        user user0_ 
+    where
+        user0_.user_id=?
+Hibernate: 
+    select
+        grade0_.user_id as user_id1_2_0_,
+        grade0_.grade as grade2_2_0_ 
+    from
+        grade grade0_ 
+    where
+        grade0_.user_id=?
+2021-12-30 16:28:37.018  INFO 252 --- [    Test worker] c.p.develop.Service.UserServiceImpl      : user4@naver.com is already exist...
+Hibernate: 
+    select
+        user0_.user_id as user_id1_5_0_,
+        user0_.point as point2_5_0_,
+        user0_.user_name as user_nam3_5_0_ 
+    from
+        user user0_ 
+    where
+        user0_.user_id=?
+Hibernate: 
+    select
+        grade0_.user_id as user_id1_2_0_,
+        grade0_.grade as grade2_2_0_ 
+    from
+        grade grade0_ 
+    where
+        grade0_.user_id=?
+2021-12-30 16:28:37.025  INFO 252 --- [    Test worker] c.p.develop.Service.UserServiceImpl      : user5@naver.com is already exist...
+Hibernate: 
+    select
+        user0_.user_id as user_id1_5_0_,
+        user0_.point as point2_5_0_,
+        user0_.user_name as user_nam3_5_0_ 
+    from
+        user user0_ 
+    where
+        user0_.user_id=?
+Hibernate: 
+    select
+        grade0_.user_id as user_id1_2_0_,
+        grade0_.grade as grade2_2_0_ 
+    from
+        grade grade0_ 
+    where
+        grade0_.user_id=?
+2021-12-30 16:28:37.031  INFO 252 --- [    Test worker] c.p.develop.Service.UserServiceImpl      : user6@naver.com is already exist...
+Hibernate: 
+    select
+        user0_.user_id as user_id1_5_0_,
+        user0_.point as point2_5_0_,
+        user0_.user_name as user_nam3_5_0_ 
+    from
+        user user0_ 
+    where
+        user0_.user_id=?
+Hibernate: 
+    select
+        grade0_.user_id as user_id1_2_0_,
+        grade0_.grade as grade2_2_0_ 
+    from
+        grade grade0_ 
+    where
+        grade0_.user_id=?
+2021-12-30 16:28:37.046  INFO 252 --- [    Test worker] c.p.develop.Service.UserServiceImpl      : user7@naver.com is already exist...
+Hibernate: 
+    select
+        user0_.user_id as user_id1_5_0_,
+        user0_.point as point2_5_0_,
+        user0_.user_name as user_nam3_5_0_ 
+    from
+        user user0_ 
+    where
+        user0_.user_id=?
+Hibernate: 
+    select
+        grade0_.user_id as user_id1_2_0_,
+        grade0_.grade as grade2_2_0_ 
+    from
+        grade grade0_ 
+    where
+        grade0_.user_id=?
+2021-12-30 16:28:37.054  INFO 252 --- [    Test worker] c.p.develop.Service.UserServiceImpl      : user8@naver.com is already exist...
+Hibernate: 
+    select
+        user0_.user_id as user_id1_5_0_,
+        user0_.point as point2_5_0_,
+        user0_.user_name as user_nam3_5_0_ 
+    from
+        user user0_ 
+    where
+        user0_.user_id=?
+Hibernate: 
+    select
+        grade0_.user_id as user_id1_2_0_,
+        grade0_.grade as grade2_2_0_ 
+    from
+        grade grade0_ 
+    where
+        grade0_.user_id=?
+2021-12-30 16:28:37.064  INFO 252 --- [    Test worker] c.p.develop.Service.UserServiceImpl      : user9@naver.com is already exist...
+Hibernate: 
+    select
+        user0_.user_id as user_id1_5_0_,
+        user0_.point as point2_5_0_,
+        user0_.user_name as user_nam3_5_0_ 
+    from
+        user user0_ 
+    where
+        user0_.user_id=?
+Hibernate: 
+    select
+        grade0_.user_id as user_id1_2_0_,
+        grade0_.grade as grade2_2_0_ 
+    from
+        grade grade0_ 
+    where
+        grade0_.user_id=?
+2021-12-30 16:28:37.078  INFO 252 --- [    Test worker] c.p.develop.Service.UserServiceImpl      : user10@naver.com is already exist...
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
