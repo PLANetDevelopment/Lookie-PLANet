@@ -46,7 +46,7 @@ public class ExpenditureTest {
     /**
      * ExpenditureDTO (지출 dto)를
      * Expenditure과 ExpenditureDetail Entity로 변환하여
-     * DB에 저장
+     * DB에 저장 (총 100개의 데이터 삽입)
      */
     @Test
     public void 수입_데이터_삽입() {
