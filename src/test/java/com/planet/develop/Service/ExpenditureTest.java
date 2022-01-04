@@ -8,7 +8,6 @@ import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
 import com.planet.develop.Repository.ExpenditureDetailRepository;
 import com.planet.develop.Repository.ExpenditureRepository;
-import com.planet.develop.Repository.GradeRepository;
 import com.planet.develop.Repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,6 @@ public class ExpenditureTest {
     private ExpenditureDetailService detailService;
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private GradeRepository gradeRepository;
     @Autowired
     private ExpenditureRepository expenditureRepository;
     @Autowired

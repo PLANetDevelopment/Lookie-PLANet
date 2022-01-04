@@ -26,11 +26,6 @@ public class User {
     @Column
     private int point;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @MapsId //@MapsId 는 @id로 지정한 컬럼에 @OneToOne 이나 @ManyToOne 관계를 매핑시키는 역할
-    @JoinColumn(name = "user_id")
-    private Grade grade;
-
     @OneToMany(mappedBy = "user")
     private List<Mission> missions= new ArrayList<>();
 
