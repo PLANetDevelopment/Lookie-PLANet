@@ -3,6 +3,7 @@ package com.planet.develop.Service;
 import com.planet.develop.DTO.ExpenditureDTO;
 import com.planet.develop.DTO.UserDTO;
 import com.planet.develop.Entity.ExpenditureDetail;
+import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -46,10 +49,10 @@ public class ExpenditureTest {
     /**
      * ExpenditureDTO (지출 dto)를
      * Expenditure과 ExpenditureDetail Entity로 변환하여
-     * DB에 저장 (총 100개의 데이터 삽입)
+     * DB에 저장
      */
     @Test
-    public void 수입_데이터_삽입() {
+    public void 지출_데이터_삽입() {
         IntStream.rangeClosed(1, 100).forEach(i -> {
             ExpenditureDTO dto = ExpenditureDTO.builder()
                     .cost((int)((Math.random()*1000+1)*100)) // 가격 랜덤 삽입
@@ -66,6 +69,24 @@ public class ExpenditureTest {
             Long eno = expenditureService.register(dto, detail);
             System.out.println("expenditure table: " + eno);
         });
+    }
+
+    /**
+     * 사용자 아이디: user10@naver.com
+     * 친반환경: G
+     */
+    @Test
+    public void 사용자별_친반환경_지출내역_가져오기() {
+        User user = User.builder()
+                .userId("user10@naver.com")
+                .build();
+        EcoEnum eco = EcoEnum.G;
+        List<Object[]> ecoList = expenditureRepository.getEcoList(user, eco);
+        System.out.println("-----지출 리스트-----");
+        for (Object[] arr : ecoList)
+            System.out.println(Arrays.toString(arr));
+        System.out.println(user.getUserId() + " 님의"
+                + " 친환경적인 총 지출 금액은 " + detailService.totalEco(user, eco) + "원 입니다.");
     }
 
 }
