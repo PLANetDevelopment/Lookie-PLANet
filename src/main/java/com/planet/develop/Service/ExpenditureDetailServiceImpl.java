@@ -4,12 +4,14 @@ import com.planet.develop.DTO.ExpenditureDTO;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
+import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Repository.ExpenditureDetailRepository;
 import com.planet.develop.Repository.ExpenditureRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -28,12 +30,21 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
     }
 
     @Override
-    public String totalEco(User user, EcoEnum eco) {
+    public String totalDayExType(User user, money_Type type, LocalDate date) {
         double total = 0;
-        List<Object[]> ecoList = expenditureRepository.getEcoList(user, eco);
+        List<Object[]> exTypeList = expenditureRepository.getDayExTypeList(user, type, date);
+        for (Object[] arr : exTypeList) {
+            total += (double) arr[1];
+        }
+        return String.format("%.0f", total);
+    }
+
+    @Override
+    public String totalDayEco(User user, EcoEnum eco, LocalDate date) {
+        double total = 0;
+        List<Object[]> ecoList = expenditureRepository.getDayEcoList(user, eco, date);
         for (Object[] arr : ecoList) {
-            double amount = (double) arr[1];
-            total += amount;
+            total += (double) arr[1];
         }
         return String.format("%.0f", total);
     }
