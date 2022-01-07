@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -76,17 +77,37 @@ public class ExpenditureTest {
      * 친반환경: G
      */
     @Test
-    public void 사용자별_친반환경_지출내역_가져오기() {
+    public void 사용자별_하루_친반환경_지출내역_가져오기() {
         User user = User.builder()
-                .userId("user7@naver.com")
+                .userId("user10@naver.com")
                 .build();
-        EcoEnum eco = EcoEnum.N;
-        List<Object[]> ecoList = expenditureRepository.getEcoList(user, eco);
+        EcoEnum eco = EcoEnum.G;
+        LocalDate date = LocalDate.now();
+        List<Object[]> ecoList = expenditureRepository.getDayEcoList(user, eco, date);
         System.out.println("-----지출 리스트-----");
         for (Object[] arr : ecoList)
             System.out.println(Arrays.toString(arr));
-        System.out.println(user.getUserId() + " 님의"
-                + " 반친환경적인 총 지출 금액은 " + detailService.totalEco(user, eco) + "원 입니다.");
+        System.out.println(user.getUserId() + " 님의 " + date + " " + eco + " 별"
+                + " 총 지출 금액은 " + detailService.totalDayEco(user, eco, date) + "원 입니다.");
+    }
+
+    /**
+     * 사용자 아이디: user1@naver.com
+     * 카테고리: study
+     */
+    @Test
+    public void 사용자별_하루_카테고리별_지출내역_가져오기() {
+        User user = User.builder()
+                .userId("user1@naver.com")
+                .build();
+        money_Type type = money_Type.study;
+        LocalDate date = LocalDate.now();
+        List<Object[]> ecoList = expenditureRepository.getDayExTypeList(user, type, date);
+        System.out.println("-----지출 리스트-----");
+        for (Object[] arr : ecoList)
+            System.out.println(Arrays.toString(arr));
+        System.out.println(user.getUserId() + " 님의 " + date + " " + type + "별"
+                + " 총 지출 금액은 " + detailService.totalDayExType(user, type, date) + "원 입니다.");
     }
 
 }
