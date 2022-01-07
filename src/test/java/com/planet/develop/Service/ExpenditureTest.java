@@ -78,15 +78,15 @@ public class ExpenditureTest {
     @Test
     public void 사용자별_친반환경_지출내역_가져오기() {
         User user = User.builder()
-                .userId("user10@naver.com")
+                .userId("user7@naver.com")
                 .build();
-        EcoEnum eco = EcoEnum.G;
+        EcoEnum eco = EcoEnum.N;
         List<Object[]> ecoList = expenditureRepository.getEcoList(user, eco);
         System.out.println("-----지출 리스트-----");
         for (Object[] arr : ecoList)
             System.out.println(Arrays.toString(arr));
         System.out.println(user.getUserId() + " 님의"
-                + " 친환경적인 총 지출 금액은 " + detailService.totalEco(user, eco) + "원 입니다.");
+                + " 반친환경적인 총 지출 금액은 " + detailService.totalEco(user, eco) + "원 입니다.");
     }
 
 }
