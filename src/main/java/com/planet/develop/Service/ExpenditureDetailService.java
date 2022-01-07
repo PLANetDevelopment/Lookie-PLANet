@@ -4,12 +4,17 @@ import com.planet.develop.DTO.ExpenditureDTO;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
+import com.planet.develop.Enum.money_Type;
+
+import java.time.LocalDate;
 
 public interface ExpenditureDetailService {
 
     Long register(ExpenditureDTO dto);
 
-    String totalEco(User user, EcoEnum eco);
+    String totalDayEco(User user, EcoEnum eco, LocalDate date);
+
+    String totalDayExType(User user, money_Type type, LocalDate date);
 
     default ExpenditureDetail dtoToEntity(ExpenditureDTO dto) {
         ExpenditureDetail entity = ExpenditureDetail.builder()
