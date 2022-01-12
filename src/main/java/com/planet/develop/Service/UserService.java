@@ -7,7 +7,7 @@ public interface UserService {
 
     /**
      * 이미 회원가입 된 아이디인지 확인
-     * 새로운 아이디라면 db에 저장 (point와 grade는 0으로 초기화)
+     * 새로운 아이디라면 db에 저장
      * @return 사용자 아이디
      */
     String register(UserDTO dto);
