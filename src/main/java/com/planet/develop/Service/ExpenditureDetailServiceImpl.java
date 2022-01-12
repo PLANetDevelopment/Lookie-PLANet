@@ -5,6 +5,7 @@ import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
+import com.planet.develop.Enum.money_Way;
 import com.planet.develop.Repository.ExpenditureDetailRepository;
 import com.planet.develop.Repository.ExpenditureRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,16 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         double total = 0;
         List<Object[]> ecoList = expenditureRepository.getDayEcoList(user, eco, date);
         for (Object[] arr : ecoList) {
+            total += (double) arr[1];
+        }
+        return String.format("%.0f", total);
+    }
+
+    @Override
+    public String totalDayExWay(User user, money_Way way, LocalDate date) {
+        double total = 0;
+        List<Object[]> exWayList = expenditureRepository.getDayExWayList(user, way, date);
+        for (Object[] arr : exWayList) {
             total += (double) arr[1];
         }
         return String.format("%.0f", total);

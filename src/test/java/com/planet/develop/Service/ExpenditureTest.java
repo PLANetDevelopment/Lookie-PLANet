@@ -30,8 +30,6 @@ public class ExpenditureTest {
     @Autowired
     private ExpenditureDetailService detailService;
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private ExpenditureRepository expenditureRepository;
     @Autowired
     private ExpenditureDetailRepository detailRepository;
@@ -108,6 +106,25 @@ public class ExpenditureTest {
             System.out.println(Arrays.toString(arr));
         System.out.println(user.getUserId() + " 님의 " + date + " " + type + "별"
                 + " 총 지출 금액은 " + detailService.totalDayExType(user, type, date) + "원 입니다.");
+    }
+
+    /**
+     * 사용자 아이디: user1@naver.com
+     * 지출 유형: card
+     */
+    @Test
+    public void 사용자별_하루_지출유형별_지출내역_가져오기() {
+        User user = User.builder()
+                .userId("user1@naver.com")
+                .build();
+        money_Way way = money_Way.card;
+        LocalDate date = LocalDate.now();
+        List<Object[]> ecoList = expenditureRepository.getDayExWayList(user, way, date);
+        System.out.println("---------지출 리스트----------");
+        for (Object[] arr : ecoList)
+            System.out.println(Arrays.toString(arr));
+        System.out.println(user.getUserId() + " 님의 " + date + " " + way + "별"
+                + " 총 지출 금액은 " + detailService.totalDayExWay(user, way, date) + "원 입니다.");
     }
 
 }
