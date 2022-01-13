@@ -12,16 +12,11 @@ public class Mission {
     @Column(name="mno")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
 
     private Long point;
     private boolean status;
-
-    public void changeMission(User user){
-        this.user=user;
-        user.getMissions().add(this);
-    }
 
 }

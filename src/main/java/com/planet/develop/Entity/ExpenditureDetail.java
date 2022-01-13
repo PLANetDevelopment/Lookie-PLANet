@@ -1,6 +1,5 @@
 package com.planet.develop.Entity;
 
-import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
 import lombok.AllArgsConstructor;
@@ -28,8 +27,6 @@ public class ExpenditureDetail {
     private money_Type exType;
 
     private String memo;
-
-    private EcoEnum eco;
 
     @Column(name = "eco_detail")
     private String ecoDetail;
