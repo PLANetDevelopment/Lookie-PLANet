@@ -1,6 +1,7 @@
 package com.planet.develop.Service;
 
 import com.planet.develop.DTO.ExpenditureDTO;
+import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     private final ExpenditureRepository expenditureRepository;
     private final ExpenditureDetailRepository detailRepository;
+
+    private final EntityManager em;
 
     @Override
     public Long register(ExpenditureDTO dto) {
@@ -58,6 +62,19 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
             total += (double) arr[1];
         }
         return String.format("%.0f", total);
+    }
+
+    public List<Expenditure> findMonthExpenditure(User user, int month) {
+        LocalDate startDate = LocalDate.of(2022,month,1);
+        int lengthOfMonth = startDate.lengthOfMonth();
+        LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
+        return em.createQuery("select e from Expenditure e left join ExpenditureDetail ed on e.eno = ed.eno " +
+                "where :startDate <= e.date and e.date <= :endDate " +
+                "and e.user = :user", Expenditure.class)
+                .setParameter("startDate",startDate)
+                .setParameter("endDate",endDate)
+                .setParameter("user", user)
+                .getResultList();
     }
 
 }

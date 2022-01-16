@@ -2,6 +2,7 @@ package com.planet.develop.Service;
 
 import com.planet.develop.DTO.ExpenditureDTO;
 import com.planet.develop.DTO.UserDTO;
+import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
@@ -110,10 +111,10 @@ public class ExpenditureTest {
 
     /**
      * 사용자 아이디: user1@naver.com
-     * 지출 유형: card
+     * 지출 방법: card
      */
     @Test
-    public void 사용자별_하루_지출유형별_지출내역_가져오기() {
+    public void 사용자별_하루_지출방법별_지출내역_가져오기() {
         User user = User.builder()
                 .userId("user1@naver.com")
                 .build();
