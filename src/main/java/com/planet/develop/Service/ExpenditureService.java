@@ -22,4 +22,18 @@ public interface ExpenditureService {
         return entity;
     }
 
+    default ExpenditureDTO entityToDto(Expenditure entity) {
+        ExpenditureDTO dto = ExpenditureDTO.builder()
+                .userId(entity.getUser().getUserId())
+                .cost(entity.getCost())
+                .date(entity.getDate())
+//                .eco(entity.getDetail().getEco())
+//                .ecoDetail(entity.getDetail().getEcoDetail())
+//                .exType(entity.getDetail().getExType())
+//                .exWay(entity.getDetail().getExWay())
+//                .memo(entity.getDetail().getMemo())
+                .build();
+        return dto;
+    }
+
 }
