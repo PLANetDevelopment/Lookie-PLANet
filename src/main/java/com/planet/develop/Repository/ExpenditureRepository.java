@@ -1,5 +1,6 @@
 package com.planet.develop.Repository;
 
+import com.planet.develop.DTO.ExpenditureDTO;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
@@ -23,7 +24,7 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
     List<Object[]> getDayEcoList(@Param("user") User user, @Param("eco") EcoEnum eco, @Param("date") LocalDate date);
 
     /**
-     * 특정 사용자의 하루 카테고리 별 지출 리스트 가져오기
+     * 특정 사용자의 하루 지출 유형 별 지출 리스트 가져오기
      */
     @Query("select e.user.userId, e.cost, ed.exType, e.date from Expenditure e " +
             "left join ExpenditureDetail ed on e.eno = ed.eno " +
@@ -31,7 +32,7 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
     List<Object[]> getDayExTypeList(@Param("user") User user, @Param("exType") money_Type exType, @Param("date") LocalDate date);
 
     /**
-     * 특정 사용자의 하루 지출 유형 별 지출 리스트 가져오기
+     * 특정 사용자의 하루 지출 방법 별 지출 리스트 가져오기
      */
     @Query("select e.user.userId, e.cost, ed.exWay, e.date from Expenditure e " +
             "left join ExpenditureDetail ed on e.eno = ed.eno " +
