@@ -92,7 +92,7 @@ public class ExpenditureTest {
 
     /**
      * 사용자 아이디: user1@naver.com
-     * 카테고리: study
+     * 지출 유형: study
      */
     @Test
     public void 사용자별_하루_카테고리별_지출내역_가져오기() {

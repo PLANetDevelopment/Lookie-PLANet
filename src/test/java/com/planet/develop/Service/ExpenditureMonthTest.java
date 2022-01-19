@@ -28,6 +28,8 @@ public class ExpenditureMonthTest {
     @Autowired
     private ExpenditureDetailRepository detailRepository;
 
+    int month = 1;
+
     /**
      * 사용자 아이디: user1@naver.com
      * 한 달 사용 내역
@@ -56,13 +58,15 @@ public class ExpenditureMonthTest {
                 .userId("user1@naver.com")
                 .build();
         money_Type type = money_Type.study;
-        List<Expenditure> monthList = detailService.totalMonthExType(user, 1, type);
+        List<Expenditure> monthList = detailService.findMonthExType(user, month, type);
         System.out.println("------지출 리스트------");
         for (Expenditure e : monthList) {
             ExpenditureDTO expenditureDTO = expenditureService.entityToDto(e);
             System.out.println("userID: " + expenditureDTO.getUserId() + " cost: "
                     + expenditureDTO.getCost() + " date: " + expenditureDTO.getDate() + " exType: " + type);
         }
+        System.out.println(user.getUserId() + " 님의 " + month + "월 " + type + "별"
+                + " 총 지출 금액은 " + detailService.totalMonthExType(user, month, type) + "원 입니다.");
     }
 
     /**
@@ -75,13 +79,15 @@ public class ExpenditureMonthTest {
                 .userId("user1@naver.com")
                 .build();
         money_Way way = money_Way.card;
-        List<Expenditure> monthList = detailService.totalMonthExWay(user, 1, way);
+        List<Expenditure> monthList = detailService.findMonthExWay(user, month, way);
         System.out.println("------지출 리스트------");
         for (Expenditure e : monthList) {
             ExpenditureDTO expenditureDTO = expenditureService.entityToDto(e);
             System.out.println("userID: " + expenditureDTO.getUserId() + " cost: "
                     + expenditureDTO.getCost() + " date: " + expenditureDTO.getDate() + " exWay: " + way);
         }
+        System.out.println(user.getUserId() + " 님의 " + month + "월 " + way + "별"
+                + " 총 지출 금액은 " + detailService.totalMonthExWay(user, month, way) + "원 입니다.");
     }
 
     /**
@@ -94,13 +100,15 @@ public class ExpenditureMonthTest {
                 .userId("user1@naver.com")
                 .build();
         EcoEnum eco = EcoEnum.G;
-        List<Expenditure> monthList = detailService.totalMonthEco(user, 1, eco);
+        List<Expenditure> monthList = detailService.findMonthEco(user, month, eco);
         System.out.println("------지출 리스트------");
         for (Expenditure e : monthList) {
             ExpenditureDTO expenditureDTO = expenditureService.entityToDto(e);
             System.out.println("userID: " + expenditureDTO.getUserId() + " cost: "
                     + expenditureDTO.getCost() + " date: " + expenditureDTO.getDate() + " eco: " + eco);
         }
+        System.out.println(user.getUserId() + " 님의 " + month + "월 " + eco + "별"
+                + " 총 지출 금액은 " + detailService.totalMonthEco(user, month, eco) + "원 입니다.");
     }
-
+    
 }
