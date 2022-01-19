@@ -48,7 +48,7 @@ public class IncomeService {
                 }
                 return total;
         }
-        /** type 별 총합 **/
+        /** type 일별 총합 **/
         public Long typeDay(String user_id,LocalDate date,money_Type type) {
                 User findUser = userRepository.findOne(user_id);
                 List<Income> days=incomeRepository.findDay(findUser,date);
@@ -60,7 +60,7 @@ public class IncomeService {
                 return total;
         }
 
-        /** way 별 총합 **/
+        /** way 일별 총합 **/
         public Long wayDay(String user_id,LocalDate date,money_Way way) {
                 User findUser = userRepository.findOne(user_id);
                 List<Income> days=incomeRepository.findDay(findUser, date);
@@ -72,6 +72,13 @@ public class IncomeService {
                 return total;
         }
 
+        /** 월별 조회 **/
+        public List<Income> findMonth(String user_id,int month){
+                User findUser = userRepository.findOne(user_id);
+                List<Income> days = incomeRepository.findMonth(findUser, month);
+                return days;
+        }
+        
         /** 월별 총합 **/
         public Long totalMonth(String user_id,int month) {
                 User findUser = userRepository.findOne(user_id);
@@ -82,6 +89,30 @@ public class IncomeService {
                 }
                 return total;
 
+        }
+
+        /** type 월별 총합 **/
+        public Long typeMonth(String user_id,int Month,money_Type type) {
+                User findUser = userRepository.findOne(user_id);
+                List<Income> days=incomeRepository.findMonth(findUser,Month);
+                Long total=0L;
+                for (Income day : days) {
+                        if(day.getIn_type()==type)
+                                total+=day.getIn_cost();
+                }
+                return total;
+        }
+
+        /** way 월별 총합 **/
+        public Long wayMonth(String user_id,int Month,money_Way way) {
+                User findUser = userRepository.findOne(user_id);
+                List<Income> days=incomeRepository.findMonth(findUser, Month);
+                Long total=0L;
+                for (Income day : days) {
+                        if(day.getIn_way()==way)
+                                total+=day.getIn_cost();
+                }
+                return total;
         }
 
 }

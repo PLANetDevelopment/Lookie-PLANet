@@ -85,6 +85,49 @@ public class IncomeServiceTest {
         //then
         System.out.println("total = " + total);
         
+    }   
+    
+    @Test
+    public void findMonth_함수_테스트() throws Exception{
+        //given
+        incomeService.create("yui12@gmail.com",1000L, LocalDate.of(2023, 2, 11), money_Type.salary, money_Way.card,"없음");
+        incomeService.create("yui12@gmail.com",2000L,LocalDate.of(2023, 2, 12), money_Type.salary, money_Way.card,"없음");
+        incomeService.create("yui12@gmail.com",3000L,LocalDate.of(2023, 2, 13), money_Type.salary, money_Way.card,"없음");
+        //when
+        List<Income> days=incomeService.findMonth("yui12@gmail.com",1);
+        //then
+        for (Income day : days) {
+            System.out.println(day.getUser().getUserName()+":"+day.getIn_cost());
+        }
+        
     }
+
+    @Test
+    public void wayMonth_함수_테스트() throws Exception{
+        //given
+        incomeService.create("yui12@gmail.com",1000L, LocalDate.of(2023, 2, 11), money_Type.salary, money_Way.card,"없음");
+        incomeService.create("yui12@gmail.com",2000L,LocalDate.of(2023, 2, 12), money_Type.salary, money_Way.card,"없음");
+        incomeService.create("yui12@gmail.com",3000L,LocalDate.of(2023, 2, 13), money_Type.salary, money_Way.card,"없음");
+        //when
+        Long total = incomeService.wayMonth("yui12@gmail.com",1,money_Way.card);
+        //then
+        System.out.println("total = " + total);
+
+    }
+
+    @Test
+    public void typeMonth_함수_테스트() throws Exception{
+        //given
+        incomeService.create("yui12@gmail.com",1000L, LocalDate.of(2021, 1, 11), money_Type.allowance, money_Way.card,"없음");
+        incomeService.create("yui12@gmail.com",2000L,LocalDate.of(2023, 2, 12), money_Type.salary, money_Way.card,"없음");
+        incomeService.create("yui12@gmail.com",3000L,LocalDate.of(2023, 2, 13), money_Type.salary, money_Way.card,"없음");
+        //when
+        Long total = incomeService.typeMonth("yui12@gmail.com",1,money_Type.salary);
+        //then
+        System.out.println("total = " + total);
+
+    }
+
+
 
 }

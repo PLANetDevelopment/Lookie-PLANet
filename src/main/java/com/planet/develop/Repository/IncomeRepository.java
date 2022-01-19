@@ -34,8 +34,7 @@ public class IncomeRepository {
     public List<Income> findMonth(User findUser, int month) {
 
         LocalDate startDate = LocalDate.of(2022,month,1);
-        int lengthOfMonth = startDate.lengthOfMonth();
-        LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
+        LocalDate endDate = LocalDate.of(2022,month,startDate.lengthOfMonth());
 
         return em.createQuery("select u from Income u where :startDate<=u.date and u.date <= :endDate", Income.class)
                 .setParameter("startDate",startDate)
