@@ -77,4 +77,46 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 .getResultList();
     }
 
+    public List<Expenditure> totalMonthExType(User user, int month, money_Type type) {
+        LocalDate startDate = LocalDate.of(2022,month,1);
+        int lengthOfMonth = startDate.lengthOfMonth();
+        LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
+        return em.createQuery("select e from Expenditure e left join ExpenditureDetail ed on e.eno = ed.eno " +
+                "where :startDate <= e.date and e.date <= :endDate " +
+                "and e.user = :user and e.detail.exType = :type", Expenditure.class)
+                .setParameter("startDate",startDate)
+                .setParameter("endDate",endDate)
+                .setParameter("user", user)
+                .setParameter("type", type)
+                .getResultList();
+    }
+
+    public List<Expenditure> totalMonthExWay(User user, int month, money_Way way) {
+        LocalDate startDate = LocalDate.of(2022,month,1);
+        int lengthOfMonth = startDate.lengthOfMonth();
+        LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
+        return em.createQuery("select e from Expenditure e left join ExpenditureDetail ed on e.eno = ed.eno " +
+                "where :startDate <= e.date and e.date <= :endDate " +
+                "and e.user = :user and e.detail.exWay = :way", Expenditure.class)
+                .setParameter("startDate",startDate)
+                .setParameter("endDate",endDate)
+                .setParameter("user", user)
+                .setParameter("way", way)
+                .getResultList();
+    }
+
+    public List<Expenditure> totalMonthEco(User user, int month, EcoEnum eco) {
+        LocalDate startDate = LocalDate.of(2022,month,1);
+        int lengthOfMonth = startDate.lengthOfMonth();
+        LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
+        return em.createQuery("select e from Expenditure e left join ExpenditureDetail ed on e.eno = ed.eno " +
+                "where :startDate <= e.date and e.date <= :endDate " +
+                "and e.user = :user and e.detail.eco = :eco", Expenditure.class)
+                .setParameter("startDate",startDate)
+                .setParameter("endDate",endDate)
+                .setParameter("user", user)
+                .setParameter("eco", eco)
+                .getResultList();
+    }
+
 }
