@@ -23,6 +23,12 @@ public interface ExpenditureDetailService {
 
     List<Expenditure> findMonthExpenditure(User user, int month);
 
+    List<Expenditure> totalMonthExType(User user, int month, money_Type type);
+
+    List<Expenditure> totalMonthExWay(User user, int i, money_Way way);
+
+    List<Expenditure> totalMonthEco(User user, int month, EcoEnum eco);
+
     default ExpenditureDetail dtoToEntity(ExpenditureDTO dto) {
         ExpenditureDetail entity = ExpenditureDetail.builder()
                 .ecoDetail(dto.getEcoDetail())
