@@ -38,7 +38,7 @@ public class IncomeServiceTest {
         List<Income> days = incomeService.findDay("yui12@gmail.com", LocalDate.of(2022, 1, 11));
         //then
         for (Income day : days) {
-            System.out.println("day = " +day.getDate() +" , "+"user = "+day.getUser().getUserName());
+            System.out.println("day = " +day.getIn_cost()+" , "+"user = "+day.getUser().getUserName());
         }
     }
 
@@ -77,10 +77,6 @@ public class IncomeServiceTest {
     @Test
     public void totalMonth_함수_테스트() throws Exception{
         //given
-        incomeService.create("yui12@gmail.com",1000L, LocalDate.of(2023, 2, 11), money_Type.salary, money_Way.card,"없음");
-        incomeService.create("yui12@gmail.com",2000L,LocalDate.of(2023, 2, 12), money_Type.salary, money_Way.card,"없음");
-        incomeService.create("yui12@gmail.com",3000L,LocalDate.of(2023, 2, 13), money_Type.salary, money_Way.card,"없음");
-        //when
         Long total = incomeService.totalMonth("yui12@gmail.com",1);
         //then
         System.out.println("total = " + total);
@@ -90,13 +86,16 @@ public class IncomeServiceTest {
     @Test
     public void findMonth_함수_테스트() throws Exception{
         //given
-        incomeService.create("yui12@gmail.com",1000L, LocalDate.of(2023, 2, 11), money_Type.salary, money_Way.card,"없음");
-        incomeService.create("yui12@gmail.com",2000L,LocalDate.of(2023, 2, 12), money_Type.salary, money_Way.card,"없음");
-        incomeService.create("yui12@gmail.com",3000L,LocalDate.of(2023, 2, 13), money_Type.salary, money_Way.card,"없음");
         //when
-        List<Income> days=incomeService.findMonth("yui12@gmail.com",1);
+        List<Income> days1=incomeService.findMonth("yui12@gmail.com",1);
+        List<Income> days2=incomeService.findMonth("hh2@gmail.com",1);
+
         //then
-        for (Income day : days) {
+        for (Income day : days1) {
+            System.out.println(day.getUser().getUserName()+":"+day.getIn_cost());
+        }
+        System.out.println();
+        for (Income day : days2) {
             System.out.println(day.getUser().getUserName()+":"+day.getIn_cost());
         }
         
@@ -105,9 +104,7 @@ public class IncomeServiceTest {
     @Test
     public void wayMonth_함수_테스트() throws Exception{
         //given
-        incomeService.create("yui12@gmail.com",1000L, LocalDate.of(2023, 2, 11), money_Type.salary, money_Way.card,"없음");
-        incomeService.create("yui12@gmail.com",2000L,LocalDate.of(2023, 2, 12), money_Type.salary, money_Way.card,"없음");
-        incomeService.create("yui12@gmail.com",3000L,LocalDate.of(2023, 2, 13), money_Type.salary, money_Way.card,"없음");
+
         //when
         Long total = incomeService.wayMonth("yui12@gmail.com",1,money_Way.card);
         //then
@@ -118,9 +115,7 @@ public class IncomeServiceTest {
     @Test
     public void typeMonth_함수_테스트() throws Exception{
         //given
-        incomeService.create("yui12@gmail.com",1000L, LocalDate.of(2021, 1, 11), money_Type.allowance, money_Way.card,"없음");
-        incomeService.create("yui12@gmail.com",2000L,LocalDate.of(2023, 2, 12), money_Type.salary, money_Way.card,"없음");
-        incomeService.create("yui12@gmail.com",3000L,LocalDate.of(2023, 2, 13), money_Type.salary, money_Way.card,"없음");
+
         //when
         Long total = incomeService.typeMonth("yui12@gmail.com",1,money_Type.salary);
         //then

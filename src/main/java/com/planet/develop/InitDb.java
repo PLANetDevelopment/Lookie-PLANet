@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 
-/** user 예제 생성 **/
+/** 테스트 용 user 생성 **/
 @Component
 @RequiredArgsConstructor
 public class InitDb {
@@ -42,14 +42,17 @@ public class InitDb {
         }
         public void dbInit2(){
             incomeService.create("yui12@gmail.com",1000L, LocalDate.of(2022, 1, 11), money_Type.salary, money_Way.card,"없음");
-            incomeService.create("yui12@gmail.com",2000L,LocalDate.of(2022, 1, 12), money_Type.salary, money_Way.card,"없음");
-            incomeService.create("yui12@gmail.com",3000L,LocalDate.of(2022, 1, 13), money_Type.salary, money_Way.card,"없음");
+            incomeService.create("yui12@gmail.com",2000L,LocalDate.of(2022, 1, 12), money_Type.allowance, money_Way.cash,"없음");
+            incomeService.create("yui12@gmail.com",3000L,LocalDate.of(2022, 1, 13), money_Type.etc, money_Way.bank,"없음");
 
 
-//            incomeService.create("yui12@gmail.com",2000L,LocalDate.of(2022, 1, 11),money_Type.allowance,money_Way.card,"없음");
-//            incomeService.create("yui12@gmail.com",3000L,LocalDate.of(2022, 1, 12),money_Type.salary,money_Way.card,"없음");
-//            incomeService.create("hh2@gmail.com",3000L,LocalDate.of(2022, 1, 11),money_Type.salary,money_Way.card,"없음");
-//            incomeService.create("hh2@gmail.com",3000L,LocalDate.of(2022, 1, 13),money_Type.salary,money_Way.card,"없음");
+            incomeService.create("hh2@gmail.com",2000L,LocalDate.of(2022, 1, 11),money_Type.salary,money_Way.card,"없음");
+            incomeService.create("hh2@gmail.com",3000L,LocalDate.of(2022, 1, 12),money_Type.allowance,money_Way.cash,"없음");
+            incomeService.create("hh2@gmail.com",3000L,LocalDate.of(2022, 1, 11),money_Type.etc,money_Way.bank,"없음");
+
+            incomeService.create("hdh2@gmail.com",3000L,LocalDate.of(2022, 1, 11),money_Type.salary,money_Way.card,"없음");
+            incomeService.create("hdh2@gmail.com",3000L,LocalDate.of(2022, 1, 12),money_Type.allowance,money_Way.cash,"없음");
+            incomeService.create("hdh2@gmail.com",3000L,LocalDate.of(2022, 1, 13),money_Type.etc,money_Way.bank,"없음");
         }
     }
 }
