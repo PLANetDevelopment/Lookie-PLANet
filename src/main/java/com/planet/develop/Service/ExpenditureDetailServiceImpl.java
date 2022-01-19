@@ -24,6 +24,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     private final ExpenditureRepository expenditureRepository;
     private final ExpenditureDetailRepository detailRepository;
+    private final ExpenditureService service;
 
     private final EntityManager em;
 
@@ -77,7 +78,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 .getResultList();
     }
 
-    public List<Expenditure> totalMonthExType(User user, int month, money_Type type) {
+    public List<Expenditure> findMonthExType(User user, int month, money_Type type) {
         LocalDate startDate = LocalDate.of(2022,month,1);
         int lengthOfMonth = startDate.lengthOfMonth();
         LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
@@ -91,7 +92,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 .getResultList();
     }
 
-    public List<Expenditure> totalMonthExWay(User user, int month, money_Way way) {
+    public List<Expenditure> findMonthExWay(User user, int month, money_Way way) {
         LocalDate startDate = LocalDate.of(2022,month,1);
         int lengthOfMonth = startDate.lengthOfMonth();
         LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
@@ -105,7 +106,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 .getResultList();
     }
 
-    public List<Expenditure> totalMonthEco(User user, int month, EcoEnum eco) {
+    public List<Expenditure> findMonthEco(User user, int month, EcoEnum eco) {
         LocalDate startDate = LocalDate.of(2022,month,1);
         int lengthOfMonth = startDate.lengthOfMonth();
         LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
@@ -117,6 +118,36 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 .setParameter("user", user)
                 .setParameter("eco", eco)
                 .getResultList();
+    }
+
+    public String totalMonthExType(User user, int month, money_Type type) {
+        double total = 0;
+        List<Expenditure> exTypeList = findMonthExType(user, month, type);
+        for (Expenditure e : exTypeList) {
+            ExpenditureDTO dto = service.entityToDto(e);
+            total += dto.getCost();
+        }
+        return String.format("%.0f", total);
+    }
+
+    public String totalMonthExWay(User user, int month, money_Way way) {
+        double total = 0;
+        List<Expenditure> exWayList = findMonthExWay(user, month, way);
+        for (Expenditure e : exWayList) {
+            ExpenditureDTO dto = service.entityToDto(e);
+            total += dto.getCost();
+        }
+        return String.format("%.0f", total);
+    }
+
+    public String totalMonthEco(User user, int month, EcoEnum eco) {
+        double total = 0;
+        List<Expenditure> ecoList = findMonthEco(user, month, eco);
+        for (Expenditure e : ecoList) {
+            ExpenditureDTO dto = service.entityToDto(e);
+            total += dto.getCost();
+        }
+        return String.format("%.0f", total);
     }
 
 }
