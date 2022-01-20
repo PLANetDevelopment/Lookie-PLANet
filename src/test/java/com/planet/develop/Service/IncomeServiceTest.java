@@ -6,6 +6,7 @@ import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
 import com.planet.develop.Repository.IncomeRepository;
 import com.planet.develop.Repository.UserRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,16 @@ public class IncomeServiceTest {
     @Autowired private IncomeService incomeService;
     @Autowired private UserRepository userRepository;
 
+    @Test
+    public void cancel_Income_함수_테스트() throws Exception{
+        //given
+        Long cancel_id=3L;
+        //when
+        incomeService.cancel(cancel_id);
+        //then
+        Income one = incomeRepository.findOne(cancel_id);
+        Assertions.assertThat(one).isNull();
+    }
 
     @Test
     public void income_일별_조회_테스트() throws Exception{

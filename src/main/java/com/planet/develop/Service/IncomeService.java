@@ -31,6 +31,12 @@ public class IncomeService {
                 return income.getId();
         }
 
+        /** 수입 삭제 **/
+        public void cancel(Long income_id){
+                Income income = incomeRepository.findOne(income_id);
+                incomeRepository.delete(income);
+        }
+
         /** 일별 조회 **/
         public List<Income> findDay(String user_id,LocalDate date){
                 User findUser = userRepository.findOne(user_id);

@@ -2,8 +2,6 @@ package com.planet.develop.Entity;
 
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

@@ -1,5 +1,4 @@
 package com.planet.develop.Repository;
-
 import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +16,10 @@ public class IncomeRepository {
 
     public void save(Income income) {
         em.persist(income);
+    }
+
+    public void delete(Income income){
+        em.remove(income);
     }
 
     public Income findOne(Long id) {
