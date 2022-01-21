@@ -19,6 +19,8 @@ import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
@@ -38,7 +40,7 @@ public class IncomeServiceTest {
         incomeService.cancel(cancel_id);
         //then
         Income one = incomeRepository.findOne(cancel_id);
-        Assertions.assertThat(one).isNull();
+        assertThat(one).isNull();
     }
 
     @Test
@@ -131,6 +133,16 @@ public class IncomeServiceTest {
         Long total = incomeService.typeMonth("yui12@gmail.com",1,money_Type.salary);
         //then
         System.out.println("total = " + total);
+
+    }
+
+    @Test
+    public void update_income_함수_테스트() throws Exception{
+        //given
+        Long income_id=incomeService.create("yui12@gmail.com",1000L, LocalDate.of(2022, 1, 11), money_Type.salary, money_Way.card,"없음");
+        //when
+        incomeService.update(income_id,2000L, LocalDate.of(2022, 1, 11), money_Type.salary, money_Way.card,"업데이트 된 수입");
+        //then
 
     }
 

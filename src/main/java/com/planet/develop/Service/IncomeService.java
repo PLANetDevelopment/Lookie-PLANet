@@ -23,9 +23,16 @@ public class IncomeService {
         /** 수입 입력 **/
         public Long create(String user_id, Long in_cost, LocalDate date, money_Type in_type, money_Way in_way, String memo) {
                 //유저 엔티티 조회
-                User findUser = userRepository.findOne(user_id);
+                User user = userRepository.findOne(user_id);
                 //수입 엔티티 생성
-                Income income = new Income(in_cost,in_way,in_type,memo,date,findUser);
+                Income income = Income.builder()
+                        .in_cost(in_cost)
+                        .date(date)
+                        .in_type(in_type)
+                        .in_way(in_way)
+                        .memo(memo)
+                        .user(user)
+                        .build();
                 //저장
                 incomeRepository.save(income);
                 return income.getId();
@@ -35,6 +42,12 @@ public class IncomeService {
         public void cancel(Long income_id){
                 Income income = incomeRepository.findOne(income_id);
                 incomeRepository.delete(income);
+        }
+
+        /** 수입 변경 **/
+        public void update(Long income_id, Long in_cost, LocalDate date, money_Type in_type, money_Way in_way, String memo){
+               Income income = incomeRepository.findOne(income_id);
+               income.update_income(in_cost,in_way,in_type,memo,date);
         }
 
         /** 일별 조회 **/

@@ -2,6 +2,8 @@ package com.planet.develop.Entity;
 
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,9 +11,10 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 
-@Entity
+
 @Getter
 @NoArgsConstructor
+@Entity
 public class Income {
 
     @Id @GeneratedValue
@@ -35,6 +38,7 @@ public class Income {
     private User user;
 
 
+    @Builder
     public Income(Long in_cost,money_Way in_way,money_Type in_type,String memo,LocalDate date,User user){
         this.in_cost=in_cost;
         this.date=date;
@@ -42,6 +46,14 @@ public class Income {
         this.in_type=in_type;
         this.memo=memo;
         this.user=user;
+    }
+
+    public void update_income(Long in_cost,money_Way in_way,money_Type in_type,String memo,LocalDate date){
+        this.in_cost=in_cost;
+        this.date=date;
+        this.in_way=in_way;
+        this.in_type=in_type;
+        this.memo=memo;
     }
 
 
