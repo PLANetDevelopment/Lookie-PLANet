@@ -7,9 +7,12 @@
     <list default="true" id="f0fc8f6e-65f9-4033-85e1-cc137d861cc0" name="Default Changelist" comment="">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/UpdateTest.java" afterDir="false" />
+>>>>>>> yujin
+=======
 >>>>>>> yujin
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.1/executionHistory/executionHistory.lock" afterDir="false" />
@@ -17,6 +20,7 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+<<<<<<< HEAD
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -47,14 +51,16 @@
       <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/planet/develop/Service/ExpenditureMonthTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/planet/develop/Service/ExpenditureMonthTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/planet/develop/Service/ExpenditureTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/planet/develop/Service/ExpenditureTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/com.planet.develop.Service.ExpenditureMonthTest.html" beforeDir="false" />
+=======
+>>>>>>> yujin
       <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/com.planet.develop.Service.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/com.planet.develop.Service.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-com.planet.develop.Service.ExpenditureMonthTest.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileTestJava/previous-compilation-data.bin" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/Expenditure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/Expenditure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/ExpenditureDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/ExpenditureDetail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" afterDir="false" />
@@ -64,6 +70,9 @@
 >>>>>>> yujin
 =======
       <change beforePath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/ExpenditureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/ExpenditureTest.java" afterDir="false" />
+>>>>>>> yujin
+=======
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/UpdateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/UpdateTest.java" afterDir="false" />
 >>>>>>> yujin
     </list>
     <option name="SHOW_DIALOG" value="false" />
