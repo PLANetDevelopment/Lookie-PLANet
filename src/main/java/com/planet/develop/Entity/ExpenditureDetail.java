@@ -37,7 +37,7 @@ public class ExpenditureDetail {
     @Column(name = "eco_detail")
     private String ecoDetail;
 
-    public update(money_Type type, money_Way way, String memo, EcoEnum eco, String ecoDetail) {
+    public void update(money_Type type, money_Way way, String memo, EcoEnum eco, String ecoDetail) {
         this.exType = type;
         this.exWay = way;
         this.memo = memo;

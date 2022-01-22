@@ -2,7 +2,6 @@ package com.planet.develop.Service;
 
 import com.planet.develop.DTO.ExpenditureDTO;
 import com.planet.develop.DTO.UserDTO;
-import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
@@ -10,7 +9,6 @@ import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
 import com.planet.develop.Repository.ExpenditureDetailRepository;
 import com.planet.develop.Repository.ExpenditureRepository;
-import com.planet.develop.Repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -53,7 +51,7 @@ public class ExpenditureTest {
      */
     @Test
     public void 지출_데이터_삽입() {
-        IntStream.rangeClosed(1, 100).forEach(i -> {
+        IntStream.rangeClosed(1, 10).forEach(i -> {
             ExpenditureDTO dto = ExpenditureDTO.builder()
                     .cost((int)((Math.random()*1000+1)*100)) // 가격 랜덤 삽입
                     .eco(EcoEnum.values()[new Random().nextInt(EcoEnum.values().length)]) // 친/반환경 랜덤 삽입

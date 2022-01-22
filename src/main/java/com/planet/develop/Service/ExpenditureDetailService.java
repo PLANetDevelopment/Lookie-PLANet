@@ -39,7 +39,9 @@ public interface ExpenditureDetailService {
 
     String totalMonthExWay(User user, int month, money_Way way);
 
-        default ExpenditureDetail dtoToEntity(ExpenditureDTO dto) {
+    Long update(Long id, ExpenditureDTO dto) throws IllegalAccessException;
+
+    default ExpenditureDetail dtoToEntity(ExpenditureDTO dto) {
         ExpenditureDetail entity = ExpenditureDetail.builder()
                 .ecoDetail(dto.getEcoDetail())
                 .eco(dto.getEco())
@@ -48,7 +50,7 @@ public interface ExpenditureDetailService {
                 .memo(dto.getMemo())
                 .ecoDetail(dto.getEcoDetail())
                 .build();
-            return entity;
-        }
+        return entity;
+    }
 
 }
