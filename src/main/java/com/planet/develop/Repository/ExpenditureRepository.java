@@ -1,6 +1,5 @@
 package com.planet.develop.Repository;
 
-import com.planet.develop.DTO.ExpenditureDTO;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;

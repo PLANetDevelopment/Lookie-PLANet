@@ -16,7 +16,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     private final ExpenditureRepository repository;
 
     @Override
-    public Long register(ExpenditureDTO dto, ExpenditureDetail detail) {
+    public Long save(ExpenditureDTO dto, ExpenditureDetail detail) {
         Expenditure entity = dtoToEntity(dto, detail);
         repository.save(entity);
         return entity.getEno();

@@ -7,7 +7,7 @@ import com.planet.develop.Entity.User;
 
 public interface ExpenditureService {
 
-    Long register(ExpenditureDTO dto, ExpenditureDetail detail);
+    Long save(ExpenditureDTO dto, ExpenditureDetail detail);
 
     default Expenditure dtoToEntity(ExpenditureDTO dto, ExpenditureDetail detail) {
         User user = User.builder()

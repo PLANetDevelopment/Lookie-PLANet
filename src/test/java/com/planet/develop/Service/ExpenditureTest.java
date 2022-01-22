@@ -63,10 +63,10 @@ public class ExpenditureTest {
                     .memo("good memo")
                     .userId("user" + (int)(Math.random()*10+1) + "@naver.com") // 사용자 아이디 랜덤 삽입
                     .build();
-            Long deno = detailService.register(dto);
+            Long deno = detailService.save(dto);
             System.out.println("expenditrue detail table: " + deno);
             ExpenditureDetail detail = detailRepository.findById(deno).get();
-            Long eno = expenditureService.register(dto, detail);
+            Long eno = expenditureService.save(dto, detail);
             System.out.println("expenditure table: " + eno);
         });
     }
@@ -87,7 +87,7 @@ public class ExpenditureTest {
         for (Object[] arr : ecoList)
             System.out.println(Arrays.toString(arr));
         System.out.println(user.getUserId() + " 님의 " + date + " " + eco + " 별"
-                + " 총 지출 금액은 " + detailService.totalDayEco(user, eco, date) + "원 입니다.");
+                + " 총 지출 금액은 " + detailService.totalEcoDay(user, eco, date) + "원 입니다.");
     }
 
     /**
@@ -106,7 +106,7 @@ public class ExpenditureTest {
         for (Object[] arr : ecoList)
             System.out.println(Arrays.toString(arr));
         System.out.println(user.getUserId() + " 님의 " + date + " " + type + "별"
-                + " 총 지출 금액은 " + detailService.totalDayExType(user, type, date) + "원 입니다.");
+                + " 총 지출 금액은 " + detailService.totalTypeDay(user, type, date) + "원 입니다.");
     }
 
     /**
@@ -125,7 +125,7 @@ public class ExpenditureTest {
         for (Object[] arr : ecoList)
             System.out.println(Arrays.toString(arr));
         System.out.println(user.getUserId() + " 님의 " + date + " " + way + "별"
-                + " 총 지출 금액은 " + detailService.totalDayExWay(user, way, date) + "원 입니다.");
+                + " 총 지출 금액은 " + detailService.totalWayDay(user, way, date) + "원 입니다.");
     }
 
 }
