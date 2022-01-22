@@ -12,6 +12,7 @@ import com.planet.develop.Repository.ExpenditureRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
@@ -189,6 +190,14 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
             total += dto.getCost();
         }
         return String.format("%.0f", total);
+    }
+
+    @Transactional // sql 구문으로 update 하지 않아도 됨 -> 더티체킹
+    public Long update(Long id, ExpenditureDTO dto) throws IllegalAccessException {
+        Expenditure expenditure = expenditureRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
+        expenditure.update(dto.(), dto.getContent());
+        return id;
     }
 
 }
