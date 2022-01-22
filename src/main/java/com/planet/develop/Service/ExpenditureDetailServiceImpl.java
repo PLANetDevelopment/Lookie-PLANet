@@ -32,7 +32,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 지출 등록 */
     @Override
-    public Long register(ExpenditureDTO dto) {
+    public Long save(ExpenditureDTO dto) {
         ExpenditureDetail entity = dtoToEntity(dto);
         detailRepository.save(entity);
         return entity.getEno();
@@ -51,7 +51,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 하루 지출 유형별 총액 */
     @Override
-    public String totalDayExType(User user, money_Type type, LocalDate date) {
+    public String totalTypeDay(User user, money_Type type, LocalDate date) {
         double total = 0;
         List<Object[]> exTypeList = expenditureRepository.getDayExTypeList(user, type, date);
         for (Object[] arr : exTypeList) {
@@ -62,7 +62,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 하루 친반환경별 총액 */
     @Override
-    public String totalDayEco(User user, EcoEnum eco, LocalDate date) {
+    public String totalEcoDay(User user, EcoEnum eco, LocalDate date) {
         double total = 0;
         List<Object[]> ecoList = expenditureRepository.getDayEcoList(user, eco, date);
         for (Object[] arr : ecoList) {
@@ -73,7 +73,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 하루 지출 방법별 총액 */
     @Override
-    public String totalDayExWay(User user, money_Way way, LocalDate date) {
+    public String totalWayDay(User user, money_Way way, LocalDate date) {
         double total = 0;
         List<Object[]> exWayList = expenditureRepository.getDayExWayList(user, way, date);
         for (Object[] arr : exWayList) {
@@ -84,7 +84,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 한 달 지출 리스트 */
     @Override
-    public List<Expenditure> findMonthExpenditure(User user, int month) {
+    public List<Expenditure> getMonthList(User user, int month) {
         LocalDate startDate = LocalDate.of(2022,month,1);
         int lengthOfMonth = startDate.lengthOfMonth();
         LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
@@ -99,7 +99,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 한 달 지출 유형별 리스트 */
     @Override
-    public List<Expenditure> findMonthExType(User user, int month, money_Type type) {
+    public List<Expenditure> getMonthTypeList(User user, int month, money_Type type) {
         LocalDate startDate = LocalDate.of(2022,month,1);
         int lengthOfMonth = startDate.lengthOfMonth();
         LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
@@ -115,7 +115,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 한 달 지출 방법별 리스트 */
     @Override
-    public List<Expenditure> findMonthExWay(User user, int month, money_Way way) {
+    public List<Expenditure> getMonthWayList(User user, int month, money_Way way) {
         LocalDate startDate = LocalDate.of(2022,month,1);
         int lengthOfMonth = startDate.lengthOfMonth();
         LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
@@ -131,7 +131,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 한 달 친반환경별 리스트 */
     @Override
-    public List<Expenditure> findMonthEco(User user, int month, EcoEnum eco) {
+    public List<Expenditure> getMonthEcoList(User user, int month, EcoEnum eco) {
         LocalDate startDate = LocalDate.of(2022,month,1);
         int lengthOfMonth = startDate.lengthOfMonth();
         LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
@@ -149,7 +149,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
     @Override
     public String totalMonth(User user, int month) {
         double total = 0;
-        List<Expenditure> exList = findMonthExpenditure(user, month);
+        List<Expenditure> exList = getMonthList(user, month);
         for (Expenditure e : exList) {
             ExpenditureDTO dto = service.entityToDto(e);
             total += dto.getCost();
@@ -159,9 +159,9 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 한 달 지출 유형별 총액 */
     @Override
-    public String totalMonthExType(User user, int month, money_Type type) {
+    public String totalMonthType(User user, int month, money_Type type) {
         double total = 0;
-        List<Expenditure> exTypeList = findMonthExType(user, month, type);
+        List<Expenditure> exTypeList = getMonthTypeList(user, month, type);
         for (Expenditure e : exTypeList) {
             ExpenditureDTO dto = service.entityToDto(e);
             total += dto.getCost();
@@ -171,9 +171,9 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 한 달 지출 방법별 총액 */
     @Override
-    public String totalMonthExWay(User user, int month, money_Way way) {
+    public String totalWayMonth(User user, int month, money_Way way) {
         double total = 0;
-        List<Expenditure> exWayList = findMonthExWay(user, month, way);
+        List<Expenditure> exWayList = getMonthWayList(user, month, way);
         for (Expenditure e : exWayList) {
             ExpenditureDTO dto = service.entityToDto(e);
             total += dto.getCost();
@@ -183,9 +183,9 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 한 달 친반환경별 지출 총액 */
     @Override
-    public String totalMonthEco(User user, int month, EcoEnum eco) {
+    public String totalEcoMonth(User user, int month, EcoEnum eco) {
         double total = 0;
-        List<Expenditure> ecoList = findMonthEco(user, month, eco);
+        List<Expenditure> ecoList = getMonthEcoList(user, month, eco);
         for (Expenditure e : ecoList) {
             ExpenditureDTO dto = service.entityToDto(e);
             total += dto.getCost();

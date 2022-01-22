@@ -13,33 +13,35 @@ import java.util.List;
 
 public interface ExpenditureDetailService {
 
-    Long register(ExpenditureDTO dto);
+    Long save(ExpenditureDTO dto);
 
-    String totalDayEco(User user, EcoEnum eco, LocalDate date);
+    String totalEcoDay(User user, EcoEnum eco, LocalDate date);
 
     String totalDay(User user, LocalDate date);
 
-    String totalDayExType(User user, money_Type type, LocalDate date);
+    String totalTypeDay(User user, money_Type type, LocalDate date);
 
-    String totalDayExWay(User user, money_Way way, LocalDate date);
+    String totalWayDay(User user, money_Way way, LocalDate date);
 
-    List<Expenditure> findMonthExpenditure(User user, int month);
+    List<Expenditure> getMonthList(User user, int month);
 
-    List<Expenditure> findMonthExType(User user, int month, money_Type type);
+    List<Expenditure> getMonthTypeList(User user, int month, money_Type type);
 
-    List<Expenditure> findMonthExWay(User user, int i, money_Way way);
+    List<Expenditure> getMonthWayList(User user, int i, money_Way way);
 
-    List<Expenditure> findMonthEco(User user, int month, EcoEnum eco);
+    List<Expenditure> getMonthEcoList(User user, int month, EcoEnum eco);
 
-    abstract String totalMonth(User user, int month);
+    String totalMonth(User user, int month);
 
-    String totalMonthExType(User user, int month, money_Type type);
+    String totalMonthType(User user, int month, money_Type type);
 
-    String totalMonthEco(User user, int month, EcoEnum eco);
+    String totalEcoMonth(User user, int month, EcoEnum eco);
 
-    String totalMonthExWay(User user, int month, money_Way way);
+    String totalWayMonth(User user, int month, money_Way way);
 
     Long update(Long id, ExpenditureDTO dto) throws IllegalAccessException;
+
+    /** delete 함수 만들기 */
 
     default ExpenditureDetail dtoToEntity(ExpenditureDTO dto) {
         ExpenditureDetail entity = ExpenditureDetail.builder()
