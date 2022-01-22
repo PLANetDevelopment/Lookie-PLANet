@@ -18,9 +18,8 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
      * Expenditure 테이블과 ExpenditureDetail 테이블 조인
      * */
     @Query("select e, ed from Expenditure e " +
-            "left join ExpenditureDetail ed on e.eno = ed.eno " +
-            "where e.user = :user and e.date = :date")
-    List<Object[]> tableJoin(@Param("user") User user, @Param("date") LocalDate date);
+            "left join ExpenditureDetail ed on e.eno = ed.eno where e.eno = :id")
+    List<Object[]> tableJoin(@Param("id") Long  id);
 
     /**
      * 특정 사용자의 하루 지출 리스트 가져오기

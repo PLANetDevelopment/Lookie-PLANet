@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -192,11 +193,14 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return String.format("%.0f", total);
     }
 
-    @Transactional // sql 구문으로 update 하지 않아도 됨 -> 더티체킹
+    @Transactional
     public Long update(Long id, ExpenditureDTO dto) throws IllegalAccessException {
         Expenditure expenditure = expenditureRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
-        expenditure.update(dto.(), dto.getContent());
+        ExpenditureDetail expenditureDetail = detailRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
+        expenditure.update(dto.getCost());
+        expenditureDetail.update(dto.getExType(), dto.getExWay(), dto.getMemo(), dto.getEco(), dto.getEcoDetail());
         return id;
     }
 

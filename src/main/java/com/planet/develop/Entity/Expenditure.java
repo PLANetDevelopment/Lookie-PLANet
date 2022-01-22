@@ -1,5 +1,8 @@
 package com.planet.develop.Entity;
 
+import com.planet.develop.Enum.EcoEnum;
+import com.planet.develop.Enum.money_Type;
+import com.planet.develop.Enum.money_Way;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,9 +32,8 @@ public class Expenditure extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public update(double cost, ExpenditureDetail detail) {
+    public void update(double cost) {
         this.cost = cost;
-        this.detail = detail;
     }
 
 }
