@@ -39,11 +39,9 @@ public interface ExpenditureDetailService {
 
     String totalWayMonth(User user, int month, money_Way way);
 
-    /** update 함수 만들기 */
+    Long update(Long id, ExpenditureDTO dto) throws IllegalAccessException;
 
     /** delete 함수 만들기 */
-
-    Long update(Long id, ExpenditureDTO dto) throws IllegalAccessException;
 
     default ExpenditureDetail dtoToEntity(ExpenditureDTO dto) {
         ExpenditureDetail entity = ExpenditureDetail.builder()
