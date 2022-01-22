@@ -1,15 +1,18 @@
 package com.planet.develop.Service;
 
+import com.planet.develop.DTO.IncomeRequestDto;
 import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
 import com.planet.develop.Repository.IncomeRepository;
 import com.planet.develop.Repository.UserRepository;
+import com.sun.xml.bind.v2.TODO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,33 +24,21 @@ public class IncomeService {
         private final UserRepository userRepository;
 
         /** 수입 입력 **/
-        public Long create(String user_id, Long in_cost, LocalDate date, money_Type in_type, money_Way in_way, String memo) {
-                //유저 엔티티 조회
-                User user = userRepository.findOne(user_id);
-                //수입 엔티티 생성
-                Income income = Income.builder()
-                        .in_cost(in_cost)
-                        .date(date)
-                        .in_type(in_type)
-                        .in_way(in_way)
-                        .memo(memo)
-                        .user(user)
-                        .build();
-                //저장
+        public Long save(Income income) {
                 incomeRepository.save(income);
                 return income.getId();
         }
 
-        /** 수입 삭제 **/
-        public void cancel(Long income_id){
-                Income income = incomeRepository.findOne(income_id);
-                incomeRepository.delete(income);
+        /** 수입 변경 **/
+        public void update(Long income_id,Long in_cost,money_Way in_way,money_Type in_type,String memo,LocalDate date){
+               Income income = incomeRepository.findOne(income_id);
+               income.update_income(in_cost, in_way, in_type, memo, date);
         }
 
-        /** 수입 변경 **/
-        public void update(Long income_id, Long in_cost, LocalDate date, money_Type in_type, money_Way in_way, String memo){
-               Income income = incomeRepository.findOne(income_id);
-               income.update_income(in_cost,in_way,in_type,memo,date);
+        /** 수입 삭제 **/
+        public void delete(Long income_id){
+                Income income = incomeRepository.findOne(income_id);
+                incomeRepository.delete(income);
         }
 
         /** 일별 조회 **/
