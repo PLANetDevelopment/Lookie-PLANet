@@ -9,7 +9,6 @@ import java.time.LocalDate;
 
 @Data
 public class IncomeRequestDto {
-    private Long id;
     private Long in_cost;
     private money_Way in_way;
     private money_Type in_type;

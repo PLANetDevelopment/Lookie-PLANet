@@ -17,14 +17,14 @@ public class IncomeController {
     private final UserService userService;
 
     @PostMapping("/api/income/{id}/new")
-    public IncomeResponseDto create_income(@PathVariable("id") String id, @RequestBody IncomeRequestDto incomeRequestDto) {
+    public IncomeResponseDto create_income(@PathVariable("id") String id, @RequestBody IncomeRequestDto request) {
         User user = userService.findUser(id);
         Income income = Income.builder()
-                .in_cost(incomeRequestDto.getIn_cost())
-                .date(incomeRequestDto.getDate())
-                .in_type(incomeRequestDto.getIn_type())
-                .in_way(incomeRequestDto.getIn_way())
-                .memo(incomeRequestDto.getMemo())
+                .in_cost(request.getIn_cost())
+                .date(request.getDate())
+                .in_type(request.getIn_type())
+                .in_way(request.getIn_way())
+                .memo(request.getMemo())
                 .user(user)
                 .build();
 
