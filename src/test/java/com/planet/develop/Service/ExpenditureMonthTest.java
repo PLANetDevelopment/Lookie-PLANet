@@ -46,6 +46,8 @@ public class ExpenditureMonthTest {
             System.out.println("userID: " + expenditureDTO.getUserId() + " cost: "
                     + expenditureDTO.getCost() + " date: " + expenditureDTO.getDate());
         }
+        System.out.println(user.getUserId() + " 님의 " + month + "월 "
+                + "총 지출 금액은 " + detailService.totalMonth(user, month) + "원 입니다.");
     }
 
     /**

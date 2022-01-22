@@ -2,18 +2,21 @@ package com.planet.develop.Entity;
 
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-
+@Getter
+@NoArgsConstructor
 @Entity
-@Getter @Setter
 public class Income {
 
     @Id @GeneratedValue
-    private Long ino;
+    @Column(name="ino")
+    private Long id;
 
     private Long in_cost;
 
@@ -27,13 +30,27 @@ public class Income {
 
     private LocalDate date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
 
-//    public void addIncome(User user){
-//        this.user=user;
-//        user.getIncomes().add(this);
-//    }
+
+    @Builder
+    public Income(Long in_cost,money_Way in_way,money_Type in_type,String memo,LocalDate date,User user){
+        this.in_cost=in_cost;
+        this.date=date;
+        this.in_way=in_way;
+        this.in_type=in_type;
+        this.memo=memo;
+        this.user=user;
+    }
+
+    public void update_income(Long in_cost,money_Way in_way,money_Type in_type,String memo,LocalDate date){
+        this.in_cost=in_cost;
+        this.date=date;
+        this.in_way=in_way;
+        this.in_type=in_type;
+        this.memo=memo;
+    }
 
 }

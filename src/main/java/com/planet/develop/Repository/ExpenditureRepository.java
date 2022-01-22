@@ -16,6 +16,15 @@ import java.util.List;
 public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> {
 
     /**
+     * 특정 사용자의 하루 지출 리스트 가져오기
+     */
+    @Query("select e.user.userId, e.cost from Expenditure e " +
+            "left join ExpenditureDetail ed on e.eno = ed.eno " +
+            "where e.user = :user and e.date = :date")
+    List<Object[]> getDayList(@Param("user") User user, @Param("date") LocalDate date);
+
+
+    /**
      * 특정 사용자의 하루 친/반환경 별 지출 리스트 가져오기
      */
     @Query("select e.user.userId, e.cost, ed.eco from Expenditure e " +

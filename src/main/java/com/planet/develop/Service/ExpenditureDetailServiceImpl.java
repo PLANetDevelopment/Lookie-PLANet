@@ -28,6 +28,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     private final EntityManager em;
 
+    /** 지출 등록 */
     @Override
     public Long register(ExpenditureDTO dto) {
         ExpenditureDetail entity = dtoToEntity(dto);
@@ -35,6 +36,18 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return entity.getEno();
     }
 
+    /** 하루 지출 총액 */
+    @Override
+    public String totalDay(User user, LocalDate date) {
+        double total = 0;
+        List<Object[]> exTypeList = expenditureRepository.getDayList(user, date);
+        for (Object[] arr : exTypeList) {
+            total += (double) arr[1];
+        }
+        return String.format("%.0f", total);
+    }
+
+    /** 하루 지출 유형별 총액 */
     @Override
     public String totalDayExType(User user, money_Type type, LocalDate date) {
         double total = 0;
@@ -45,6 +58,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return String.format("%.0f", total);
     }
 
+    /** 하루 친반환경별 총액 */
     @Override
     public String totalDayEco(User user, EcoEnum eco, LocalDate date) {
         double total = 0;
@@ -55,6 +69,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return String.format("%.0f", total);
     }
 
+    /** 하루 지출 방법별 총액 */
     @Override
     public String totalDayExWay(User user, money_Way way, LocalDate date) {
         double total = 0;
@@ -65,6 +80,8 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return String.format("%.0f", total);
     }
 
+    /** 한 달 지출 리스트 */
+    @Override
     public List<Expenditure> findMonthExpenditure(User user, int month) {
         LocalDate startDate = LocalDate.of(2022,month,1);
         int lengthOfMonth = startDate.lengthOfMonth();
@@ -78,6 +95,8 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 .getResultList();
     }
 
+    /** 한 달 지출 유형별 리스트 */
+    @Override
     public List<Expenditure> findMonthExType(User user, int month, money_Type type) {
         LocalDate startDate = LocalDate.of(2022,month,1);
         int lengthOfMonth = startDate.lengthOfMonth();
@@ -92,6 +111,8 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 .getResultList();
     }
 
+    /** 한 달 지출 방법별 리스트 */
+    @Override
     public List<Expenditure> findMonthExWay(User user, int month, money_Way way) {
         LocalDate startDate = LocalDate.of(2022,month,1);
         int lengthOfMonth = startDate.lengthOfMonth();
@@ -106,6 +127,8 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 .getResultList();
     }
 
+    /** 한 달 친반환경별 리스트 */
+    @Override
     public List<Expenditure> findMonthEco(User user, int month, EcoEnum eco) {
         LocalDate startDate = LocalDate.of(2022,month,1);
         int lengthOfMonth = startDate.lengthOfMonth();
@@ -120,6 +143,20 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 .getResultList();
     }
 
+    /** 한 달 지출 총액 */
+    @Override
+    public String totalMonth(User user, int month) {
+        double total = 0;
+        List<Expenditure> exList = findMonthExpenditure(user, month);
+        for (Expenditure e : exList) {
+            ExpenditureDTO dto = service.entityToDto(e);
+            total += dto.getCost();
+        }
+        return String.format("%.0f", total);
+    }
+
+    /** 한 달 지출 유형별 총액 */
+    @Override
     public String totalMonthExType(User user, int month, money_Type type) {
         double total = 0;
         List<Expenditure> exTypeList = findMonthExType(user, month, type);
@@ -130,6 +167,8 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return String.format("%.0f", total);
     }
 
+    /** 한 달 지출 방법별 총액 */
+    @Override
     public String totalMonthExWay(User user, int month, money_Way way) {
         double total = 0;
         List<Expenditure> exWayList = findMonthExWay(user, month, way);
@@ -140,6 +179,8 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return String.format("%.0f", total);
     }
 
+    /** 한 달 친반환경별 지출 총액 */
+    @Override
     public String totalMonthEco(User user, int month, EcoEnum eco) {
         double total = 0;
         List<Expenditure> ecoList = findMonthEco(user, month, eco);

@@ -17,6 +17,8 @@ public interface ExpenditureDetailService {
 
     String totalDayEco(User user, EcoEnum eco, LocalDate date);
 
+    String totalDay(User user, LocalDate date);
+
     String totalDayExType(User user, money_Type type, LocalDate date);
 
     String totalDayExWay(User user, money_Way way, LocalDate date);
@@ -28,6 +30,8 @@ public interface ExpenditureDetailService {
     List<Expenditure> findMonthExWay(User user, int i, money_Way way);
 
     List<Expenditure> findMonthEco(User user, int month, EcoEnum eco);
+
+    abstract String totalMonth(User user, int month);
 
     String totalMonthExType(User user, int month, money_Type type);
 

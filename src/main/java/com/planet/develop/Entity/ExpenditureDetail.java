@@ -21,14 +21,17 @@ public class ExpenditureDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eno;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ex_way")
     private money_Way exWay;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "ex_type")
     private money_Type exType;
 
     private String memo;
 
+    @Enumerated(EnumType.STRING)
     private EcoEnum eco;
 
     @Column(name = "eco_detail")
