@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0fc8f6e-65f9-4033-85e1-cc137d861cc0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/UpdateTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.1/executionHistory/executionHistory.lock" afterDir="false" />
@@ -14,6 +15,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Entity/Expenditure$ExpenditureBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Entity/Expenditure$ExpenditureBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Entity/Expenditure.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Entity/Expenditure.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Entity/ExpenditureDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Entity/ExpenditureDetail.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Entity/Income.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Entity/Income.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Repository/ExpenditureRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Repository/ExpenditureRepository.class" afterDir="false" />
@@ -21,6 +24,7 @@
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Service/ExpenditureDetailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Service/ExpenditureDetailService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/planet/develop/Service/ExpenditureMonthTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/planet/develop/Service/ExpenditureMonthTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/test/com/planet/develop/Service/ExpenditureTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/test/com/planet/develop/Service/ExpenditureTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/com.planet.develop.Service.ExpenditureMonthTest.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/com.planet.develop.Service.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/tests/test/packages/com.planet.develop.Service.html" afterDir="false" />
@@ -104,10 +108,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../SpringBoot/Real Springboot/Spring with AWS" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\topjo\OneDrive\바탕 화면\PLANet" />
       <recent name="C:\Users\topjo\OneDrive\바탕 화면\PLANet\src\main\java\com\planet\develop\Service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
