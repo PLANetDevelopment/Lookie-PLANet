@@ -29,4 +29,9 @@ public class Expenditure extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public update(double cost, ExpenditureDetail detail) {
+        this.cost = cost;
+        this.detail = detail;
+    }
+
 }
