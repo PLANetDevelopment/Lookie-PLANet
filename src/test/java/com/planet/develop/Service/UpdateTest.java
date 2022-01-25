@@ -1,6 +1,6 @@
 package com.planet.develop.Service;
 
-import com.planet.develop.DTO.ExpenditureDTO;
+import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Way;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ public class UpdateTest {
 
     @Test
     public void updateTest() throws IllegalAccessException {
-        ExpenditureDTO dto = ExpenditureDTO.builder()
+        ExpenditureRequestDto dto = ExpenditureRequestDto.builder()
                 .cost(1000)
                 .exWay(money_Way.card)
                 .eco(EcoEnum.G)
