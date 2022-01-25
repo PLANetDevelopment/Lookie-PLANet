@@ -1,6 +1,6 @@
 package com.planet.develop.Service;
 
-import com.planet.develop.DTO.ExpenditureDTO;
+import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.DTO.UserDTO;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
@@ -52,7 +52,7 @@ public class ExpenditureTest {
     @Test
     public void 지출_데이터_삽입() {
         IntStream.rangeClosed(1, 10).forEach(i -> {
-            ExpenditureDTO dto = ExpenditureDTO.builder()
+            ExpenditureRequestDto dto = ExpenditureRequestDto.builder()
                     .cost((int)((Math.random()*1000+1)*100)) // 가격 랜덤 삽입
                     .eco(EcoEnum.values()[new Random().nextInt(EcoEnum.values().length)]) // 친/반환경 랜덤 삽입
                     .ecoDetail("good detail")
