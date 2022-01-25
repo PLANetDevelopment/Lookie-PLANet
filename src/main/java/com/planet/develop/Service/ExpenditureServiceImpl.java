@@ -1,6 +1,6 @@
 package com.planet.develop.Service;
 
-import com.planet.develop.DTO.ExpenditureDTO;
+import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Repository.ExpenditureRepository;
@@ -16,7 +16,7 @@ public class ExpenditureServiceImpl implements ExpenditureService {
     private final ExpenditureRepository repository;
 
     @Override
-    public Long save(ExpenditureDTO dto, ExpenditureDetail detail) {
+    public Long save(ExpenditureRequestDto dto, ExpenditureDetail detail) {
         Expenditure entity = dtoToEntity(dto, detail);
         repository.save(entity);
         return entity.getEno();

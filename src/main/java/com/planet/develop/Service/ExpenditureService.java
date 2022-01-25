@@ -1,37 +1,33 @@
 package com.planet.develop.Service;
 
-import com.planet.develop.DTO.ExpenditureDTO;
+import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
 
 public interface ExpenditureService {
 
-    Long save(ExpenditureDTO dto, ExpenditureDetail detail);
+    Long save(ExpenditureRequestDto dto, ExpenditureDetail detail);
 
-    default Expenditure dtoToEntity(ExpenditureDTO dto, ExpenditureDetail detail) {
+    default Expenditure dtoToEntity(ExpenditureRequestDto dto, ExpenditureDetail detail) {
         User user = User.builder()
                 .userId(dto.getUserId())
                 .build();
         Expenditure entity = Expenditure.builder()
                 .eno(detail.getEno())
                 .cost(dto.getCost())
+                .date(dto.getDate())
                 .user(user)
                 .detail(detail)
                 .build();
         return entity;
     }
 
-    default ExpenditureDTO entityToDto(Expenditure entity) {
-        ExpenditureDTO dto = ExpenditureDTO.builder()
+    default ExpenditureRequestDto entityToDto(Expenditure entity) {
+        ExpenditureRequestDto dto = ExpenditureRequestDto.builder()
                 .userId(entity.getUser().getUserId())
                 .cost(entity.getCost())
                 .date(entity.getDate())
-//                .eco(entity.getDetail().getEco())
-//                .ecoDetail(entity.getDetail().getEcoDetail())
-//                .exType(entity.getDetail().getExType())
-//                .exWay(entity.getDetail().getExWay())
-//                .memo(entity.getDetail().getMemo())
                 .build();
         return dto;
     }

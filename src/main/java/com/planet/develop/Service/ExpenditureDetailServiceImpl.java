@@ -1,6 +1,6 @@
 package com.planet.develop.Service;
 
-import com.planet.develop.DTO.ExpenditureDTO;
+import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +31,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 지출 등록 */
     @Override
-    public Long save(ExpenditureDTO dto) {
+    public Long save(ExpenditureRequestDto dto) {
         ExpenditureDetail entity = dtoToEntity(dto);
         detailRepository.save(entity);
         return entity.getEno();
@@ -151,7 +150,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         double total = 0;
         List<Expenditure> exList = getMonthList(user, month);
         for (Expenditure e : exList) {
-            ExpenditureDTO dto = service.entityToDto(e);
+            ExpenditureRequestDto dto = service.entityToDto(e);
             total += dto.getCost();
         }
         return String.format("%.0f", total);
@@ -163,7 +162,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         double total = 0;
         List<Expenditure> exTypeList = getMonthTypeList(user, month, type);
         for (Expenditure e : exTypeList) {
-            ExpenditureDTO dto = service.entityToDto(e);
+            ExpenditureRequestDto dto = service.entityToDto(e);
             total += dto.getCost();
         }
         return String.format("%.0f", total);
@@ -175,7 +174,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         double total = 0;
         List<Expenditure> exWayList = getMonthWayList(user, month, way);
         for (Expenditure e : exWayList) {
-            ExpenditureDTO dto = service.entityToDto(e);
+            ExpenditureRequestDto dto = service.entityToDto(e);
             total += dto.getCost();
         }
         return String.format("%.0f", total);
@@ -187,14 +186,14 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         double total = 0;
         List<Expenditure> ecoList = getMonthEcoList(user, month, eco);
         for (Expenditure e : ecoList) {
-            ExpenditureDTO dto = service.entityToDto(e);
+            ExpenditureRequestDto dto = service.entityToDto(e);
             total += dto.getCost();
         }
         return String.format("%.0f", total);
     }
 
     @Transactional
-    public Long update(Long id, ExpenditureDTO dto) throws IllegalAccessException {
+    public Long update(Long id, ExpenditureRequestDto dto) throws IllegalAccessException {
         Expenditure expenditure = expenditureRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
         ExpenditureDetail expenditureDetail = detailRepository.findById(id).orElseThrow(() ->

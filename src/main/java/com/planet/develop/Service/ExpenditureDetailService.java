@@ -1,6 +1,6 @@
 package com.planet.develop.Service;
 
-import com.planet.develop.DTO.ExpenditureDTO;
+import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface ExpenditureDetailService {
 
-    Long save(ExpenditureDTO dto);
+    Long save(ExpenditureRequestDto dto);
 
     String totalEcoDay(User user, EcoEnum eco, LocalDate date);
 
@@ -39,11 +39,11 @@ public interface ExpenditureDetailService {
 
     String totalWayMonth(User user, int month, money_Way way);
 
-    Long update(Long id, ExpenditureDTO dto) throws IllegalAccessException;
+    Long update(Long id, ExpenditureRequestDto dto) throws IllegalAccessException;
 
     /** delete 함수 만들기 */
 
-    default ExpenditureDetail dtoToEntity(ExpenditureDTO dto) {
+    default ExpenditureDetail dtoToEntity(ExpenditureRequestDto dto) {
         ExpenditureDetail entity = ExpenditureDetail.builder()
                 .ecoDetail(dto.getEcoDetail())
                 .eco(dto.getEco())
