@@ -2,6 +2,8 @@ package com.planet.develop.Controller;
 
 import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.DTO.ExpenditureResponseDto;
+import com.planet.develop.DTO.IncomeRequestDto;
+import com.planet.develop.DTO.IncomeResponseDto;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Repository.ExpenditureDetailRepository;
 import com.planet.develop.Service.ExpenditureDetailService;
@@ -23,7 +25,7 @@ public class ExpenditureController {
 
     /** 지출 데이터 저장 */
     @PostMapping("/api/expenditure/{id}/new")
-    public ExpenditureResponseDto create_outcome(@PathVariable("id") String id,
+    public ExpenditureResponseDto create_expenditure(@PathVariable("id") String id,
                                                 @RequestBody ExpenditureRequestDto reuqest) {
         reuqest.setUserId(id);
         Long deno = detailService.save(reuqest);
@@ -32,8 +34,18 @@ public class ExpenditureController {
         return new ExpenditureResponseDto(eno);
     }
 
-    /** 지출 데이터 삭제 */
-
     /** 지출 데이터 수정 */
+    @PostMapping("/api/expenditure/{id}/update")
+    public ExpenditureResponseDto update_expenditure(@PathVariable("id") Long id,
+                                                     @RequestBody ExpenditureRequestDto request) throws IllegalAccessException {
+        Long eno = detailService.update(id, request);
+        return new ExpenditureResponseDto(eno);
+    }
+
+    /** 지출 데이터 삭제 */
+    @DeleteMapping("/api/expenditure/{id}/delete")
+    public void delete_income(@PathVariable("id") Long id){
+        detailService.delete(id);
+    }
 
 }
