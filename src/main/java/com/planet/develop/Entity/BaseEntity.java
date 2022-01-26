@@ -10,12 +10,11 @@ import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
 
 @MappedSuperclass
-@EntityListeners(value = {AuditingEntityListener.class})
 @Getter
-abstract class BaseEntity {
-
-    @CreatedDate
-    @Column(updatable = false)
+public class BaseEntity {
     private LocalDate date;
 
+    public void changeDate(LocalDate date) {
+        this.date=date;
+    }
 }

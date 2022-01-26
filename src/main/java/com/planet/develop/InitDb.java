@@ -1,7 +1,8 @@
 package com.planet.develop;
 
-import com.planet.develop.Entity.Expenditure;
+import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
+import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Service.IncomeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 
 /** 테스트 용 user 생성 **/
 @Component
@@ -43,15 +45,18 @@ public class InitDb {
                     .userName("회원C")
                     .build();
 
-            Expenditure expenditure = Expenditure.builder()
-                    .cost(10000L)
+            Income income = Income.builder()
+                    .in_cost(10000L)
+                    .in_type(money_Type.salary)
+                    .date(LocalDate.of(2022, 1, 11))
+                    .user(user1)
                     .build();
 
             em.persist(user1);
             em.persist(user2);
             em.persist(user3);
 
-            em.persist(expenditure);
+            em.persist(income);
 
 
         }

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Income {
+public class Income extends BaseEntity {
 
     @Id @GeneratedValue
     @Column(name="ino")
@@ -28,8 +28,6 @@ public class Income {
 
     private String memo;
 
-    private LocalDate date;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
@@ -38,19 +36,19 @@ public class Income {
     @Builder
     public Income(Long in_cost,money_Way in_way,money_Type in_type,String memo,LocalDate date,User user){
         this.in_cost=in_cost;
-        this.date=date;
         this.in_way=in_way;
         this.in_type=in_type;
         this.memo=memo;
         this.user=user;
+        changeDate(date);
     }
 
     public void update_income(Long in_cost,money_Way in_way,money_Type in_type,String memo,LocalDate date){
         this.in_cost=in_cost;
-        this.date=date;
         this.in_way=in_way;
         this.in_type=in_type;
         this.memo=memo;
+        changeDate(date);
     }
 
 }
