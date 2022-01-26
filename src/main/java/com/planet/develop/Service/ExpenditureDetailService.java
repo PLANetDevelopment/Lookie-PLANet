@@ -41,7 +41,7 @@ public interface ExpenditureDetailService {
 
     Long update(Long id, ExpenditureRequestDto dto) throws IllegalAccessException;
 
-    /** delete 함수 만들기 */
+    void delete(Long id);
 
     default ExpenditureDetail dtoToEntity(ExpenditureRequestDto dto) {
         ExpenditureDetail entity = ExpenditureDetail.builder()

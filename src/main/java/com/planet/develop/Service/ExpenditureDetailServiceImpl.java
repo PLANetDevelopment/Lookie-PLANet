@@ -192,15 +192,23 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return String.format("%.0f", total);
     }
 
+    /** 지출 수정 */
     @Transactional
     public Long update(Long id, ExpenditureRequestDto dto) throws IllegalAccessException {
         Expenditure expenditure = expenditureRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
         ExpenditureDetail expenditureDetail = detailRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
-        expenditure.update(dto.getCost());
+        expenditure.update(dto.getCost(), dto.getDate());
         expenditureDetail.update(dto.getExType(), dto.getExWay(), dto.getMemo(), dto.getEco(), dto.getEcoDetail());
         return id;
+    }
+
+    /** 지출 삭제 */
+    @Override
+    public void delete(Long id) {
+        expenditureRepository.deleteById(id);
+        detailRepository.deleteById(id);
     }
 
 }
