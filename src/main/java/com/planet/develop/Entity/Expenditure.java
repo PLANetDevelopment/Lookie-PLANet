@@ -36,8 +36,9 @@ public class Expenditure{
     @JoinColumn(name = "user_id")
     private User user;
 
-    public void update(double cost) {
+    public void update(double cost, LocalDate date) {
         this.cost = cost;
+        this.date = date;
     }
 
 }
