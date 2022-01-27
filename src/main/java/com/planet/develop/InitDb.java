@@ -45,9 +45,21 @@ public class InitDb {
                     .userName("회원C")
                     .build();
 
-            Income income = Income.builder()
+            Income income1 = Income.builder()
                     .in_cost(10000L)
                     .in_type(money_Type.salary)
+                    .date(LocalDate.of(2022, 1, 11))
+                    .user(user1)
+                    .build();
+            Income income2 = Income.builder()
+                    .in_cost(20000L)
+                    .in_type(money_Type.salary)
+                    .date(LocalDate.of(2022, 1, 11))
+                    .user(user1)
+                    .build();
+            Income income3 = Income.builder()
+                    .in_cost(30000L)
+                    .in_type(money_Type.allowance)
                     .date(LocalDate.of(2022, 1, 11))
                     .user(user1)
                     .build();
@@ -56,7 +68,9 @@ public class InitDb {
             em.persist(user2);
             em.persist(user3);
 
-            em.persist(income);
+            em.persist(income1);
+            em.persist(income2);
+            em.persist(income3);
 
 
         }

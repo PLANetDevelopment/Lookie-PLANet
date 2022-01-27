@@ -46,7 +46,7 @@ public class IncomeService {
         return days;
     }
 
-    /** 일별 총합  **/
+    /** 특정 일별 총합  **/
     public Long totalDay(String user_id,LocalDate date) {
         Optional<User> findUser = userRepository.findById(user_id);
         List<Income> days=incomeRepository.findDay(findUser.get(), date);

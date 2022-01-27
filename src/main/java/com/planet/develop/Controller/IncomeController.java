@@ -1,5 +1,6 @@
 package com.planet.develop.Controller;
 
+import com.planet.develop.DTO.IncomeDto;
 import com.planet.develop.DTO.IncomeRequestDto;
 import com.planet.develop.DTO.IncomeResponseDto;
 import com.planet.develop.Entity.Income;
@@ -7,17 +8,23 @@ import com.planet.develop.Entity.User;
 import com.planet.develop.Repository.UserRepository;
 import com.planet.develop.Service.IncomeService;
 import com.planet.develop.Service.UserService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
 public class IncomeController {
     private final IncomeService incomeService;
-    private final UserService userService;
     private final UserRepository userRepository;
+
+    //localhost:8080/api/income/yui12@gmail.com/1
 
     @PostMapping("/api/income/{id}/new")
     public IncomeResponseDto create_income(@PathVariable("id") String id, @RequestBody IncomeRequestDto request) {
@@ -49,8 +56,5 @@ public class IncomeController {
     public void delete_income(@PathVariable("id") Long id){
         incomeService.delete(id);
     }
-
-    //TODO
-    //조회 함수 어떻게 구현할 지
 
 }
