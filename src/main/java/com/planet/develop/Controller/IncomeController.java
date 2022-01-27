@@ -30,9 +30,7 @@ public class IncomeController {
                 .memo(request.getMemo())
                 .user(user.get())
                 .build();
-
         Long incomeId = incomeService.save(income);
-
         return new IncomeResponseDto(incomeId);
     }
 
@@ -41,7 +39,6 @@ public class IncomeController {
     public IncomeResponseDto update_income(@PathVariable("id") Long id, @RequestBody IncomeRequestDto request){
         incomeService.update(id,request.getIn_cost(),request.getIn_way(),
                 request.getIn_type(),request.getMemo(),request.getDate());
-
         return new IncomeResponseDto(id);
     }
 

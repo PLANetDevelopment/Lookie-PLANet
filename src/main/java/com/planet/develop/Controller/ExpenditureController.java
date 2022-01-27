@@ -32,6 +32,8 @@ public class ExpenditureController {
         ExpenditureDetail detail = detailRepository.findById(deno).get();
         Long eno = expenditureService.save(reuqest, detail);
         return new ExpenditureResponseDto(eno);
+        // TODO
+        // 메인화면으로 redirect
     }
 
     /** 지출 데이터 수정 */

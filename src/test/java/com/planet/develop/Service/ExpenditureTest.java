@@ -33,6 +33,8 @@ public class ExpenditureTest {
     @Autowired
     private ExpenditureDetailRepository detailRepository;
 
+    Random random = new Random();
+
     @Test
     public void 회원가입() {
         IntStream.rangeClosed(1, 10).forEach(i -> {
@@ -53,12 +55,13 @@ public class ExpenditureTest {
     public void 지출_데이터_삽입() {
         IntStream.rangeClosed(1, 10).forEach(i -> {
             ExpenditureRequestDto dto = ExpenditureRequestDto.builder()
-                    .cost((int)((Math.random()*1000+1)*100)) // 가격 랜덤 삽입
+                    .cost(Long.valueOf(random.nextInt(100000))) // 가격 랜덤 삽입
                     .eco(EcoEnum.values()[new Random().nextInt(EcoEnum.values().length)]) // 친/반환경 랜덤 삽입
                     .ecoDetail("good detail")
                     .exType(money_Type.values()[new Random().nextInt(money_Type.values().length)]) // 유형 랜덤 삽입
                     .exWay(money_Way.values()[new Random().nextInt(money_Way.values().length)]) // 방법 랜덤 삽입
                     .memo("good memo")
+                    .date(LocalDate.of(2022, 01, 23))
                     .userId("user" + (int)(Math.random()*10+1) + "@naver.com") // 사용자 아이디 랜덤 삽입
                     .build();
             Long deno = detailService.save(dto);

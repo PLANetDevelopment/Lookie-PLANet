@@ -56,6 +56,7 @@ public class IncomeService {
         }
         return total;
     }
+
     /** type 일별 총합 **/
     public Long typeDay(String user_id,LocalDate date,money_Type type) {
         Optional<User> findUser = userRepository.findById(user_id);
