@@ -15,13 +15,13 @@ public interface ExpenditureDetailService {
 
     Long save(ExpenditureRequestDto dto);
 
-    String totalEcoDay(User user, EcoEnum eco, LocalDate date);
+    Long totalEcoDay(User user, EcoEnum eco, LocalDate date);
 
-    String totalDay(User user, LocalDate date);
+    Long totalDay(User user, LocalDate date);
 
-    String totalTypeDay(User user, money_Type type, LocalDate date);
+    Long totalTypeDay(User user, money_Type type, LocalDate date);
 
-    String totalWayDay(User user, money_Way way, LocalDate date);
+    Long totalWayDay(User user, money_Way way, LocalDate date);
 
     List<Expenditure> getMonthList(User user, int month);
 
@@ -31,13 +31,13 @@ public interface ExpenditureDetailService {
 
     List<Expenditure> getMonthEcoList(User user, int month, EcoEnum eco);
 
-    String totalMonth(User user, int month);
+    Long totalMonth(User user, int month);
 
-    String totalMonthType(User user, int month, money_Type type);
+    Long totalMonthType(User user, int month, money_Type type);
 
-    String totalEcoMonth(User user, int month, EcoEnum eco);
+    Long totalEcoMonth(User user, int month, EcoEnum eco);
 
-    String totalWayMonth(User user, int month, money_Way way);
+    Long totalWayMonth(User user, int month, money_Way way);
 
     Long update(Long id, ExpenditureRequestDto dto) throws IllegalAccessException;
 

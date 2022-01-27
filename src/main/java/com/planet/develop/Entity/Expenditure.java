@@ -22,7 +22,7 @@ public class Expenditure{
     private Long eno;
 
     @Column(nullable = false)
-    private double cost;
+    private Long cost;
 
     @Column(nullable = false)
     private LocalDate date;
@@ -36,7 +36,7 @@ public class Expenditure{
     @JoinColumn(name = "user_id")
     private User user;
 
-    public void update(double cost, LocalDate date) {
+    public void update(Long cost, LocalDate date) {
         this.cost = cost;
         this.date = date;
     }

@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class ExpenditureRequestDto {
     private String userId; // 사용자 아이디
-    private double cost; // 비용
+    private Long cost; // 비용
     private LocalDate date; // 날짜
     private money_Type exType; // 유형
     private money_Way exWay; // 방법

@@ -39,46 +39,46 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 하루 지출 총액 */
     @Override
-    public String totalDay(User user, LocalDate date) {
-        double total = 0;
+    public Long totalDay(User user, LocalDate date) {
+        Long total = 0L;
         List<Object[]> exTypeList = expenditureRepository.getDayList(user, date);
         for (Object[] arr : exTypeList) {
-            total += (double) arr[1];
+            total += (Long) arr[1];
         }
-        return String.format("%.0f", total);
+        return total;
     }
 
     /** 하루 지출 유형별 총액 */
     @Override
-    public String totalTypeDay(User user, money_Type type, LocalDate date) {
-        double total = 0;
+    public Long totalTypeDay(User user, money_Type type, LocalDate date) {
+        Long total = 0L;
         List<Object[]> exTypeList = expenditureRepository.getDayExTypeList(user, type, date);
         for (Object[] arr : exTypeList) {
-            total += (double) arr[1];
+            total += (Long) arr[1];
         }
-        return String.format("%.0f", total);
+        return total;
     }
 
     /** 하루 친반환경별 총액 */
     @Override
-    public String totalEcoDay(User user, EcoEnum eco, LocalDate date) {
-        double total = 0;
+    public Long totalEcoDay(User user, EcoEnum eco, LocalDate date) {
+        Long total = 0L;
         List<Object[]> ecoList = expenditureRepository.getDayEcoList(user, eco, date);
         for (Object[] arr : ecoList) {
-            total += (double) arr[1];
+            total += (Long) arr[1];
         }
-        return String.format("%.0f", total);
+        return total;
     }
 
     /** 하루 지출 방법별 총액 */
     @Override
-    public String totalWayDay(User user, money_Way way, LocalDate date) {
-        double total = 0;
+    public Long totalWayDay(User user, money_Way way, LocalDate date) {
+        Long total = 0L;
         List<Object[]> exWayList = expenditureRepository.getDayExWayList(user, way, date);
         for (Object[] arr : exWayList) {
-            total += (double) arr[1];
+            total += (Long) arr[1];
         }
-        return String.format("%.0f", total);
+        return total;
     }
 
     /** 한 달 지출 리스트 */
@@ -146,50 +146,50 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 한 달 지출 총액 */
     @Override
-    public String totalMonth(User user, int month) {
-        double total = 0;
+    public Long totalMonth(User user, int month) {
+        Long total = 0L;
         List<Expenditure> exList = getMonthList(user, month);
         for (Expenditure e : exList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
             total += dto.getCost();
         }
-        return String.format("%.0f", total);
+        return total;
     }
 
     /** 한 달 지출 유형별 총액 */
     @Override
-    public String totalMonthType(User user, int month, money_Type type) {
-        double total = 0;
+    public Long totalMonthType(User user, int month, money_Type type) {
+        Long total = 0L;
         List<Expenditure> exTypeList = getMonthTypeList(user, month, type);
         for (Expenditure e : exTypeList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
             total += dto.getCost();
         }
-        return String.format("%.0f", total);
+        return total;
     }
 
     /** 한 달 지출 방법별 총액 */
     @Override
-    public String totalWayMonth(User user, int month, money_Way way) {
-        double total = 0;
+    public Long totalWayMonth(User user, int month, money_Way way) {
+        Long total = 0L;
         List<Expenditure> exWayList = getMonthWayList(user, month, way);
         for (Expenditure e : exWayList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
             total += dto.getCost();
         }
-        return String.format("%.0f", total);
+        return total;
     }
 
     /** 한 달 친반환경별 지출 총액 */
     @Override
-    public String totalEcoMonth(User user, int month, EcoEnum eco) {
-        double total = 0;
+    public Long totalEcoMonth(User user, int month, EcoEnum eco) {
+        Long total = 0L;
         List<Expenditure> ecoList = getMonthEcoList(user, month, eco);
         for (Expenditure e : ecoList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
             total += dto.getCost();
         }
-        return String.format("%.0f", total);
+        return total;
     }
 
     /** 지출 수정 */
@@ -204,7 +204,6 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return id;
     }
 
-    /** 지출 삭제 */
     @Override
     public void delete(Long id) {
         expenditureRepository.deleteById(id);
