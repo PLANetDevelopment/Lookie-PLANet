@@ -17,4 +17,13 @@ public class ExpenditureDetailDto {
     private String memo; // 메모
     private EcoEnum eco; // 친/반환경
     private String ecoDetail; // 친/반환경 상세
+
+    public ExpenditureDetailDto(Object cost, Object exType, Object exWay, Object memo, Object eco, Object ecoDetail) {
+        this.cost = (Long) cost;
+        this.exType = (money_Type) exType;
+        this.exWay = (money_Way) exWay;
+        this.memo = (String) memo;
+        this.eco = (EcoEnum) eco;
+        this.ecoDetail = (String) ecoDetail;
+    }
 }
