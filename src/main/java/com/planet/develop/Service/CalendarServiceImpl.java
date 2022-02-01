@@ -1,7 +1,7 @@
 package com.planet.develop.Service;
 
-import com.planet.develop.DTO.CalendarDayDto;
-import com.planet.develop.DTO.CalendarDto;
+import com.planet.develop.DTO.*;
+import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +35,18 @@ public class CalendarServiceImpl implements CalendarService {
             calendarDayDtos.add(calendarDayDto);
         }
         return new CalendarDto(totalMonthIncome,totalMonthExpenditure, calendarDayDtos);
+    }
+
+    @Override
+    public DayDetailDto findDayDetail(String id, int month, int day) {
+        List<Income> in_days = incomeService.findDay(id, LocalDate.of(2022, month, day));
+        User user = userRepository.findById(id).get();
+        List<ExpenditureDetailDto> ex_days = detailService.findDay(user, LocalDate.of(2022, month, day));
+        List<IncomeDetailDto> in_collect = in_days.stream()
+                .map(m->new IncomeDetailDto(m.getIn_cost(),m.getIn_way(),m.getIn_type(),m.getMemo()))
+                .collect(Collectors.toList());
+        DayDetailDto dayDetailDto = new DayDetailDto(in_collect, ex_days);
+        return dayDetailDto;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.planet.develop.Service;
 
+import com.planet.develop.DTO.ExpenditureDetailDto;
 import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
@@ -22,6 +23,8 @@ public interface ExpenditureDetailService {
     Long totalTypeDay(User user, money_Type type, LocalDate date);
 
     Long totalWayDay(User user, money_Way way, LocalDate date);
+
+    List<ExpenditureDetailDto> findDay(User user, LocalDate date);
 
     List<Expenditure> getMonthList(User user, int month);
 

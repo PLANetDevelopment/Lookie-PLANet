@@ -1,5 +1,6 @@
 package com.planet.develop.Service;
 
+import com.planet.develop.DTO.ExpenditureDetailDto;
 import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -79,6 +81,17 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
             total += (Long) arr[1];
         }
         return total;
+    }
+
+    @Override
+    public List<ExpenditureDetailDto> findDay(User user, LocalDate date) {
+        List<Object[]> dayList = expenditureRepository.getDayList(user, date);
+        List<ExpenditureDetailDto> dtoList = new ArrayList<>();
+        for (Object[] arr : dayList) {
+            ExpenditureDetailDto dto = new ExpenditureDetailDto(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 
     /** 한 달 지출 리스트 */
