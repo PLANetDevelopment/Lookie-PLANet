@@ -53,7 +53,7 @@ public class ExpenditureTest {
      */
     @Test
     public void 지출_데이터_삽입() {
-        IntStream.rangeClosed(1, 10).forEach(i -> {
+        IntStream.rangeClosed(1, 100).forEach(i -> {
             ExpenditureRequestDto dto = ExpenditureRequestDto.builder()
                     .cost(Long.valueOf(random.nextInt(100000))) // 가격 랜덤 삽입
                     .eco(EcoEnum.values()[new Random().nextInt(EcoEnum.values().length)]) // 친/반환경 랜덤 삽입
