@@ -33,4 +33,5 @@ public class Yujin_CalendarController {
         DayDetailDto dayDetailDto = calendarService.findDayDetail(id, month, day);
         return calendarService.findDayExTypeDetail(id, month, day);
     }
+
 }

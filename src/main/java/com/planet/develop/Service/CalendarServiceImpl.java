@@ -65,6 +65,7 @@ public class CalendarServiceImpl implements CalendarService {
                     dto.getExType(), dto.getCost(), dto.getMemo(),dto.getEco(), dto.getEcoDetail());
             detailDtos.add(typeDto);
         }
+
         Map<money_Type, List<DayExTypeDetailDto>> map = new HashMap<>();
         for (DayExTypeDetailDto dto : detailDtos){
             money_Type key = dto.getExType();
@@ -77,7 +78,6 @@ public class CalendarServiceImpl implements CalendarService {
                 map.put(key, list);
             }
         }
-        System.out.println(map);
         return map;
     }
 
