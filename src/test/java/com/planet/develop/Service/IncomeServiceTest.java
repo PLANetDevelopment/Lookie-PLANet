@@ -67,7 +67,7 @@ public class IncomeServiceTest {
         //given
         String user_id="yui12@gmail.com";
         //when
-        Long total = incomeService.wayDay(user_id, LocalDate.of(2022, 1, 11),money_Way.card);
+        Long total = incomeService.wayDay(user_id, LocalDate.of(2022, 1, 11), money_Way.card);
         //then
         System.out.println("total = " + total);
     }
@@ -115,7 +115,7 @@ public class IncomeServiceTest {
         //given
 
         //when
-        Long total = incomeService.typeMonth("yui12@gmail.com",1,money_Type.salary);
+        Long total = incomeService.typeMonth("yui12@gmail.com",1, money_Type.salary);
         //then
         System.out.println("total = " + total);
 
@@ -126,7 +126,7 @@ public class IncomeServiceTest {
         //given
 
         //when
-        incomeService.update(1L,20000L,money_Way.card,money_Type.salary,"업데이트 된 수입",date);
+        incomeService.update(1L,20000L, money_Way.card, money_Type.salary,"업데이트 된 수입",date);
         Income one = incomeRepository.findOne(1L);
         //then
         assertThat(one.getIn_cost()).isEqualTo(20000);

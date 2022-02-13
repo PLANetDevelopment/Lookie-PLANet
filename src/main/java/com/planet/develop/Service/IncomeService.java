@@ -57,7 +57,7 @@ public class IncomeService {
         return total;
     }
     /** type 일별 총합 **/
-    public Long typeDay(String user_id,LocalDate date,money_Type type) {
+    public Long typeDay(String user_id, LocalDate date, money_Type type) {
         Optional<User> findUser = userRepository.findById(user_id);
         List<Income> days=incomeRepository.findDay(findUser.get(),date);
         Long total=0L;
@@ -69,7 +69,7 @@ public class IncomeService {
     }
 
     /** way 일별 총합 **/
-    public Long wayDay(String user_id,LocalDate date,money_Way way) {
+    public Long wayDay(String user_id, LocalDate date, money_Way way) {
         Optional<User> findUser = userRepository.findById(user_id);
         List<Income> days=incomeRepository.findDay(findUser.get(), date);
         Long total=0L;
@@ -100,7 +100,7 @@ public class IncomeService {
     }
 
     /** type 월별 총합 **/
-    public Long typeMonth(String user_id,int Month,money_Type type) {
+    public Long typeMonth(String user_id, int Month, money_Type type) {
         Optional<User> findUser = userRepository.findById(user_id);
         List<Income> days=incomeRepository.findMonth(findUser.get(),Month);
         Long total=0L;
@@ -112,7 +112,7 @@ public class IncomeService {
     }
 
     /** way 월별 총합 **/
-    public Long wayMonth(String user_id,int Month,money_Way way) {
+    public Long wayMonth(String user_id, int Month, money_Way way) {
         Optional<User> findUser = userRepository.findById(user_id);
         List<Income> days=incomeRepository.findMonth(findUser.get(), Month);
         Long total=0L;

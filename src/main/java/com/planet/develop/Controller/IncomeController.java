@@ -1,21 +1,14 @@
 package com.planet.develop.Controller;
 
-import com.planet.develop.DTO.IncomeDto;
 import com.planet.develop.DTO.IncomeRequestDto;
 import com.planet.develop.DTO.IncomeResponseDto;
 import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Repository.UserRepository;
 import com.planet.develop.Service.IncomeService;
-import com.planet.develop.Service.UserService;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -26,6 +19,7 @@ public class IncomeController {
 
     //localhost:8080/api/income/yui12@gmail.com/1
 
+    /** 수입 데이터 저장*/
     @PostMapping("/api/income/{id}/new")
     public IncomeResponseDto create_income(@PathVariable("id") String id, @RequestBody IncomeRequestDto request) {
         Optional<User> user = userRepository.findById(id);
@@ -43,7 +37,7 @@ public class IncomeController {
         return new IncomeResponseDto(incomeId);
     }
 
-
+    /**수입 데이터 수정*/
     @PostMapping("/api/income/{id}/update")
     public IncomeResponseDto update_income(@PathVariable("id") Long id, @RequestBody IncomeRequestDto request){
         incomeService.update(id,request.getIn_cost(),request.getIn_way(),
@@ -52,6 +46,7 @@ public class IncomeController {
         return new IncomeResponseDto(id);
     }
 
+    /** 수입 데이터 삭제*/
     @DeleteMapping("/api/income/{id}/delete")
     public void delete_income(@PathVariable("id") Long id){
         incomeService.delete(id);

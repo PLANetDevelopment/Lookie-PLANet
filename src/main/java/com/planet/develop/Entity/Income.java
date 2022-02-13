@@ -5,7 +5,6 @@ import com.planet.develop.Enum.money_Way;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -34,7 +33,7 @@ public class Income extends BaseEntity {
 
 
     @Builder
-    public Income(Long in_cost,money_Way in_way,money_Type in_type,String memo,LocalDate date,User user){
+    public Income(Long in_cost, money_Way in_way, money_Type in_type, String memo, LocalDate date, User user){
         this.in_cost=in_cost;
         this.in_way=in_way;
         this.in_type=in_type;
@@ -43,7 +42,7 @@ public class Income extends BaseEntity {
         changeDate(date);
     }
 
-    public void update_income(Long in_cost,money_Way in_way,money_Type in_type,String memo,LocalDate date){
+    public void update_income(Long in_cost, money_Way in_way, money_Type in_type, String memo, LocalDate date){
         this.in_cost=in_cost;
         this.in_way=in_way;
         this.in_type=in_type;

@@ -1,10 +1,12 @@
 package com.planet.develop.Controller;
 
-import com.planet.develop.DTO.IncomeDetailDto;
-import com.planet.develop.DTO.IncomeDto;
+import com.planet.develop.DTO.CalendarDto;
+import com.planet.develop.DTO.ExpenditureTypeDetailDto;
+import com.planet.develop.DTO.IncomeTypeDetailDto;
+import com.planet.develop.DTO.TypeDetailDto;
 import com.planet.develop.Entity.Income;
 import com.planet.develop.Enum.money_Type;
-import com.planet.develop.Service.IncomeService;
+import com.planet.develop.Service.CalendarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,56 +24,21 @@ import java.util.stream.Collectors;
 @RestController
 public class CalendarController {
 
-    private final IncomeService incomeService;
+    private final CalendarService calendarService;
 
-    /** 월별 조회 함수 */
-    @GetMapping("/api/income/{id}/{month}")
-    public IncomeDto findIncome(@PathVariable("id") String id, @PathVariable("month") int month){
-        Long totalMonth = incomeService.totalMonth(id,month);
-
-        List<Long> days = new ArrayList<>();
-        days.add(0L);
-        for(int n=1;n<=31;n++) {
-            Long day = incomeService.totalDay(id, LocalDate.of(2022, month,n));
-            days.add(day);
-        }
-        return new IncomeDto(totalMonth,days);
-
+    /** 월별 수입/지출 조회 함수 */
+    @GetMapping("/api/calendar/{id}/{month}")
+    public CalendarDto findCalendar(@PathVariable("id") String id, @PathVariable("month") int month){
+        CalendarDto calendar = calendarService.findCalendar(id, month);
+        return calendar;
     }
-
 
     /** 일별 조회 (세부 조회) */
-    @GetMapping("/api/income/{id}/{month}/{day}")
-    public Map<String,IncomeDetailDto> findIncomeDetail(@PathVariable("id") String id,@PathVariable("month") int month,@PathVariable("day") int day){
-        List<Income> days = incomeService.findDay(id, LocalDate.of(2022, month, day));
-
-        List<IncomeDetailDto> collect = days.stream()
-                .map(m->new IncomeDetailDto(m.getIn_cost(),m.getIn_way(),m.getIn_type(),m.getMemo()))
-                .collect(Collectors.toList());
-
-        Map incomeDetails = sortByType(collect);
-        return incomeDetails;
+    @GetMapping("/api/calendar/{id}/{month}/{day}")
+    public Map<money_Type, List<TypeDetailDto>> findIncomeDetail(@PathVariable("id") String id,
+                                                                 @PathVariable("month") int month, @PathVariable("day") int day){
+        return calendarService.findDayExTypeDetail(id, month, day);
     }
 
-    private Map sortByType(List<IncomeDetailDto> collect) {
-        List<IncomeDetailDto> salary=new ArrayList<>();
-        List<IncomeDetailDto> allowance=new ArrayList<>();
-        List<IncomeDetailDto> etc=new ArrayList<>();
 
-        for (IncomeDetailDto detailDto : collect) {
-            if (detailDto.getIn_type().equals(money_Type.salary))
-                salary.add(detailDto);
-            else if (detailDto.getIn_type().equals(money_Type.allowance))
-                allowance.add(detailDto);
-            else if (detailDto.getIn_type().equals(money_Type.etc))
-                etc.add(detailDto);
-        }
-
-        Map types = new HashMap();
-        types.put("salary", salary);
-        types.put("allowance", allowance);
-        types.put("etc", etc);
-
-        return types;
-    }
 }
