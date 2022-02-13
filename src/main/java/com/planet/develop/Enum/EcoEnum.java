@@ -1,5 +1,9 @@
 package com.planet.develop.Enum;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum EcoEnum {
-    G, R, N
+    @JsonProperty("G") G,
+    @JsonProperty("R") R,
+    @JsonProperty("N") N
 }

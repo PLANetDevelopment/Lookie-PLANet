@@ -31,7 +31,8 @@ public class CalendarServiceImpl implements CalendarService {
         User user = userRepository.findById(id).get();
         Long totalMonthExpenditure = expenditureDetailService.totalMonth(user, month);
         List<CalendarDayDto> calendarDayDtos = new ArrayList<>();
-        for(int n=1;n<=31;n++) {
+        int days = LocalDate.of(2022,month,month).lengthOfMonth();
+        for(int n=1;n<=days;n++) {
             Long incomeDay = incomeService.totalDay(id, LocalDate.of(2022, month,n));
             Long expenditureDay = expenditureDetailService.totalDay(user, LocalDate.of(2022, month, n));
             CalendarDayDto calendarDayDto = new CalendarDayDto(LocalDate.of(2022, month,n), incomeDay, expenditureDay);
@@ -45,14 +46,24 @@ public class CalendarServiceImpl implements CalendarService {
         User user = userRepository.findById(id).get();
         List<Income> in_days = incomeService.findDay(id, LocalDate.of(2022, month, day));
         List<ExpenditureTypeDetailDto> ex_days = expenditureDetailService.findDay(user, LocalDate.of(2022, month, day));
+        List<TypeDetailDto> in_detailDtos = getIncomeTypeDtos(in_days);
+        List<TypeDetailDto> ex_detailDtos = getExpenditureTypeDtos(ex_days);
+        in_detailDtos.addAll(ex_detailDtos);
+        Map<money_Type, List<TypeDetailDto>> total = makeListToMap(in_detailDtos);
+        return total;
+    }
 
+    private List<TypeDetailDto> getIncomeTypeDtos(List<Income> in_days) {
         List<TypeDetailDto> in_detailDtos = new ArrayList<>();
         for (Income dto : in_days) { // 타입 변환
             TypeDetailDto typeDto = new TypeDetailDto();
             typeDto.saveIncomeType(dto.getIn_type(), dto.getIn_cost(), dto.getMemo());
             in_detailDtos.add(typeDto);
         }
+        return in_detailDtos;
+    }
 
+    private List<TypeDetailDto> getExpenditureTypeDtos(List<ExpenditureTypeDetailDto> ex_days) {
         List<TypeDetailDto> ex_detailDtos = new ArrayList<>();
         for (ExpenditureTypeDetailDto dto : ex_days) { // 타입 변환
 
@@ -61,9 +72,10 @@ public class CalendarServiceImpl implements CalendarService {
             typeDto.setIncome(false);
             ex_detailDtos.add(typeDto);
         }
+        return ex_detailDtos;
+    }
 
-        in_detailDtos.addAll(ex_detailDtos);
-
+    private Map<money_Type, List<TypeDetailDto>> makeListToMap(List<TypeDetailDto> in_detailDtos) {
         Map<money_Type, List<TypeDetailDto>> map = new HashMap<>();
         for (TypeDetailDto dto : in_detailDtos) {
             money_Type key = dto.getType();

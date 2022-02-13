@@ -15,7 +15,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-public class Yujin_CalendarController {
+public class CalendarController {
 
     private final CalendarService calendarService;
     private final IncomeService incomeService;
