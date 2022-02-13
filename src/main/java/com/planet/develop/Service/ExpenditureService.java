@@ -16,10 +16,10 @@ public interface ExpenditureService {
         Expenditure entity = Expenditure.builder()
                 .eno(detail.getEno())
                 .cost(dto.getCost())
-                .date(dto.getDate())
                 .user(user)
                 .detail(detail)
                 .build();
+        entity.changeDate(dto.getDate());
         return entity;
     }
 

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExpenditureDetailDto {
+public class ExpenditureTypeDetailDto {
     private Long cost; // 비용
     private money_Type exType; // 유형
     private money_Way exWay; // 방법
@@ -18,7 +18,7 @@ public class ExpenditureDetailDto {
     private EcoEnum eco; // 친/반환경
     private String ecoDetail; // 친/반환경 상세
 
-    public ExpenditureDetailDto(Object cost, Object exType, Object exWay, Object memo, Object eco, Object ecoDetail) {
+    public ExpenditureTypeDetailDto(Object cost, Object exType, Object exWay, Object memo, Object eco, Object ecoDetail) {
         this.cost = (Long) cost;
         this.exType = (money_Type) exType;
         this.exWay = (money_Way) exWay;

@@ -10,6 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DayDetailDto {
-    List<IncomeDetailDto> in_days;
-    List<ExpenditureDetailDto> ex_days;
+    List<IncomeTypeDetailDto> in_days;
+    List<ExpenditureTypeDetailDto> ex_days;
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class IncomeDetailDto {
+public class IncomeTypeDetailDto {
     private Long in_cost;
     private money_Way in_way;
     private money_Type in_type;

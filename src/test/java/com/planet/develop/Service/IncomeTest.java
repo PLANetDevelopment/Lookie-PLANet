@@ -21,16 +21,16 @@ public class IncomeTest {
 
     @Test
     public void 지출_데이터_삽입() {
-        IntStream.rangeClosed(1, 10).forEach(i -> {
+        IntStream.rangeClosed(1, 5).forEach(i -> {
             User user = User.builder()
-                    .userId("user" + (int)(Math.random()*10+1) + "@naver.com")
+                    .userId("user1@naver.com")
                     .build();
             Income income = Income.builder()
                     .date(LocalDate.of(2022, 01, 23))
                     .memo("income memo")
                     .user(user)
                     .in_cost(Long.valueOf(random.nextInt(100000)))
-                    .in_type(money_Type.values()[new Random().nextInt(money_Type.values().length)])
+                    .in_type(money_Type.etc)
                     .in_way(money_Way.values()[new Random().nextInt(money_Way.values().length)])
                     .build();
             incomeService.save(income);
