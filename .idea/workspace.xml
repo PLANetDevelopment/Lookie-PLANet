@@ -5,32 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0fc8f6e-65f9-4033-85e1-cc137d861cc0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/TypeDetailDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/BaseEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Entity/Expenditure$ExpenditureBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Entity/Expenditure$ExpenditureBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Entity/Expenditure.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Entity/Expenditure.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Entity/Income.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Entity/Income.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Enum/money_Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Enum/money_Type.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Repository/ExpenditureRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Repository/ExpenditureRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/Yujin_CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/Yujin_CalendarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/DayDetailDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/DayDetailDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/ExpenditureDetailDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/ExpenditureTypeDetailDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/IncomeDetailDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/IncomeTypeDetailDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/Expenditure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/Expenditure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/Income.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/Income.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Enum/EcoEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Enum/EcoEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Enum/money_Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Enum/money_Type.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Enum/money_Way.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Enum/money_Way.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CalendarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CalendarService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CalendarServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CalendarServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/IncomeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/IncomeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/IncomeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/IncomeTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,19 +92,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.DevelopApplication">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ExpenditureMonthTest.사용자의_한달_친반환경별_사용내역_구하기" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -291,7 +258,8 @@
       <workItem from="1641991281164" duration="2240000" />
       <workItem from="1642127476629" duration="624000" />
       <workItem from="1642139251438" duration="17006000" />
-      <workItem from="1643166130320" duration="46968000" />
+      <workItem from="1643166130320" duration="48775000" />
+      <workItem from="1644737624251" duration="1741000" />
     </task>
     <servers />
   </component>
