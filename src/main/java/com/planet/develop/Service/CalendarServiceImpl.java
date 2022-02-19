@@ -31,7 +31,10 @@ public class CalendarServiceImpl implements CalendarService {
         User user = userRepository.findById(id).get();
         Long totalMonthExpenditure = expenditureDetailService.totalMonth(user, month);
         List<CalendarDayDto> calendarDayDtos = new ArrayList<>();
-        for(int n=1;n<=31;n++) {
+
+
+        int days = LocalDate.of(2022,month,month).lengthOfMonth();
+        for(int n=1;n<=days;n++) {
             Long incomeDay = incomeService.totalDay(id, LocalDate.of(2022, month,n));
             Long expenditureDay = expenditureDetailService.totalDay(user, LocalDate.of(2022, month, n));
             CalendarDayDto calendarDayDto = new CalendarDayDto(LocalDate.of(2022, month,n), incomeDay, expenditureDay);

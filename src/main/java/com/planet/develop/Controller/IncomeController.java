@@ -33,7 +33,6 @@ public class IncomeController {
                 .build();
 
         Long incomeId = incomeService.save(income);
-
         return new IncomeResponseDto(incomeId);
     }
 

@@ -1,6 +1,7 @@
 package com.planet.develop;
 
 import com.planet.develop.Entity.Income;
+import com.planet.develop.Entity.Mission;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Service.IncomeService;
@@ -21,6 +22,7 @@ public class InitDb {
     @PostConstruct
     public void init() {
         initService.dbInit1();
+        initService.dbInit2();
     }
 
     @Component
@@ -28,7 +30,6 @@ public class InitDb {
     @RequiredArgsConstructor
     static class InitService {
         private final EntityManager em;
-        private final IncomeService incomeService;
         public void dbInit1() {
             User user1 = User.builder()
                     .userId("yui12@gmail.com")
@@ -74,5 +75,35 @@ public class InitDb {
 
 
         }
+        public void dbInit2() {
+            Mission mission1=new Mission();
+            mission1.setEmoji("1");
+            mission1.setName("잔반 남기지 않기");
+
+            Mission mission2=new Mission();
+            mission2.setEmoji("2");
+            mission2.setName("냉장고 정리하기");
+
+            Mission mission3=new Mission();
+            mission3.setEmoji("3");
+            mission3.setName("차량 연료 80%이하로 채우기");
+
+            Mission mission4=new Mission();
+            mission4.setEmoji("4");
+            mission4.setName("양치컵 사용하기");
+
+            Mission mission5=new Mission();
+            mission5.setEmoji("5");
+            mission5.setName("샤워시간 단축하기");
+
+            em.persist(mission1);
+            em.persist(mission2);
+            em.persist(mission3);
+            em.persist(mission4);
+            em.persist(mission5);
+
+        }
     }
+
+
 }
