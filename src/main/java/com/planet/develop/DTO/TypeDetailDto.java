@@ -1,5 +1,6 @@
 package com.planet.develop.DTO;
 
+import com.planet.develop.Enum.EcoDetail;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ public class TypeDetailDto {
     Long cost;
     String memo;
     EcoEnum eco;
-    String eco_detail;
+    EcoDetail eco_detail;
 
     public void saveIncomeType(money_Type type, Long cost, String memo) {
         this.type = type;
@@ -25,7 +26,7 @@ public class TypeDetailDto {
     }
 
     public void saveExpenditureType(money_Type type, Long cost, String memo,
-                                    EcoEnum eco, String eco_detail) {
+                                    EcoEnum eco, EcoDetail eco_detail) {
         this.type = type;
         this.cost = cost;
         this.memo = memo;

@@ -1,5 +1,6 @@
 package com.planet.develop.DTO;
 
+import com.planet.develop.Enum.EcoDetail;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import lombok.AllArgsConstructor;
@@ -14,5 +15,5 @@ public class DayExTypeDetailDto {
     Long cost;
     String memo;
     EcoEnum eco;
-    String eco_detail;
+    EcoDetail eco_detail;
 }

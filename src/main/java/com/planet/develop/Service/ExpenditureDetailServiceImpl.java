@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +88,8 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<Object[]> dayList = expenditureRepository.getDayList(user, date);
         List<ExpenditureTypeDetailDto> dtoList = new ArrayList<>();
         for (Object[] arr : dayList) {
-            ExpenditureTypeDetailDto dto = new ExpenditureTypeDetailDto(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
+            ExpenditureTypeDetailDto dto = new ExpenditureTypeDetailDto(
+                    arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7]);
             dtoList.add(dto);
         }
         return dtoList;
@@ -142,21 +142,26 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 .getResultList();
     }
 
-    /** 한 달 친반환경별 리스트 */
     @Override
     public List<Expenditure> getMonthEcoList(User user, int month, EcoEnum eco) {
-        LocalDate startDate = LocalDate.of(2022,month,1);
-        int lengthOfMonth = startDate.lengthOfMonth();
-        LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
-        return em.createQuery("select e from Expenditure e left join ExpenditureDetail ed on e.eno = ed.eno " +
-                "where :startDate <= e.date and e.date <= :endDate " +
-                "and e.user = :user and e.detail.eco = :eco", Expenditure.class)
-                .setParameter("startDate",startDate)
-                .setParameter("endDate",endDate)
-                .setParameter("user", user)
-                .setParameter("eco", eco)
-                .getResultList();
+        return null;
     }
+
+//    /** 한 달 친반환경별 리스트 */
+//    @Override
+//    public List<Expenditure> getMonthEcoList(User user, int month, EcoEnum eco) {
+//        LocalDate startDate = LocalDate.of(2022,month,1);
+//        int lengthOfMonth = startDate.lengthOfMonth();
+//        LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
+//        return em.createQuery("select e from Expenditure e left join ExpenditureDetail ed on e.eno = ed.eno " +
+//                "where :startDate <= e.date and e.date <= :endDate " +
+//                "and e.user = :user and e.detail.eco = :eco", Expenditure.class)
+//                .setParameter("startDate",startDate)
+//                .setParameter("endDate",endDate)
+//                .setParameter("user", user)
+//                .setParameter("eco", eco)
+//                .getResultList();
+//    }
 
     /** 한 달 지출 총액 */
     @Override
@@ -165,7 +170,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<Expenditure> exList = getMonthList(user, month);
         for (Expenditure e : exList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
-            total += dto.getCost();
+            total += dto.getEx_cost();
         }
         return total;
     }
@@ -177,7 +182,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<Expenditure> exTypeList = getMonthTypeList(user, month, type);
         for (Expenditure e : exTypeList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
-            total += dto.getCost();
+            total += dto.getEx_cost();
         }
         return total;
     }
@@ -189,7 +194,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<Expenditure> exWayList = getMonthWayList(user, month, way);
         for (Expenditure e : exWayList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
-            total += dto.getCost();
+            total += dto.getEx_cost();
         }
         return total;
     }
@@ -201,7 +206,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<Expenditure> ecoList = getMonthEcoList(user, month, eco);
         for (Expenditure e : ecoList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
-            total += dto.getCost();
+            total += dto.getEx_cost();
         }
         return total;
     }
@@ -213,8 +218,8 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
         ExpenditureDetail expenditureDetail = detailRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
-        expenditure.update(dto.getCost(), dto.getDate());
-        expenditureDetail.update(dto.getExType(), dto.getExWay(), dto.getMemo(), dto.getEco(), dto.getEcoDetail());
+        expenditure.update(dto.getEx_cost(), dto.getDate());
+        expenditureDetail.update(dto.getExType(), dto.getExWay(), dto.getMemo());
         return id;
     }
 

@@ -42,18 +42,17 @@ public interface ExpenditureDetailService {
 
     Long totalWayMonth(User user, int month, money_Way way);
 
+    /** ecoDetail의 연속된 숫자 또는 문자를 분리해서 해석하는 메서드 */
+
     Long update(Long id, ExpenditureRequestDto dto) throws IllegalAccessException;
 
     void delete(Long id);
 
     default ExpenditureDetail dtoToEntity(ExpenditureRequestDto dto) {
         ExpenditureDetail entity = ExpenditureDetail.builder()
-                .ecoDetail(dto.getEcoDetail())
-                .eco(dto.getEco())
                 .exType(dto.getExType())
                 .exWay(dto.getExWay())
                 .memo(dto.getMemo())
-                .ecoDetail(dto.getEcoDetail())
                 .build();
         return entity;
     }

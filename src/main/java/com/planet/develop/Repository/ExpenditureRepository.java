@@ -24,8 +24,9 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
     /**
      * 특정 사용자의 하루 지출 리스트 가져오기
      */
-    @Query("select e.user.userId, e.cost, ed.exType, ed.exWay, ed.memo, ed.eco, ed.ecoDetail from Expenditure e " +
+    @Query("select e.cost, ed.exType, ed.exWay, ed.memo, ec.eco, ec.ecoDetail, ec.etcMemo, ec.expenditure.eno from Expenditure e " +
             "left join ExpenditureDetail ed on e.eno = ed.eno " +
+            "left join Eco ec on e.eno = ec.expenditure.eno " +
             "where e.user = :user and e.date = :date")
     List<Object[]> getDayList(@Param("user") User user, @Param("date") LocalDate date);
 
@@ -33,9 +34,10 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
     /**
      * 특정 사용자의 하루 친/반환경 별 지출 리스트 가져오기
      */
-    @Query("select e.user.userId, e.cost, ed.eco from Expenditure e " +
+    @Query("select e.user.userId, e.cost, ec.eco from Expenditure e " +
             "left join ExpenditureDetail ed on e.eno = ed.eno " +
-            "where e.user = :user and ed.eco = :eco and e.date = :date")
+            "left join Eco ec on e.eno = ec.expenditure.eno " +
+            "where e.user = :user and ec.eco = :eco and e.date = :date")
     List<Object[]> getDayEcoList(@Param("user") User user, @Param("eco") EcoEnum eco, @Param("date") LocalDate date);
 
     /**

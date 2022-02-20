@@ -23,13 +23,4 @@ public class User {
     @Column(name = "user_name")
     private String userName;
 
-    @Column
-    private int point;
-
-//    @OneToMany(mappedBy = "user")
-//    private List<Mission> missions= new ArrayList<>();
-
-//    @OneToMany(mappedBy = "user")
-//    private List<Income> incomes= new ArrayList<>();
-
 }
