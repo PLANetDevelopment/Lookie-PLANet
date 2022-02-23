@@ -12,4 +12,10 @@ import lombok.*;
 public class EcoDto {
     private EcoEnum eco;
     private EcoDetail ecoDetial;
+    private String etcMemo;
+
+    public EcoDto(EcoEnum eco, EcoDetail ecoDetial) {
+        this.eco = eco;
+        this.ecoDetial = ecoDetial;
+    }
 }

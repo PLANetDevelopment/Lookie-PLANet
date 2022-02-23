@@ -24,4 +24,18 @@ public class ExpenditureRequestDto {
     private String memo; // 메모
     private List<EcoDetail> ecoDetail; // 친/반환경 상세
     private String etcMemo;
+    private EcoEnum eco;
+
+    public ExpenditureRequestDto(String userId, Long ex_cost, LocalDate date,
+                                 money_Type exType, money_Way exWay, String memo,
+                                 List<EcoDetail> ecoDetail, String etcMemo) {
+        this.userId = userId;
+        this.ex_cost = ex_cost;
+        this.date = date;
+        this.exType = exType;
+        this.exWay = exWay;
+        this.memo = memo;
+        this.ecoDetail = ecoDetail;
+        this.etcMemo = etcMemo;
+    }
 }

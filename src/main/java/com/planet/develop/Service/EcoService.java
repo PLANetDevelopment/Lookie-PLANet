@@ -13,13 +13,11 @@ public interface EcoService {
 
     void save(ExpenditureRequestDto dto, Expenditure expenditure);
 
-    // TODO: ecoDetail에 etc가 들어온다면 etcMemo에 값 저장
-    // TODO: ecoDetail에 etc가 들어온다면 G, R, N 값 선택
-
     default List<Eco> dtoToEntity(ExpenditureRequestDto dto, Expenditure expenditure) {
         List<Eco> ecoList = new ArrayList<>();
         List<EcoDetail> ecoDetails = dto.getEcoDetail();
         for (EcoDetail ecoDetail : ecoDetails) {
+            String etcMemo = null; // etc가 아니라면 null을 유지
             // ecoDetail -> eco(G, N, R)로 변환
             EcoEnum ecoEnum = null;
             if (EcoDetail.ecoProducts.equals(ecoDetail) || EcoDetail.vegan.equals(ecoDetail)
@@ -30,14 +28,15 @@ public interface EcoService {
                     || EcoDetail.wasteFood.equals(ecoDetail)) {
                 ecoEnum = EcoEnum.R;
             } else if (EcoDetail.etc.equals(ecoDetail)) {
-                ecoEnum = EcoEnum.N;
+                ecoEnum = dto.getEco(); // etc라면 사용자가 지정한 eco 데이터 삽입
+                etcMemo = dto.getEtcMemo(); // etc라면 etcMemo 데이터 삽입
             } else {
                 ecoEnum = EcoEnum.N;
             }
             Eco entity = Eco.builder()
                     .eco(ecoEnum)
                     .ecoDetail(ecoDetail)
-                    .etcMemo(dto.getEtcMemo())
+                    .etcMemo(etcMemo)
                     .expenditure(expenditure)
                     .build();
             ecoList.add(entity);

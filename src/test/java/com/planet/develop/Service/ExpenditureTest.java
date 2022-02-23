@@ -58,8 +58,8 @@ public class ExpenditureTest {
         // ecoDetail 리스트 설정
         List<EcoDetail> ecoDetails = new ArrayList<>();
         ecoDetails.add(EcoDetail.multiUse);
-        ecoDetails.add(EcoDetail.personalBag);
-        ecoDetails.add(EcoDetail.wasteFood);
+        ecoDetails.add(EcoDetail.sharing);
+//        ecoDetails.add(EcoDetail.personalBag);
 
         IntStream.rangeClosed(1, 5).forEach(i -> {
             ExpenditureRequestDto dto = ExpenditureRequestDto.builder()
@@ -70,7 +70,8 @@ public class ExpenditureTest {
                     .exWay(money_Way.values()[new Random().nextInt(money_Way.values().length)]) // 방법 랜덤 삽입
                     .memo("good memo")
                     .date(LocalDate.of(2022, 01, 23))
-                    .userId("user" + (int)(Math.random()*3+1) + "@naver.com") // 사용자 아이디 랜덤 삽입
+//                    .userId("user" + (int)(Math.random()*3+1) + "@naver.com") // 사용자 아이디 랜덤 삽입
+                    .userId("user1@naver.com") // 사용자 아이디 랜덤 삽입
                     .build();
 
             Long deno = detailService.save(dto);
