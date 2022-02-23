@@ -3,6 +3,8 @@ package com.planet.develop.Service;
 import com.planet.develop.DTO.*;
 import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
+import com.planet.develop.Enum.EcoDetail;
+import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +43,7 @@ public class CalendarServiceImpl implements CalendarService {
         return new CalendarDto(totalMonthIncome,totalMonthExpenditure, calendarDayDtos);
     }
 
+    // TODO
     /** 유형별 하루 지출/수입 상세 */
     public Map<money_Type, List<TypeDetailDto>> findDayExTypeDetail(String id, int month, int day) {
         User user = userRepository.findById(id).get();
@@ -51,6 +54,37 @@ public class CalendarServiceImpl implements CalendarService {
         in_detailDtos.addAll(ex_detailDtos);
         Map<money_Type, List<TypeDetailDto>> total = makeListToMap(in_detailDtos);
         return total;
+    }
+
+    /**
+     * 친반환경별 중복 선택 시 List<Map<EcoEnum, EcoDetial>>
+     */
+    @Override
+    public List<EcoDto> dupEcoList(List<ExpenditureTypeDetailDto> ex_days, Long exEno) {
+        List<EcoDto> ecoDtoList = new ArrayList<>();
+        for (ExpenditureTypeDetailDto dto : ex_days) {
+            if (dto.getExEno() == exEno) {
+                EcoDto ecoDto = new EcoDto(dto.getEco(), dto.getEcoDetail());
+                ecoDtoList.add(ecoDto);
+            }
+        }
+       return ecoDtoList;
+    }
+
+    /** 하루 지출 중 expenditure_eno 값을 중복되지 않게 List<Long>에 저장한다. */
+    private List<Long> findExEno(List<ExpenditureTypeDetailDto> ex_days) {
+        List<Long> dupEcoCheck = new ArrayList<>();
+        for (ExpenditureTypeDetailDto dto : ex_days) {
+            Long exEno = dto.getExEno();
+            if (dupEcoCheck.contains(exEno)) { // exEno가 이미 존재하면 생략
+                System.out.println("saved key : " + exEno);
+                continue;
+            } else {
+                dupEcoCheck.add(exEno); // exEno가 존재하지 않는다면 List에 담는다.
+                System.out.println("newly saved key : " + exEno);
+            }
+        }
+        return dupEcoCheck;
     }
 
     private List<TypeDetailDto> getIncomeTypeDtos(List<Income> in_days) {
@@ -65,13 +99,25 @@ public class CalendarServiceImpl implements CalendarService {
 
     private List<TypeDetailDto> getExpenditureTypeDtos(List<ExpenditureTypeDetailDto> ex_days) {
         List<TypeDetailDto> ex_detailDtos = new ArrayList<>();
-        for (ExpenditureTypeDetailDto dto : ex_days) { // 타입 변환
+        List<Long> exEnoList = new ArrayList<>();
 
-            TypeDetailDto typeDto = new TypeDetailDto();
-            typeDto.saveExpenditureType(dto.getExType(), dto.getCost(), dto.getMemo(), dto.getEco(), dto.getEcoDetail());
-            typeDto.setIncome(false);
-            ex_detailDtos.add(typeDto);
-        }
+        Long dupCheck = null;
+
+            for (ExpenditureTypeDetailDto dto : ex_days) { // 타입 변환
+                // expenditure_eno에 따라 행이 중복 출력되는 오류 해결
+                dupCheck = dto.getExEno();
+                if (exEnoList.contains(dupCheck)) // expenditure_eno의 종류만큼 반복한다.
+                    continue;
+                else
+                    exEnoList.add(dupCheck);
+
+                List<EcoDto> ecoList2 = dupEcoList(ex_days, dupCheck);
+
+                TypeDetailDto typeDto = new TypeDetailDto();
+                typeDto.saveExpenditureType(dto.getExType(), dto.getCost(), dto.getMemo(), ecoList2);
+                typeDto.setIncome(false);
+                ex_detailDtos.add(typeDto);
+            }
         return ex_detailDtos;
     }
 

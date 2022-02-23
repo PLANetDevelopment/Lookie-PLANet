@@ -1,12 +1,12 @@
 package com.planet.develop.DTO;
 
-import com.planet.develop.Enum.EcoDetail;
-import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
+import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -16,8 +16,7 @@ public class TypeDetailDto {
     money_Type type;
     Long cost;
     String memo;
-    EcoEnum eco;
-    EcoDetail eco_detail;
+    List<EcoDto> ecoList;
 
     public void saveIncomeType(money_Type type, Long cost, String memo) {
         this.type = type;
@@ -25,12 +24,11 @@ public class TypeDetailDto {
         this.memo = memo;
     }
 
-    public void saveExpenditureType(money_Type type, Long cost, String memo,
-                                    EcoEnum eco, EcoDetail eco_detail) {
+    public void saveExpenditureType(money_Type type, Long cost,
+                                    String memo, List<EcoDto> ecoList) {
         this.type = type;
         this.cost = cost;
         this.memo = memo;
-        this.eco = eco;
-        this.eco_detail = eco_detail;
+        this.ecoList = ecoList;
     }
 }

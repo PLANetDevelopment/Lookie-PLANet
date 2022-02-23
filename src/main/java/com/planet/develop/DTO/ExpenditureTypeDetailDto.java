@@ -16,8 +16,8 @@ public class ExpenditureTypeDetailDto {
     private money_Type exType; // 유형
     private money_Way exWay; // 방법
     private String memo; // 메모
-    private EcoEnum eco; // 친/반환경
-    private EcoDetail ecoDetail; // 친/반환경 상세
+    private EcoEnum eco;
+    private EcoDetail ecoDetail;
     private String etcMemo; // 기타메모
     private Long exEno; // expenditure_eno
 
