@@ -89,7 +89,9 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<Object[]> dayList = expenditureRepository.getDayList(user, date);
         List<ExpenditureTypeDetailDto> dtoList = new ArrayList<>();
         for (Object[] arr : dayList) {
-            ExpenditureTypeDetailDto dto = new ExpenditureTypeDetailDto(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5]);
+            System.out.println("arr[0] = " + arr[0]);
+            System.out.println("arr[0] = " + arr[1]);
+            ExpenditureTypeDetailDto dto = new ExpenditureTypeDetailDto(arr[0], arr[1]);
             dtoList.add(dto);
         }
         return dtoList;

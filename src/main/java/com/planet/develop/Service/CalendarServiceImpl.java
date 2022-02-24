@@ -23,7 +23,6 @@ public class CalendarServiceImpl implements CalendarService {
     private final IncomeService incomeService;
     private final ExpenditureDetailService expenditureDetailService;
     private final UserRepository userRepository;
-
     /** 1일-31일 동안 하루 지출/수입 */
     @Override
     public CalendarDto findCalendar(String id, int month) {
@@ -43,8 +42,9 @@ public class CalendarServiceImpl implements CalendarService {
         return new CalendarDto(totalMonthIncome,totalMonthExpenditure, calendarDayDtos);
     }
 
+
     /** 유형별 하루 지출/수입 상세 */
-    public Map<money_Type, List<TypeDetailDto>> findDayExTypeDetail(String id, int month, int day) {
+    public Result findDayExTypeDetail(String id, int month, int day) {
         User user = userRepository.findById(id).get();
         List<Income> in_days = incomeService.findDay(id, LocalDate.of(2022, month, day));
         List<ExpenditureTypeDetailDto> ex_days = expenditureDetailService.findDay(user, LocalDate.of(2022, month, day));
@@ -57,8 +57,23 @@ public class CalendarServiceImpl implements CalendarService {
         in_detailDtos.addAll(ex_detailDtos);
 
         Map<money_Type, List<TypeDetailDto>> total = makeListToMap(in_detailDtos);
-        return total;
+
+        Map<money_Type, Long> moneyTotal = new HashMap<>();
+
+        for (List<TypeDetailDto> value : total.values()) {
+            for (TypeDetailDto typeDetailDto : value) {
+                if (moneyTotal.containsKey(typeDetailDto.getType())) {
+                    Long sum = moneyTotal.get(typeDetailDto.getType()) + typeDetailDto.getCost();
+                    moneyTotal.replace(typeDetailDto.getType(), sum);
+                } else {
+                    moneyTotal.put(typeDetailDto.getType(), typeDetailDto.getCost());
+                }
+            }
+        }
+
+        return new Result(moneyTotal,total);
     }
+
 
     private List<TypeDetailDto> getIncomeTypeDtos(List<Income> in_days) {
         List<TypeDetailDto> in_detailDtos = new ArrayList<>();
@@ -73,7 +88,6 @@ public class CalendarServiceImpl implements CalendarService {
     private List<TypeDetailDto> getExpenditureTypeDtos(List<ExpenditureTypeDetailDto> ex_days) {
         List<TypeDetailDto> ex_detailDtos = new ArrayList<>();
         for (ExpenditureTypeDetailDto dto : ex_days) { // 타입 변환
-
             TypeDetailDto typeDto = new TypeDetailDto();
             typeDto.saveExpenditureType(dto.getExType(), dto.getCost(), dto.getMemo(), dto.getEco(), dto.getEcoDetail());
             typeDto.setIncome(false);

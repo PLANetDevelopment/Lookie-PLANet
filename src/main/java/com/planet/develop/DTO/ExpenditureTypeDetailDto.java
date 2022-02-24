@@ -26,4 +26,9 @@ public class ExpenditureTypeDetailDto {
         this.eco = (EcoEnum) eco;
         this.ecoDetail = (String) ecoDetail;
     }
+
+
+
+    public ExpenditureTypeDetailDto(Object o, Object o1) {
+    }
 }
