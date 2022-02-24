@@ -19,7 +19,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,6 +26,8 @@ public class MissionController {
     private final UserRepository userRepository;
     private final MissionCompleteService missionCompleteService;
     private final MissionRepository missionRepository;
+
+    /** 에코미션 데이터 저장*/
     @PostMapping("/mission/{id}/{emoji}/{name}")
     public void main(@PathVariable("id") String id, @PathVariable("emoji") String emoji, @PathVariable("name")String name){
         User user = userRepository.findById(id).get();
@@ -35,21 +36,14 @@ public class MissionController {
                 .name(name)
                 .user(user)
                 .build();
-
-
         missionCompleteService.save(mission);
     }
 
-    //TODO 이모지 저장하기
-
+    /** 에코미션 페이지 조회*/
     @GetMapping("/mission/{id}")
     public Result mission(@PathVariable("id") String id){
         User user = userRepository.findById(id).get();
         Mission mission = missionRepository.findMission(LocalDate.now());
-        System.out.println("LocalDate.now() = " + LocalDate.now());
-        System.out.println("------------------------------------------");
-        System.out.println("mission.getName() = " + mission.getName());
-        System.out.println("------------------------------------------");
         MissionCompleteDto todayMission = new MissionCompleteDto(mission.getName(),mission.getEmoji());
 
         List<MissionComplete> missions = missionCompleteService.findMissions(user);

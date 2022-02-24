@@ -17,7 +17,6 @@ public interface UserService {
         User entity = User.builder()
                 .userId(dto.getUserId())
                 .userName(dto.getUserName())
-                .point(0)
                 .build();
 
         return entity;
