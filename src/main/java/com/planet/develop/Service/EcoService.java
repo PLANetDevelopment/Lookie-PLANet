@@ -19,7 +19,7 @@ public interface EcoService {
         for (EcoDetail ecoDetail : ecoDetails) {
             String etcMemo = null; // etc가 아니라면 null을 유지
             // ecoDetail -> eco(G, N, R)로 변환
-            EcoEnum ecoEnum = null;
+            EcoEnum ecoEnum = EcoEnum.N;
             if (EcoDetail.ecoProducts.equals(ecoDetail) || EcoDetail.vegan.equals(ecoDetail)
                     || EcoDetail.multiUse.equals(ecoDetail) || EcoDetail.personalBag.equals(ecoDetail)
                     || EcoDetail.sharing.equals(ecoDetail)) {

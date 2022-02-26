@@ -45,7 +45,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         Long total = 0L;
         List<Object[]> exTypeList = expenditureRepository.getDayList(user, date);
         for (Object[] arr : exTypeList) {
-            total += (Long) arr[1];
+            total += (Long) arr[0];
         }
         return total;
     }
@@ -146,22 +146,6 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
     public List<Expenditure> getMonthEcoList(User user, int month, EcoEnum eco) {
         return null;
     }
-
-//    /** 한 달 친반환경별 리스트 */
-//    @Override
-//    public List<Expenditure> getMonthEcoList(User user, int month, EcoEnum eco) {
-//        LocalDate startDate = LocalDate.of(2022,month,1);
-//        int lengthOfMonth = startDate.lengthOfMonth();
-//        LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
-//        return em.createQuery("select e from Expenditure e left join ExpenditureDetail ed on e.eno = ed.eno " +
-//                "where :startDate <= e.date and e.date <= :endDate " +
-//                "and e.user = :user and e.detail.eco = :eco", Expenditure.class)
-//                .setParameter("startDate",startDate)
-//                .setParameter("endDate",endDate)
-//                .setParameter("user", user)
-//                .setParameter("eco", eco)
-//                .getResultList();
-//    }
 
     /** 한 달 지출 총액 */
     @Override

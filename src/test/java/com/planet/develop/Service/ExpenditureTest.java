@@ -5,6 +5,7 @@ import com.planet.develop.DTO.UserDTO;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Enum.EcoDetail;
+import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
 import com.planet.develop.Repository.ExpenditureDetailRepository;
@@ -57,19 +58,21 @@ public class ExpenditureTest {
     public void 지출_데이터_삽입() {
         // ecoDetail 리스트 설정
         List<EcoDetail> ecoDetails = new ArrayList<>();
-        ecoDetails.add(EcoDetail.multiUse);
         ecoDetails.add(EcoDetail.sharing);
+        ecoDetails.add(EcoDetail.vegan);
+        ecoDetails.add(EcoDetail.etc);
 //        ecoDetails.add(EcoDetail.personalBag);
 
-        IntStream.rangeClosed(1, 5).forEach(i -> {
+        IntStream.rangeClosed(1, 2).forEach(i -> {
             ExpenditureRequestDto dto = ExpenditureRequestDto.builder()
                     .ex_cost(Long.valueOf(random.nextInt(100000))) // 가격 랜덤 삽입
                     .ecoDetail(ecoDetails)
-                    .etcMemo("etc memo")
+                    .etcMemo("라벨 붙은 음료수 삼")
+                    .eco(EcoEnum.N)
                     .exType(money_Type.values()[new Random().nextInt(money_Type.values().length)]) // 유형 랜덤 삽입
                     .exWay(money_Way.values()[new Random().nextInt(money_Way.values().length)]) // 방법 랜덤 삽입
-                    .memo("good memo")
-                    .date(LocalDate.of(2022, 01, 23))
+                    .memo("빵 사먹음")
+                    .date(LocalDate.of(2022, 02, 26))
 //                    .userId("user" + (int)(Math.random()*3+1) + "@naver.com") // 사용자 아이디 랜덤 삽입
                     .userId("user1@naver.com") // 사용자 아이디 랜덤 삽입
                     .build();

@@ -4,15 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CalendarDto {
-    int sumOfEcoCount;
-    int sumOfNoneEcoCount;
-    Long totalMonthIncome;
-    Long totalMonthExpenditure;
-    List<CalendarDayDto> calendarDayDtos;
+public class CalendarResponseDto {
+    List<LocalDate> anniversaryList;
+    CalendarDto calendarDto;
+    String content;
 }
