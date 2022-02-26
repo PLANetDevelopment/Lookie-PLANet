@@ -13,4 +13,6 @@ public class CalendarDayDto {
     LocalDate date;
     Long incomeDays;
     Long ExpenditureDays;
+    int ecoCount;
+    int noneEcoCount;
 }

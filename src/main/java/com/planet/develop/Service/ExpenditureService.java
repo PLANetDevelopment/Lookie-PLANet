@@ -15,7 +15,7 @@ public interface ExpenditureService {
                 .build();
         Expenditure entity = Expenditure.builder()
                 .eno(detail.getEno())
-                .cost(dto.getCost())
+                .cost(dto.getEx_cost())
                 .user(user)
                 .detail(detail)
                 .build();
@@ -26,7 +26,7 @@ public interface ExpenditureService {
     default ExpenditureRequestDto entityToDto(Expenditure entity) {
         ExpenditureRequestDto dto = ExpenditureRequestDto.builder()
                 .userId(entity.getUser().getUserId())
-                .cost(entity.getCost())
+                .ex_cost(entity.getCost())
                 .date(entity.getDate())
                 .build();
         return dto;

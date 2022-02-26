@@ -10,6 +10,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CalendarDto {
+    int sumOfEcoCount;
+    int sumOfNoneEcoCount;
     Long totalMonthIncome;
     Long totalMonthExpenditure;
     List<CalendarDayDto> calendarDayDtos;

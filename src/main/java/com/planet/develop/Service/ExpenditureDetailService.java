@@ -49,12 +49,9 @@ public interface ExpenditureDetailService {
 
     default ExpenditureDetail dtoToEntity(ExpenditureRequestDto dto) {
         ExpenditureDetail entity = ExpenditureDetail.builder()
-                .ecoDetail(dto.getEcoDetail())
-                .eco(dto.getEco())
                 .exType(dto.getExType())
                 .exWay(dto.getExWay())
                 .memo(dto.getMemo())
-                .ecoDetail(dto.getEcoDetail())
                 .build();
         return entity;
     }

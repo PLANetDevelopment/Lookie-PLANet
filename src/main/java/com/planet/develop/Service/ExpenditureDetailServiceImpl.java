@@ -46,7 +46,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         Long total = 0L;
         List<Object[]> exTypeList = expenditureRepository.getDayList(user, date);
         for (Object[] arr : exTypeList) {
-            total += (Long) arr[1];
+            total += (Long) arr[0];
         }
         return total;
     }
@@ -89,9 +89,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<Object[]> dayList = expenditureRepository.getDayList(user, date);
         List<ExpenditureTypeDetailDto> dtoList = new ArrayList<>();
         for (Object[] arr : dayList) {
-            System.out.println("arr[0] = " + arr[0]);
-            System.out.println("arr[0] = " + arr[1]);
-            ExpenditureTypeDetailDto dto = new ExpenditureTypeDetailDto(arr[0], arr[1]);
+            ExpenditureTypeDetailDto dto = new ExpenditureTypeDetailDto(arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7]);
             dtoList.add(dto);
         }
         return dtoList;
@@ -167,7 +165,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<Expenditure> exList = getMonthList(user, month);
         for (Expenditure e : exList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
-            total += dto.getCost();
+            total += dto.getEx_cost();
         }
         return total;
     }
@@ -179,7 +177,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<Expenditure> exTypeList = getMonthTypeList(user, month, type);
         for (Expenditure e : exTypeList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
-            total += dto.getCost();
+            total += dto.getEx_cost();
         }
         return total;
     }
@@ -191,7 +189,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<Expenditure> exWayList = getMonthWayList(user, month, way);
         for (Expenditure e : exWayList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
-            total += dto.getCost();
+            total += dto.getEx_cost();
         }
         return total;
     }
@@ -203,7 +201,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<Expenditure> ecoList = getMonthEcoList(user, month, eco);
         for (Expenditure e : ecoList) {
             ExpenditureRequestDto dto = service.entityToDto(e);
-            total += dto.getCost();
+            total += dto.getEx_cost();
         }
         return total;
     }
@@ -215,11 +213,10 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
         ExpenditureDetail expenditureDetail = detailRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
-        expenditure.update(dto.getCost(), dto.getDate());
-        expenditureDetail.update(dto.getExType(), dto.getExWay(), dto.getMemo(), dto.getEco(), dto.getEcoDetail());
+        expenditure.update(dto.getEx_cost(), dto.getDate());
+        expenditureDetail.update(dto.getExType(), dto.getExWay(), dto.getMemo());
         return id;
     }
-
     @Override
     public void delete(Long id) {
         expenditureRepository.deleteById(id);

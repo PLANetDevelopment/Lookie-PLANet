@@ -1,6 +1,7 @@
 package com.planet.develop;
 
 import com.planet.develop.Entity.*;
+import com.planet.develop.Enum.EcoDetail;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
@@ -58,7 +59,7 @@ public class InitDb {
                     .user(user1)
                     .build();
             Income income3 = Income.builder()
-                    .in_cost(30000L)
+                    .in_cost(50000L)
                     .in_type(money_Type.allowance)
                     .date(LocalDate.of(2022, 1, 11))
                     .user(user1)
@@ -84,19 +85,27 @@ public class InitDb {
                     .date(LocalDate.of(2022, 1, 11))
                     .user(user1)
                     .build();
-            /** ExpenditureDetail expenditureDetail1 =ExpenditureDetail.builder()
-             .eco(EcoEnum.G)
-             .ecoDetail("절약")
+
+             ExpenditureDetail expenditureDetail1 =ExpenditureDetail.builder()
              .exType(money_Type.salary)
              .exWay(money_Way.card)
              .memo("ㅎㅎ")
              .build();
 
+
+
              Expenditure expenditure1 = Expenditure.builder()
              .detail(expenditureDetail1)
              .user(user1)
              .build();
-             expenditure1.update(30000L,LocalDate.of(2022, 1, 11));**/
+             expenditure1.update(50000L,LocalDate.of(2022, 1, 11));
+
+            Eco eco = Eco.builder()
+                    .eco(EcoEnum.G)
+                    .ecoDetail(EcoDetail.ecoProducts)
+                    .etcMemo("텀블러 사용")
+                    .expenditure(expenditure1)
+                    .build();
 
             em.persist(user1);
             em.persist(user2);
@@ -109,8 +118,8 @@ public class InitDb {
             em.persist(income5);
             em.persist(income6);
 
-            //em.persist(expenditure1);
-
+            em.persist(expenditure1);
+            em.persist(eco);
 
         }
     }

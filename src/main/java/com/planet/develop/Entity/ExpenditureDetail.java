@@ -1,6 +1,5 @@
 package com.planet.develop.Entity;
 
-import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
 import lombok.AllArgsConstructor;
@@ -31,18 +30,10 @@ public class ExpenditureDetail {
 
     private String memo;
 
-    @Enumerated(EnumType.STRING)
-    private EcoEnum eco;
-
-    @Column(name = "eco_detail")
-    private String ecoDetail;
-
-    public void update(money_Type type, money_Way way, String memo, EcoEnum eco, String ecoDetail) {
+    public void update(money_Type type, money_Way way, String memo) {
         this.exType = type;
         this.exWay = way;
         this.memo = memo;
-        this.eco = eco;
-        this.ecoDetail = ecoDetail;
     }
 
 }
