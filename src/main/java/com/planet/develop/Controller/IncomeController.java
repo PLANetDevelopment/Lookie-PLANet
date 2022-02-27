@@ -16,7 +16,6 @@ import java.util.Optional;
 @RestController
 public class IncomeController {
     private final IncomeService incomeService;
-    private final UserService userService;
     private final UserRepository userRepository;
 
     @PostMapping("/api/income/{id}/new")
@@ -46,8 +45,5 @@ public class IncomeController {
     public void delete_income(@PathVariable("id") Long id){
         incomeService.delete(id);
     }
-
-    //TODO
-    //조회 함수 어떻게 구현할 지
 
 }

@@ -5,11 +5,7 @@ import com.planet.develop.Entity.User;
 
 public interface UserService {
 
-    /**
-     * 이미 회원가입 된 아이디인지 확인
-     * 새로운 아이디라면 db에 저장
-     * @return 사용자 아이디
-     */
+    /** 사용자 등록 */
     String register(UserDTO dto);
 
     default User dtoToEntity(UserDTO dto) {
