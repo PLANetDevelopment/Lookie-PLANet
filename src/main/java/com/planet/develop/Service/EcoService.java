@@ -13,6 +13,10 @@ public interface EcoService {
 
     void save(ExpenditureRequestDto dto, Expenditure expenditure);
 
+    void delete(Long id, ExpenditureRequestDto dto);
+
+    void update(Long id, ExpenditureRequestDto dto, Expenditure expenditure);
+
     default List<Eco> dtoToEntity(ExpenditureRequestDto dto, Expenditure expenditure) {
         List<Eco> ecoList = new ArrayList<>();
         List<EcoDetail> ecoDetails = dto.getEcoDetail();

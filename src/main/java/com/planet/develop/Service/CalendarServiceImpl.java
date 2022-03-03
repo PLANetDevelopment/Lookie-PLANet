@@ -94,7 +94,7 @@ public class CalendarServiceImpl implements CalendarService {
         return in_detailDtos;
     }
 
-    /** 유형별 일일 지출 상세 조회 */
+    /** 중복 선택한 친/반환경 데이터를 TypeDetailDto로 변환해서 List<TypeDetailDto> 타입으로 리턴 */
     private List<TypeDetailDto> getExpenditureTypeDtos(List<ExpenditureTypeDetailDto> ex_days) {
         List<TypeDetailDto> ex_detailDtos = new ArrayList<>();
         List<Long> exEnoList = new ArrayList<>();

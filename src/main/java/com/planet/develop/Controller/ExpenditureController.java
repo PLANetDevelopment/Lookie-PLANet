@@ -43,7 +43,7 @@ public class ExpenditureController {
 
     /** 지출 데이터 수정 */
     @PostMapping("/api/expenditure/{id}/update")
-    public ExpenditureResponseDto update_expenditure(@PathVariable("id") Long id,
+    public ExpenditureResponseDto update_expenditure(@PathVariable("id") Long id, // 여기서 id는 eno를 의미
                                                      @RequestBody ExpenditureRequestDto request) throws IllegalAccessException {
         Long eno = detailService.update(id, request);
         return new ExpenditureResponseDto(eno);

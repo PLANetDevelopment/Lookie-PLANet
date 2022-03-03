@@ -2,12 +2,14 @@ package com.planet.develop.Service;
 
 import com.planet.develop.DTO.ExpenditureTypeDetailDto;
 import com.planet.develop.DTO.ExpenditureRequestDto;
+import com.planet.develop.Entity.Eco;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
+import com.planet.develop.Repository.EcoRepository;
 import com.planet.develop.Repository.ExpenditureDetailRepository;
 import com.planet.develop.Repository.ExpenditureRepository;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +29,9 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     private final ExpenditureRepository expenditureRepository;
     private final ExpenditureDetailRepository detailRepository;
-    private final ExpenditureService service;
+    private final EcoRepository ecoRepository;
+    private final ExpenditureService expenditureService;
+    private final EcoService ecoService;
 
     private final EntityManager em;
 
@@ -153,7 +157,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         Long total = 0L;
         List<Expenditure> exList = getMonthList(user, month);
         for (Expenditure e : exList) {
-            ExpenditureRequestDto dto = service.entityToDto(e);
+            ExpenditureRequestDto dto = expenditureService.entityToDto(e);
             total += dto.getEx_cost();
         }
         return total;
@@ -165,7 +169,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         Long total = 0L;
         List<Expenditure> exTypeList = getMonthTypeList(user, month, type);
         for (Expenditure e : exTypeList) {
-            ExpenditureRequestDto dto = service.entityToDto(e);
+            ExpenditureRequestDto dto = expenditureService.entityToDto(e);
             total += dto.getEx_cost();
         }
         return total;
@@ -177,7 +181,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         Long total = 0L;
         List<Expenditure> exWayList = getMonthWayList(user, month, way);
         for (Expenditure e : exWayList) {
-            ExpenditureRequestDto dto = service.entityToDto(e);
+            ExpenditureRequestDto dto = expenditureService.entityToDto(e);
             total += dto.getEx_cost();
         }
         return total;
@@ -189,7 +193,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         Long total = 0L;
         List<Expenditure> ecoList = getMonthEcoList(user, month, eco);
         for (Expenditure e : ecoList) {
-            ExpenditureRequestDto dto = service.entityToDto(e);
+            ExpenditureRequestDto dto = expenditureService.entityToDto(e);
             total += dto.getEx_cost();
         }
         return total;
@@ -202,8 +206,9 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
         ExpenditureDetail expenditureDetail = detailRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("해당 게시글이 없습니다. id = " + id));
-        expenditure.update(dto.getEx_cost(), dto.getDate());
-        expenditureDetail.update(dto.getExType(), dto.getExWay(), dto.getMemo());
+        expenditure.update(dto.getEx_cost(), dto.getDate()); // 지출 테이블 수정
+        expenditureDetail.update(dto.getExType(), dto.getExWay(), dto.getMemo()); // 지출 상세 테이블 수정
+        ecoService.update(id, dto, expenditure); // 에코 테이블 수정
         return id;
     }
 

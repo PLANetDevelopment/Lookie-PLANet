@@ -32,9 +32,4 @@ public class Eco {
     @ManyToOne(fetch = FetchType.LAZY)
     private Expenditure expenditure;
 
-    public void update(EcoDetail ecoDetail, String etcMemo) {
-        this.ecoDetail = this.getEcoDetail();
-        this.etcMemo = this.getEtcMemo();
-    }
-
 }

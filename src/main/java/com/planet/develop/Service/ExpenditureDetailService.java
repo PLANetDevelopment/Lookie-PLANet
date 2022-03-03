@@ -42,8 +42,6 @@ public interface ExpenditureDetailService {
 
     Long totalWayMonth(User user, int month, money_Way way);
 
-    /** ecoDetail의 연속된 숫자 또는 문자를 분리해서 해석하는 메서드 */
-
     Long update(Long id, ExpenditureRequestDto dto) throws IllegalAccessException;
 
     void delete(Long id);
