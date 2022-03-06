@@ -1,7 +1,6 @@
 package com.planet.develop.Controller;
 
 import com.planet.develop.DTO.*;
-import com.planet.develop.Entity.Anniversary;
 import com.planet.develop.Entity.Quote;
 import com.planet.develop.Repository.AnniversaryRepository;
 import com.planet.develop.Repository.QuoteRepository;

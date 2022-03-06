@@ -19,9 +19,4 @@ public class Mission {
     private Long point;
     private boolean status;
 
-//    public void changeMission(User user){
-//        this.user=user;
-//        user.getMissions().add(this);
-//    }
-
 }
