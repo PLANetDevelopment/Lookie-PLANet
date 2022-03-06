@@ -4,6 +4,7 @@ import com.planet.develop.DTO.*;
 import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
+import com.planet.develop.Enum.TIE;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Repository.AnniversaryRepository;
 import com.planet.develop.Repository.ExpenditureRepository;
@@ -36,8 +37,6 @@ public class CalendarServiceImpl implements CalendarService {
         User user = userRepository.findById(id).get();
         Long totalMonthExpenditure = expenditureDetailService.totalMonth(user, month);
         List<CalendarDayDto> calendarDayDtos = new ArrayList<>();
-
-
         int days = LocalDate.of(2022,month,month).lengthOfMonth();
         int sumOfEcoCount=0;
         int sumOfNoneEcoCount=0;
@@ -56,13 +55,8 @@ public class CalendarServiceImpl implements CalendarService {
 
     /** 유형별 하루 지출/수입 상세 */
     public Result findDayExTypeDetail(String id, int month, int day) {
-        User user = userRepository.findById(id).get();
-        List<Income> in_days = incomeService.findDay(id, LocalDate.of(2022, month, day));
-        List<ExpenditureTypeDetailDto> ex_days = expenditureDetailService.findDay(user, LocalDate.of(2022, month, day));
-        List<TypeDetailDto> in_detailDtos = getIncomeTypeDtos(in_days);
-        List<TypeDetailDto> ex_detailDtos = getExpenditureTypeDtos(ex_days);
+        List<TypeDetailDto> in_detailDtos = inExTypeDetailDto(id, month, day, TIE.T);
         String content = anniversaryRepository.getAnniversary(month, day).getContent();
-        in_detailDtos.addAll(ex_detailDtos);
         Map<money_Type, List<TypeDetailDto>> total = makeListToMap(in_detailDtos);
         Map<money_Type, Long> moneyTotal = new HashMap<>();
         for (List<TypeDetailDto> value : total.values()) {
@@ -82,6 +76,25 @@ public class CalendarServiceImpl implements CalendarService {
             }
         }
         return new Result(moneyTotal,total, content);
+    }
+
+    @Override
+    public List<TypeDetailDto> inExTypeDetailDto(String id, int month, int day, TIE tie) {
+        User user = userRepository.findById(id).get();
+        List<Income> in_days = new ArrayList<>();
+        List<ExpenditureTypeDetailDto> ex_days = new ArrayList<>();
+        if (tie == TIE.I) {
+            in_days = incomeService.findDay(id, LocalDate.of(2022, month, day)); // 수입 상세 내역만
+        } else if (tie == TIE.E) {
+            ex_days = expenditureDetailService.findDay(user, LocalDate.of(2022, month, day)); // 지출 상세 내역만
+        } else {
+            in_days = incomeService.findDay(id, LocalDate.of(2022, month, day)); // 수입 상세 내역과
+            ex_days = expenditureDetailService.findDay(user, LocalDate.of(2022, month, day)); // 지출 상세 내역 모두
+        }
+        List<TypeDetailDto> in_detailDtos = getIncomeTypeDtos(in_days);
+        List<TypeDetailDto> ex_detailDtos = getExpenditureTypeDtos(ex_days);
+        in_detailDtos.addAll(ex_detailDtos);
+        return in_detailDtos;
     }
 
     private List<TypeDetailDto> getIncomeTypeDtos(List<Income> in_days) {

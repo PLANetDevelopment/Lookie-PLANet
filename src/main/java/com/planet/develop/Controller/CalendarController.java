@@ -36,11 +36,10 @@ public class CalendarController {
         return new CalendarResponseDto(anniversaryList.get(), calendar, quote.getContent());
     }
 
-
     /** 일별 조회 (세부 조회) */
     @GetMapping("/api/calendar/{id}/{month}/{day}")
-    public Result findIncomeDetail(@PathVariable("id") String id, @PathVariable("month") int month, @PathVariable("day") int day){
-
+    public Result findIncomeDetail(@PathVariable("id") String id,
+                                   @PathVariable("month") int month, @PathVariable("day") int day){
         return  calendarService.findDayExTypeDetail(id, month, day);
     }
 }

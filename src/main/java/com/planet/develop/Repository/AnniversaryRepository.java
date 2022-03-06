@@ -1,7 +1,6 @@
 package com.planet.develop.Repository;
 
 import com.planet.develop.Entity.Anniversary;
-import com.planet.develop.Entity.Income;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
