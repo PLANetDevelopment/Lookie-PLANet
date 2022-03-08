@@ -13,12 +13,10 @@ import javax.persistence.Id;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Quote {
-
+public class Anniversary extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int qno;
-
+    private int no;
     private String content;
 
 }

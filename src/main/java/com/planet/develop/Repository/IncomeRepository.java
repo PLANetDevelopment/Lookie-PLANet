@@ -45,4 +45,6 @@ public class IncomeRepository {
                 .setParameter("endDate",endDate)
                 .getResultList();
     }
+
+
 }

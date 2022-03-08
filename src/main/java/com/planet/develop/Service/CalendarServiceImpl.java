@@ -2,10 +2,12 @@ package com.planet.develop.Service;
 
 import ch.qos.logback.core.joran.conditional.ElseAction;
 import com.planet.develop.DTO.*;
+import com.planet.develop.Entity.Anniversary;
 import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
+import com.planet.develop.Repository.AnniversaryRepository;
 import com.planet.develop.Repository.ExpenditureRepository;
 import com.planet.develop.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +28,8 @@ public class CalendarServiceImpl implements CalendarService {
     private final IncomeService incomeService;
     private final ExpenditureDetailService expenditureDetailService;
     private final UserRepository userRepository;
-    private final EcoService ecoService;
     private final ExpenditureRepository expenditureRepository;
-
+    private final AnniversaryRepository anniversaryRepository;
     /** 1일-31일 동안 하루 지출/수입/eco_count */
     @Override
     public CalendarDto findCalendar(String id, int month) {
@@ -60,7 +61,7 @@ public class CalendarServiceImpl implements CalendarService {
         User user = userRepository.findById(id).get();
         List<Income> in_days = incomeService.findDay(id, LocalDate.of(2022, month, day));
         List<ExpenditureTypeDetailDto> ex_days = expenditureDetailService.findDay(user, LocalDate.of(2022, month, day));
-
+        String content = anniversaryRepository.getAnniversary(month, day).getContent();
         List<TypeDetailDto> in_detailDtos = getIncomeTypeDtos(in_days);
         List<TypeDetailDto> ex_detailDtos = getExpenditureTypeDtos(ex_days);
         in_detailDtos.addAll(ex_detailDtos);
@@ -86,7 +87,7 @@ public class CalendarServiceImpl implements CalendarService {
             }
         }
 
-        return new Result(moneyTotal,total);
+        return new Result(moneyTotal,total,content);
     }
 
 

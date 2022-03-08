@@ -8,4 +8,5 @@ import lombok.Data;
 public class Result<T> {
     private T totalMoney;
     private T totalDetails;
+    String content;
 }
