@@ -92,13 +92,35 @@ public class InitDb {
              .memo("ㅎㅎ")
              .build();
 
-
-
              Expenditure expenditure1 = Expenditure.builder()
              .detail(expenditureDetail1)
              .user(user1)
              .build();
-             expenditure1.update(50000L,LocalDate.of(2022, 1, 11));
+             expenditure1.update(50000L,LocalDate.of(2022, 2, 8));
+
+            ExpenditureDetail expenditureDetail2 =ExpenditureDetail.builder()
+                    .exType(money_Type.salary)
+                    .exWay(money_Way.card)
+                    .memo("ㅎㅎ")
+                    .build();
+
+            Expenditure expenditure2= Expenditure.builder()
+                    .detail(expenditureDetail2)
+                    .user(user1)
+                    .build();
+            expenditure2.update(50000L,LocalDate.of(2022, 2, 8));
+
+            ExpenditureDetail expenditureDetail3 =ExpenditureDetail.builder()
+                    .exType(money_Type.salary)
+                    .exWay(money_Way.card)
+                    .memo("ㅎㅎ")
+                    .build();
+
+            Expenditure expenditure3 = Expenditure.builder()
+                    .detail(expenditureDetail3)
+                    .user(user1)
+                    .build();
+            expenditure3.update(50000L,LocalDate.of(2022, 3, 9));
 
             Eco eco = Eco.builder()
                     .eco(EcoEnum.G)
@@ -106,6 +128,19 @@ public class InitDb {
                     .etcMemo("텀블러 사용")
                     .expenditure(expenditure1)
                     .build();
+            Eco eco2 = Eco.builder()
+                    .eco(EcoEnum.G)
+                    .ecoDetail(EcoDetail.ecoProducts)
+                    .etcMemo("텀블러 사용")
+                    .expenditure(expenditure2)
+                    .build();
+            Eco eco3 = Eco.builder()
+                    .eco(EcoEnum.G)
+                    .ecoDetail(EcoDetail.ecoProducts)
+                    .etcMemo("텀블러 사용")
+                    .expenditure(expenditure3)
+                    .build();
+
 
             em.persist(user1);
             em.persist(user2);
@@ -120,6 +155,10 @@ public class InitDb {
 
             em.persist(expenditure1);
             em.persist(eco);
+            em.persist(expenditure2);
+            em.persist(eco2);
+            em.persist(expenditure3);
+            em.persist(eco3);
 
         }
     }
