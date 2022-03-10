@@ -1,7 +1,10 @@
 package com.planet.develop;
 
-import com.planet.develop.Entity.Expenditure;
-import com.planet.develop.Entity.User;
+import com.planet.develop.Entity.*;
+import com.planet.develop.Enum.EcoDetail;
+import com.planet.develop.Enum.EcoEnum;
+import com.planet.develop.Enum.money_Type;
+import com.planet.develop.Enum.money_Way;
 import com.planet.develop.Service.IncomeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 
 /** 테스트 용 user 생성 **/
 @Component
@@ -26,7 +30,6 @@ public class InitDb {
     @RequiredArgsConstructor
     static class InitService {
         private final EntityManager em;
-        private final IncomeService incomeService;
         public void dbInit1() {
             User user1 = User.builder()
                     .userId("yui12@gmail.com")
@@ -43,17 +46,122 @@ public class InitDb {
                     .userName("회원C")
                     .build();
 
-            Expenditure expenditure = Expenditure.builder()
-                    .cost(10000L)
+            Income income1 = Income.builder()
+                    .in_cost(10000L)
+                    .in_type(money_Type.salary)
+                    .date(LocalDate.of(2022, 1, 11))
+                    .user(user1)
                     .build();
+            Income income2 = Income.builder()
+                    .in_cost(20000L)
+                    .in_type(money_Type.salary)
+                    .date(LocalDate.of(2022, 1, 11))
+                    .user(user1)
+                    .build();
+            Income income3 = Income.builder()
+                    .in_cost(50000L)
+                    .in_type(money_Type.allowance)
+                    .date(LocalDate.of(2022, 1, 11))
+                    .user(user1)
+                    .build();
+
+            Income income4 = Income.builder()
+                    .in_cost(30000L)
+                    .in_type(money_Type.etc)
+                    .date(LocalDate.of(2022, 1, 11))
+                    .user(user1)
+                    .build();
+
+            Income income5 = Income.builder()
+                    .in_cost(30000L)
+                    .in_type(money_Type.medical_treatment)
+                    .date(LocalDate.of(2022, 1, 11))
+                    .user(user1)
+                    .build();
+
+            Income income6 = Income.builder()
+                    .in_cost(30000L)
+                    .in_type(money_Type.culture)
+                    .date(LocalDate.of(2022, 1, 11))
+                    .user(user1)
+                    .build();
+
+             ExpenditureDetail expenditureDetail1 =ExpenditureDetail.builder()
+             .exType(money_Type.salary)
+             .exWay(money_Way.card)
+             .memo("ㅎㅎ")
+             .build();
+
+             Expenditure expenditure1 = Expenditure.builder()
+             .detail(expenditureDetail1)
+             .user(user1)
+             .build();
+             expenditure1.update(50000L,LocalDate.of(2022, 2, 8));
+
+            ExpenditureDetail expenditureDetail2 =ExpenditureDetail.builder()
+                    .exType(money_Type.salary)
+                    .exWay(money_Way.card)
+                    .memo("ㅎㅎ")
+                    .build();
+
+            Expenditure expenditure2= Expenditure.builder()
+                    .detail(expenditureDetail2)
+                    .user(user1)
+                    .build();
+            expenditure2.update(50000L,LocalDate.of(2022, 2, 8));
+
+            ExpenditureDetail expenditureDetail3 =ExpenditureDetail.builder()
+                    .exType(money_Type.salary)
+                    .exWay(money_Way.card)
+                    .memo("ㅎㅎ")
+                    .build();
+
+            Expenditure expenditure3 = Expenditure.builder()
+                    .detail(expenditureDetail3)
+                    .user(user1)
+                    .build();
+            expenditure3.update(50000L,LocalDate.of(2022, 3, 9));
+
+            Eco eco = Eco.builder()
+                    .eco(EcoEnum.G)
+                    .ecoDetail(EcoDetail.ecoProducts)
+                    .etcMemo("텀블러 사용")
+                    .expenditure(expenditure1)
+                    .build();
+            Eco eco2 = Eco.builder()
+                    .eco(EcoEnum.G)
+                    .ecoDetail(EcoDetail.ecoProducts)
+                    .etcMemo("텀블러 사용")
+                    .expenditure(expenditure2)
+                    .build();
+            Eco eco3 = Eco.builder()
+                    .eco(EcoEnum.G)
+                    .ecoDetail(EcoDetail.ecoProducts)
+                    .etcMemo("텀블러 사용")
+                    .expenditure(expenditure3)
+                    .build();
+
 
             em.persist(user1);
             em.persist(user2);
             em.persist(user3);
 
-            em.persist(expenditure);
+            em.persist(income1);
+            em.persist(income2);
+            em.persist(income3);
+            em.persist(income4);
+            em.persist(income5);
+            em.persist(income6);
 
+            em.persist(expenditure1);
+            em.persist(eco);
+            em.persist(expenditure2);
+            em.persist(eco2);
+            em.persist(expenditure3);
+            em.persist(eco3);
 
         }
     }
+
+
 }

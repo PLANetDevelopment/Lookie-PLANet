@@ -35,6 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
-
+.json
 build.gradle
 application.yml

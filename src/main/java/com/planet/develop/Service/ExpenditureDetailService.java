@@ -1,6 +1,8 @@
 package com.planet.develop.Service;
 
-import com.planet.develop.DTO.ExpenditureDTO;
+import com.planet.develop.DTO.ExpenditureDetailDto;
+import com.planet.develop.DTO.ExpenditureRequestDto;
+import com.planet.develop.DTO.ExpenditureTypeDetailDto;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
@@ -13,42 +15,45 @@ import java.util.List;
 
 public interface ExpenditureDetailService {
 
-    Long register(ExpenditureDTO dto);
+    Long save(ExpenditureRequestDto dto);
 
-    String totalDayEco(User user, EcoEnum eco, LocalDate date);
+    Long totalEcoDay(User user, EcoEnum eco, LocalDate date);
 
-    String totalDay(User user, LocalDate date);
+    Long totalDay(User user, LocalDate date);
 
-    String totalDayExType(User user, money_Type type, LocalDate date);
+    Long totalTypeDay(User user, money_Type type, LocalDate date);
 
-    String totalDayExWay(User user, money_Way way, LocalDate date);
+    Long totalWayDay(User user, money_Way way, LocalDate date);
 
-    List<Expenditure> findMonthExpenditure(User user, int month);
+    List<ExpenditureTypeDetailDto> findDay(User user, LocalDate date);
 
-    List<Expenditure> findMonthExType(User user, int month, money_Type type);
+    List<Expenditure> getMonthList(User user, int month);
 
-    List<Expenditure> findMonthExWay(User user, int i, money_Way way);
+    List<Expenditure> getMonthTypeList(User user, int month, money_Type type);
 
-    List<Expenditure> findMonthEco(User user, int month, EcoEnum eco);
+    List<Expenditure> getMonthWayList(User user, int i, money_Way way);
 
-    abstract String totalMonth(User user, int month);
+    List<Expenditure> getMonthEcoList(User user, int month, EcoEnum eco);
 
-    String totalMonthExType(User user, int month, money_Type type);
+    Long totalMonth(User user, int month);
 
-    String totalMonthEco(User user, int month, EcoEnum eco);
+    Long totalMonthType(User user, int month, money_Type type);
 
-    String totalMonthExWay(User user, int month, money_Way way);
+    Long totalEcoMonth(User user, int month, EcoEnum eco);
 
-        default ExpenditureDetail dtoToEntity(ExpenditureDTO dto) {
+    Long totalWayMonth(User user, int month, money_Way way);
+
+    Long update(Long id, ExpenditureRequestDto dto) throws IllegalAccessException;
+
+    void delete(Long id);
+
+    default ExpenditureDetail dtoToEntity(ExpenditureRequestDto dto) {
         ExpenditureDetail entity = ExpenditureDetail.builder()
-                .ecoDetail(dto.getEcoDetail())
-                .eco(dto.getEco())
                 .exType(dto.getExType())
                 .exWay(dto.getExWay())
                 .memo(dto.getMemo())
-                .ecoDetail(dto.getEcoDetail())
                 .build();
-            return entity;
-        }
+        return entity;
+    }
 
 }

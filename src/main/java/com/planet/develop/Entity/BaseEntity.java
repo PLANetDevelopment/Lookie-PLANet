@@ -3,6 +3,7 @@ package com.planet.develop.Entity;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
@@ -10,12 +11,12 @@ import javax.persistence.MappedSuperclass;
 import java.time.LocalDate;
 
 @MappedSuperclass
-@EntityListeners(value = {AuditingEntityListener.class})
 @Getter
-abstract class BaseEntity {
+public class BaseEntity {
 
-    @CreatedDate
-    @Column(updatable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
-
+    public void changeDate(LocalDate date) {
+        this.date=date;
+    }
 }
