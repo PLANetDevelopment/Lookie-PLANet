@@ -72,14 +72,14 @@ public class IncomeServiceTest {
         System.out.println("total = " + total);
     }
 
-    @Test
-    public void totalMonth_함수_테스트() throws Exception{
-        //given
-        Long total = incomeService.totalMonth("yui12@gmail.com",1);
-        //then
-        System.out.println("total = " + total);
-
-    }
+//    @Test
+//    public void totalMonth_함수_테스트() throws Exception{
+//        //given
+//        Long total = incomeService.totalMonth("yui12@gmail.com",1);
+//        //then
+//        System.out.println("total = " + total);
+//
+//    }
 
     @Test
     public void findMonth_함수_테스트() throws Exception{

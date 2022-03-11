@@ -35,7 +35,7 @@ public interface ExpenditureDetailService {
 
     List<Expenditure> getMonthEcoList(User user, int month, EcoEnum eco);
 
-    Long totalMonth(User user, int month);
+    Long totalMonth(User user,int year,int month);
 
     Long totalMonthType(User user, int month, money_Type type);
 

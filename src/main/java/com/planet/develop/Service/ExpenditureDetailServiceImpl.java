@@ -160,13 +160,10 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 한 달 지출 총액 */
     @Override
-    public Long totalMonth(User user, int month) {
-        Long total = 0L;
-        List<Expenditure> exList = getMonthList(user, month);
-        for (Expenditure e : exList) {
-            ExpenditureRequestDto dto = service.entityToDto(e);
-            total += dto.getEx_cost();
-        }
+    public Long totalMonth(User user, int year ,int month) {
+        LocalDate startDate = LocalDate.of(year,month,1);
+        LocalDate endDate = LocalDate.of(year,month,startDate.lengthOfMonth());
+        Long total = expenditureRepository.calMonth(user,startDate,endDate);
         return total;
     }
 

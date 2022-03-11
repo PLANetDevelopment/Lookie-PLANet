@@ -19,9 +19,9 @@ import java.util.List;
 public class StatisticsRepository {
     private final EntityManager em;
 
-    public Long getMonthEcoCount(User user,EcoEnum eco,int month){
-        LocalDate startDate = LocalDate.of(2022,month,1);
-        LocalDate endDate = LocalDate.of(2022,month,startDate.lengthOfMonth());
+    public Long getMonthEcoCount(User user,EcoEnum eco,int year,int month){
+        LocalDate startDate = LocalDate.of(year,month,1);
+        LocalDate endDate = LocalDate.of(year,month,startDate.lengthOfMonth());
 
         return em.createQuery("select count(*) from Expenditure e " +
                         "left join ExpenditureDetail ed on e.eno = ed.eno " +
@@ -34,19 +34,19 @@ public class StatisticsRepository {
                 .getSingleResult();
     }
 
-    public Long getDifference(User user,LocalDate now, LocalDate last){
-        LocalDate startDate = LocalDate.of( now.getYear(),now.getMonthValue(),1);
-        Long nowCount = em.createQuery("select count(*) from Expenditure e " +
+    public Long getNowEcoCount(User user,LocalDate now,LocalDate startDate,EcoEnum eco) {
+       return em.createQuery("select count(*) from Expenditure e " +
                         "left join ExpenditureDetail ed on e.eno = ed.eno " +
                         "left join Eco ec on e.eno = ec.expenditure.eno " +
-                        "where e.user = :user and ec.eco ='G' and :startDate<=e.date and e.date <= :endDate", Long.class)
+                        "where e.user = :user and ec.eco = :eco and :startDate<=e.date and e.date <= :endDate", Long.class)
                 .setParameter("user", user)
+                .setParameter("eco",eco)
                 .setParameter("startDate", startDate)
                 .setParameter("endDate", now)
                 .getSingleResult();
-
-        startDate= startDate.minusMonths(1);
-        Long lastCount = em.createQuery("select count(*) from Expenditure e " +
+        }
+    public Long getLastEcoCount(User user, LocalDate last,LocalDate startDate) {
+        return em.createQuery("select count(*) from Expenditure e " +
                         "left join ExpenditureDetail ed on e.eno = ed.eno " +
                         "left join Eco ec on e.eno = ec.expenditure.eno " +
                         "where e.user = :user and ec.eco ='G' and :startDate<=e.date and e.date <= :endDate", Long.class)
@@ -54,10 +54,5 @@ public class StatisticsRepository {
                 .setParameter("startDate", startDate)
                 .setParameter("endDate", last)
                 .getSingleResult();
-        System.out.println("now = " + now);
-        System.out.println("last = " + last);
-        System.out.println("nowCount = " + nowCount);
-        System.out.println("lastCount = " + lastCount);
-        return nowCount-lastCount;
     }
 }

@@ -27,9 +27,9 @@ public class CalendarController {
     Random random = new Random();
 
     /** 월별 수입/지출 조회 함수 */
-    @GetMapping("/api/calendar/{id}/{month}")
-    public CalendarResponseDto findCalendar(@PathVariable("id") String id, @PathVariable("month") int month){
-        CalendarDto calendar = calendarService.findCalendar(id, month);
+    @GetMapping("/api/calendar/{id}/{year}/{month}")
+    public CalendarResponseDto findCalendar(@PathVariable("id") String id,@PathVariable("year") int  year,@PathVariable("month") int month){
+        CalendarDto calendar = calendarService.findCalendar(id,year,month);
         int qno = random.nextInt(40) + 1;
         Quote quote = quoteRepository.findById(qno).get();
         Optional<List<LocalDate>> anniversaryList = Optional.ofNullable(anniversaryRepository.getAnniversaryList(month));

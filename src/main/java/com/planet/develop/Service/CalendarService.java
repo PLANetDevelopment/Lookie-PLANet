@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface CalendarService {
     /** 월별 지출/수입 총액과 일별 지출/소비 총액 구하기 */
-    CalendarDto findCalendar(String id, int month);
+    CalendarDto findCalendar(String id,int year, int month);
     /** 유형별 하루 지출/수입 상세 */
     Result findDayExTypeDetail(String id, int month, int day);
 

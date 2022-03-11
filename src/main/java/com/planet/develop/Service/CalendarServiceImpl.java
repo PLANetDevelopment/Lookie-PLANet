@@ -32,10 +32,10 @@ public class CalendarServiceImpl implements CalendarService {
     private final AnniversaryRepository anniversaryRepository;
     /** 1일-31일 동안 하루 지출/수입/eco_count */
     @Override
-    public CalendarDto findCalendar(String id, int month) {
-        Long totalMonthIncome = incomeService.totalMonth(id,month);
+    public CalendarDto findCalendar(String id,int year, int month) {
         User user = userRepository.findById(id).get();
-        Long totalMonthExpenditure = expenditureDetailService.totalMonth(user, month);
+        Long totalMonthIncome = incomeService.totalMonth(user,year,month);
+        Long totalMonthExpenditure = expenditureDetailService.totalMonth(user,year,month);
         List<CalendarDayDto> calendarDayDtos = new ArrayList<>();
 
 

@@ -19,12 +19,12 @@ public class MainController {
     private final IncomeService incomeService;
     private final ExpenditureDetailService expenditureDetailService;
 
-    @GetMapping("/main/{id}/{month}")
-    public mainResponseDto main(@PathVariable("id") String id, @PathVariable("month") int month){
+    @GetMapping("/main/{id}/{year}/{month}")
+    public mainResponseDto main(@PathVariable("id") String id,@PathVariable("year") int year, @PathVariable("month") int month){
         User user = userRepository.findById(id).get();
         String userName=user.getUserName();
-        Long totalMonthIncome = incomeService.totalMonth(user.getUserId(),month);
-        Long totalMonthExpenditure = expenditureDetailService.totalMonth(user, month);
+        Long totalMonthIncome = incomeService.totalMonth(user,year,month);
+        Long totalMonthExpenditure = expenditureDetailService.totalMonth(user,year, month);
 
         return new mainResponseDto(userName,totalMonthIncome,totalMonthExpenditure);
     }

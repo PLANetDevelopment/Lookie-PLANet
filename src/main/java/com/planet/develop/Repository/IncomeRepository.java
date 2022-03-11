@@ -46,5 +46,16 @@ public class IncomeRepository {
                 .getResultList();
     }
 
+    public Long calMonth(User user,int year,int month){
+        LocalDate startDate = LocalDate.of(year,month,1);
+        LocalDate endDate = LocalDate.of(year,month,startDate.lengthOfMonth());
+
+        return em.createQuery("select sum(u.in_cost) from Income u where u.user= :user and :startDate<=u.date and u.date <= :endDate", Long.class)
+                .setParameter("user",user)
+                .setParameter("startDate",startDate)
+                .setParameter("endDate",endDate)
+                .getSingleResult();
+    }
+
 
 }

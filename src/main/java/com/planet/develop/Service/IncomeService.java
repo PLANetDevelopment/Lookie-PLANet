@@ -87,14 +87,10 @@ public class IncomeService {
         return days;
     }
 
-    /** 월별 총합 **/
-    public Long totalMonth(String user_id,int month) {
-        Optional<User> findUser = userRepository.findById(user_id);
-        List<Income> days=incomeRepository.findMonth(findUser.get(),month);
-        Long total=0L;
-        for (Income day : days) {
-            total+=day.getIn_cost();
-        }
+
+    /** 월별 총합2 **/
+    public Long totalMonth(User user,int year,int month) {
+        Long total = incomeRepository.calMonth(user,year,month);
         return total;
 
     }
