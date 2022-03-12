@@ -6,6 +6,7 @@ import com.planet.develop.Entity.Eco;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
+import com.planet.develop.Enum.EcoDetail;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
@@ -41,6 +42,37 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         ExpenditureDetail entity = dtoToEntity(dto);
         detailRepository.save(entity);
         return entity.getEno();
+    }
+
+    /** 수정 페이지 */
+    @Override
+    public ExpenditureRequestDto getSingleDetail(Long eno) {
+        Expenditure expenditure = expenditureRepository.findById(eno).get(); // 지출 테이블 조회
+        ExpenditureDetail detail = detailRepository.findById(eno).get(); // 지출 상세 테이블 조회
+        List<Long> ecoByEno = ecoRepository.getEcoByEno(eno); // 친반환경 테이블 조회
+        List<EcoDetail> ecoDetails = new ArrayList<>();
+        String etcMemo = null; EcoEnum eco = null;
+        for (Long ecoEno : ecoByEno) {
+            Eco ecoEntity = ecoRepository.findById(ecoEno).get();
+            EcoDetail ecoDetail = ecoEntity.getEcoDetail();
+            ecoDetails.add(ecoDetail);
+            if (ecoEntity.getEtcMemo() != null) {
+                etcMemo = ecoEntity.getEtcMemo();
+                eco = ecoEntity.getEco();
+            }
+        }
+        ExpenditureRequestDto requestDto = ExpenditureRequestDto.builder()
+                .userId(expenditure.getUser().getUserId())
+                .ex_cost(expenditure.getCost())
+                .date(expenditure.getDate())
+                .exType(detail.getExType())
+                .exWay(detail.getExWay())
+                .memo(detail.getMemo())
+                .ecoDetail(ecoDetails)
+                .etcMemo(etcMemo)
+                .eco(eco)
+                .build();
+        return requestDto;
     }
 
     /** 하루 지출 총액 */
@@ -102,9 +134,23 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
     /** 한 달 지출 리스트 */
     @Override
     public List<Expenditure> getMonthList(User user, int month) {
-        LocalDate startDate = LocalDate.of(2022,month,1);
+        LocalDate startDate = LocalDate.of(2022, month, 1);
         int lengthOfMonth = startDate.lengthOfMonth();
-        LocalDate endDate = LocalDate.of(2022,month,lengthOfMonth);
+        LocalDate endDate = LocalDate.of(2022, month, lengthOfMonth);
+        return em.createQuery("select e from Expenditure e left join ExpenditureDetail ed on e.eno = ed.eno " +
+                "where :startDate <= e.date and e.date <= :endDate " +
+                "and e.user = :user", Expenditure.class)
+                .setParameter("startDate",startDate)
+                .setParameter("endDate",endDate)
+                .setParameter("user", user)
+                .getResultList();
+    }
+
+    /** 한 달 특정 날짜까지 지출 리스트 */
+    @Override
+    public List<Expenditure> getMonthList(User user, int month, int day) {
+        LocalDate startDate = LocalDate.of(2022, month, 1);
+        LocalDate endDate = LocalDate.of(2022, month, day);
         return em.createQuery("select e from Expenditure e left join ExpenditureDetail ed on e.eno = ed.eno " +
                 "where :startDate <= e.date and e.date <= :endDate " +
                 "and e.user = :user", Expenditure.class)
@@ -156,6 +202,18 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
     public Long totalMonth(User user, int month) {
         Long total = 0L;
         List<Expenditure> exList = getMonthList(user, month);
+        for (Expenditure e : exList) {
+            ExpenditureRequestDto dto = expenditureService.entityToDto(e);
+            total += dto.getEx_cost();
+        }
+        return total;
+    }
+
+    /** 한 달 특정 날짜까지 총 지출 */
+    @Override
+    public Long totalMonthDay(User user, int month, int day) {
+        Long total = 0L;
+        List<Expenditure> exList = getMonthList(user, month, day);
         for (Expenditure e : exList) {
             ExpenditureRequestDto dto = expenditureService.entityToDto(e);
             total += dto.getEx_cost();

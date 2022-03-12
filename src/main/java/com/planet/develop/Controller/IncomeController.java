@@ -6,7 +6,6 @@ import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Repository.UserRepository;
 import com.planet.develop.Service.IncomeService;
-import com.planet.develop.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

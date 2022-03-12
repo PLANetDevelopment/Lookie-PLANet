@@ -15,4 +15,10 @@ public class CalendarDayDto {
     Long ExpenditureDays;
     int ecoCount;
     int noneEcoCount;
+
+    public CalendarDayDto(LocalDate date, Long incomeDays, Long expenditureDays) {
+        this.date = date;
+        this.incomeDays = incomeDays;
+        ExpenditureDays = expenditureDays;
+    }
 }

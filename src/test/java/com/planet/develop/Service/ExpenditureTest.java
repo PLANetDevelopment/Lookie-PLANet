@@ -49,11 +49,6 @@ public class ExpenditureTest {
         });
     }
 
-    /**
-     * ExpenditureDTO (지출 dto)를
-     * Expenditure과 ExpenditureDetail Entity로 변환하여
-     * DB에 저장
-     */
     @Test
     public void 지출_데이터_삽입() {
         // ecoDetail 리스트 설정
@@ -63,7 +58,7 @@ public class ExpenditureTest {
         ecoDetails.add(EcoDetail.etc);
 //        ecoDetails.add(EcoDetail.personalBag);
 
-        IntStream.rangeClosed(1, 2).forEach(i -> {
+        IntStream.rangeClosed(1, 1).forEach(i -> {
             ExpenditureRequestDto dto = ExpenditureRequestDto.builder()
                     .ex_cost(Long.valueOf(random.nextInt(100000))) // 가격 랜덤 삽입
                     .ecoDetail(ecoDetails)
@@ -72,7 +67,7 @@ public class ExpenditureTest {
                     .exType(money_Type.values()[new Random().nextInt(money_Type.values().length)]) // 유형 랜덤 삽입
                     .exWay(money_Way.values()[new Random().nextInt(money_Way.values().length)]) // 방법 랜덤 삽입
                     .memo("빵 사먹음")
-                    .date(LocalDate.of(2022, 02, 26))
+                    .date(LocalDate.of(2022, 03, 12))
 //                    .userId("user" + (int)(Math.random()*3+1) + "@naver.com") // 사용자 아이디 랜덤 삽입
                     .userId("user1@naver.com") // 사용자 아이디 랜덤 삽입
                     .build();

@@ -16,6 +16,8 @@ public interface ExpenditureDetailService {
 
     Long save(ExpenditureRequestDto dto);
 
+    ExpenditureRequestDto getSingleDetail(Long eno);
+
     Long totalEcoDay(User user, EcoEnum eco, LocalDate date);
 
     Long totalDay(User user, LocalDate date);
@@ -28,6 +30,8 @@ public interface ExpenditureDetailService {
 
     List<Expenditure> getMonthList(User user, int month);
 
+    List<Expenditure> getMonthList(User user, int month, int day);
+
     List<Expenditure> getMonthTypeList(User user, int month, money_Type type);
 
     List<Expenditure> getMonthWayList(User user, int i, money_Way way);
@@ -35,6 +39,8 @@ public interface ExpenditureDetailService {
     List<Expenditure> getMonthEcoList(User user, int month, EcoEnum eco);
 
     Long totalMonth(User user, int month);
+
+    Long totalMonthDay(User user, int month, int day);
 
     Long totalMonthType(User user, int month, money_Type type);
 

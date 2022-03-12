@@ -15,4 +15,15 @@ public class CalendarDto {
     Long totalMonthIncome;
     Long totalMonthExpenditure;
     List<CalendarDayDto> calendarDayDtos;
+
+    public CalendarDto(Long totalMonthIncome, Long totalMonthExpenditure, List<CalendarDayDto> calendarDayDtos) {
+        this.totalMonthIncome = totalMonthIncome;
+        this.totalMonthExpenditure = totalMonthExpenditure;
+        this.calendarDayDtos = calendarDayDtos;
+    }
+
+    public CalendarDto(Long totalMonthIncome, Long totalMonthExpenditure) {
+        this.totalMonthIncome = totalMonthIncome;
+        this.totalMonthExpenditure = totalMonthExpenditure;
+    }
 }

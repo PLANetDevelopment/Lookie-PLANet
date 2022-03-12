@@ -19,19 +19,19 @@ public class StatisticsController {
     /** 지난 달 대비 수입/지출 차액 + 한 달 일별 상세 내역 페이지 */
     @GetMapping("/api/statistics/total/{id}/{month}")
     public StatisticsDto findTotalStatic(@PathVariable("id") String id, @PathVariable("month") int month){
-        return statisticsService.merge(id, month, TIE.T);
+        return statisticsService.functionByMonth(id, month, TIE.T);
     }
 
     /** 비고) 수입 페이지 */
     @GetMapping("/api/statistics/income/{id}/{month}")
     public StatisticsDto findIncomeStatic(@PathVariable("id") String id, @PathVariable("month") int month){
-        return statisticsService.merge(id, month, TIE.I);
+        return statisticsService.functionByMonth(id, month, TIE.I);
     }
 
     /** 비고) 지출 페이지 */
     @GetMapping("/api/statistics/expenditure/{id}/{month}")
     public StatisticsDto findExpenditureStatic(@PathVariable("id") String id, @PathVariable("month") int month){
-        return statisticsService.merge(id, month, TIE.E);
+        return statisticsService.functionByMonth(id, month, TIE.E);
     }
 
 }
