@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,11 +24,16 @@ public class AnniversaryRepository {
                 .getResultList();
     }
 
-    public Anniversary getAnniversary(int month,int day){
-        LocalDate date  = LocalDate.of(2022,month,day);
-        return em.createQuery("select a from Anniversary a where :date=a.date", Anniversary.class)
-                .setParameter("date",date)
-                .getSingleResult();
+    public String getAnniversary(int year,int month,int day){
+        LocalDate date  = LocalDate.of(year,month,day);
+        TypedQuery<String> date1 = em.createQuery("select a.content from Anniversary a where :date=a.date", String.class)
+                .setParameter("date", date);
+
+        try {
+           return date1.getSingleResult();
+        } catch (Exception e) {
+            return "";
+        }
     }
 
 }

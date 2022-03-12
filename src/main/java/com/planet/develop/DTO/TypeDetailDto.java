@@ -14,21 +14,24 @@ import java.util.Map;
 public class TypeDetailDto {
     boolean isIncome = true;
     money_Type type;
+    Long id;
     Long cost;
     String memo;
     List<EcoDto> ecoList;
 
-    public void saveIncomeType(money_Type type, Long cost, String memo) {
+    public void saveIncomeType(money_Type type, Long cost, String memo,Long id) {
         this.type = type;
         this.cost = cost;
         this.memo = memo;
+        this.id=id;
     }
 
     public void saveExpenditureType(money_Type type, Long cost,
-                                    String memo, List<EcoDto> ecoList) {
+                                    String memo, List<EcoDto> ecoList,Long id) {
         this.type = type;
         this.cost = cost;
         this.memo = memo;
         this.ecoList = ecoList;
+        this.id=id;
     }
 }

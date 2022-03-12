@@ -15,10 +15,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -57,11 +54,11 @@ public class CalendarServiceImpl implements CalendarService {
 
 
     /** 유형별 하루 지출/수입 상세 */
-    public Result findDayExTypeDetail(String id, int month, int day) {
+    public Result findDayExTypeDetail(String id, int year,int month, int day) {
         User user = userRepository.findById(id).get();
         List<Income> in_days = incomeService.findDay(id, LocalDate.of(2022, month, day));
         List<ExpenditureTypeDetailDto> ex_days = expenditureDetailService.findDay(user, LocalDate.of(2022, month, day));
-        String content = anniversaryRepository.getAnniversary(month, day).getContent();
+        String content = anniversaryRepository.getAnniversary(year, month, day);
         List<TypeDetailDto> in_detailDtos = getIncomeTypeDtos(in_days);
         List<TypeDetailDto> ex_detailDtos = getExpenditureTypeDtos(ex_days);
         in_detailDtos.addAll(ex_detailDtos);
@@ -95,7 +92,7 @@ public class CalendarServiceImpl implements CalendarService {
         List<TypeDetailDto> in_detailDtos = new ArrayList<>();
         for (Income dto : in_days) { // 타입 변환
             TypeDetailDto typeDto = new TypeDetailDto();
-            typeDto.saveIncomeType(dto.getIn_type(), dto.getIn_cost(), dto.getMemo());
+            typeDto.saveIncomeType(dto.getIn_type(), dto.getIn_cost(), dto.getMemo(),dto.getId());
             in_detailDtos.add(typeDto);
         }
         return in_detailDtos;
@@ -116,7 +113,7 @@ public class CalendarServiceImpl implements CalendarService {
             // 중복 선택한 친/반환경 데이터를 List<EcoDto> 타입으로 변환해서 리턴
             List<EcoDto> dupEcoList = dupEcoList(ex_days, dupCheck);
             TypeDetailDto typeDto = new TypeDetailDto();
-            typeDto.saveExpenditureType(dto.getExType(), dto.getCost(), dto.getMemo(), dupEcoList);
+            typeDto.saveExpenditureType(dto.getExType(), dto.getCost(), dto.getMemo(), dupEcoList,dto.getExEno());
             typeDto.setIncome(false);
             ex_detailDtos.add(typeDto);
         }

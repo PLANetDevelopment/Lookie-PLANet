@@ -38,9 +38,9 @@ public class CalendarController {
 
 
     /** 일별 조회 (세부 조회) */
-    @GetMapping("/api/calendar/{id}/{month}/{day}")
-    public Result findIncomeDetail(@PathVariable("id") String id, @PathVariable("month") int month, @PathVariable("day") int day){
+    @GetMapping("/api/calendar/{id}/{year}/{month}/{day}")
+    public Result findIncomeDetail(@PathVariable("id") String id,@PathVariable("year") int year, @PathVariable("month") int month, @PathVariable("day") int day){
 
-        return  calendarService.findDayExTypeDetail(id, month, day);
+        return  calendarService.findDayExTypeDetail(id,year,month,day);
     }
 }
