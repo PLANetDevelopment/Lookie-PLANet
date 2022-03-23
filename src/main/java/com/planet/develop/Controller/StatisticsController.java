@@ -4,6 +4,7 @@ import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.MissionComplete;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
+import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Repository.IncomeRepository;
 import com.planet.develop.Repository.UserRepository;
 import com.planet.develop.Service.*;
@@ -35,12 +36,14 @@ public class StatisticsController {
         Long expenditureTotal = expenditureDetailService.totalMonth(user,year,month);
         Map<String,Long> ecoBoard =statisticsService.getEcoCountComparedToLast(user,year,month);
         Map<Integer, Long> ecoCount = statisticsService.getYearEcoCount(user, EcoEnum.G,year);
-
+        List<Map<money_Type, Long>> tagCounts = statisticsService.getTagCounts(user, year, month);
         Long difference = ecoBoard.get("difference");
         Long percentage = ecoBoard.get("percentage");
         Long nowEcoCount=ecoBoard.get("nowEcoCount");
         Long nowNoneEcoCount=ecoBoard.get("noneEcoCount");
-        return new Result(incomeTotal,expenditureTotal,difference,ecoCount,nowEcoCount,nowNoneEcoCount,percentage);
+        Map<money_Type, Long> ecoTagCounts=tagCounts.get(0);
+        Map<money_Type, Long> noEcoTagCounts=tagCounts.get(1);
+        return new Result(incomeTotal,expenditureTotal,difference,ecoCount,nowEcoCount,nowNoneEcoCount,percentage,ecoTagCounts,noEcoTagCounts);
     }
 
     @Data
@@ -53,5 +56,7 @@ public class StatisticsController {
         private T nowEcoCount;
         private T nowNoneEcoCount;
         private T percentage;
+        private T ecoTagCounts;
+        private T noEcoTagCounts;
     }
 }

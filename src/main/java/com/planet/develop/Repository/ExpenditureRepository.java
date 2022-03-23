@@ -41,6 +41,7 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
     List<Object[]> getDayEcoList(@Param("user") User user, @Param("eco") EcoEnum eco, @Param("date") LocalDate date);
 
 
+
     /**
      * 특정 사용자의 하루 지출 유형 별 지출 리스트 가져오기
      */

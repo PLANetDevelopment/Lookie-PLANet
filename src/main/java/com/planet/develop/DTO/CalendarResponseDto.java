@@ -12,7 +12,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CalendarResponseDto {
-    Optional<List<LocalDate>> anniversaryList;
+    Optional<List<Object[]>> anniversaryList;
     CalendarDto calendarDto;
     String content;
 }

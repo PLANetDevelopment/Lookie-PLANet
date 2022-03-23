@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.ChronoField;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -32,7 +35,7 @@ public class CalendarController {
         CalendarDto calendar = calendarService.findCalendar(id,year,month);
         int qno = random.nextInt(40) + 1;
         Quote quote = quoteRepository.findById(qno).get();
-        Optional<List<LocalDate>> anniversaryList = Optional.ofNullable(anniversaryRepository.getAnniversaryList(month));
+        Optional<List<Object[]>> anniversaryList = Optional.ofNullable(anniversaryRepository.getAnniversaryList(month));
         return new CalendarResponseDto(anniversaryList,calendar, quote.getContent());
     }
 

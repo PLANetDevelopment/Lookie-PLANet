@@ -1,8 +1,6 @@
 package com.planet.develop.Service;
 
-import ch.qos.logback.core.joran.conditional.ElseAction;
 import com.planet.develop.DTO.*;
-import com.planet.develop.Entity.Anniversary;
 import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
@@ -35,8 +33,7 @@ public class CalendarServiceImpl implements CalendarService {
         Long totalMonthExpenditure = expenditureDetailService.totalMonth(user,year,month);
         List<CalendarDayDto> calendarDayDtos = new ArrayList<>();
 
-
-        int days = LocalDate.of(2022,month,month).lengthOfMonth();
+        int days = LocalDate.of(2022,month,1).lengthOfMonth();
         int sumOfEcoCount=0;
         int sumOfNoneEcoCount=0;
         for(int n=1;n<=days;n++) {

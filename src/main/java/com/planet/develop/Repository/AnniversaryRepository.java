@@ -14,11 +14,11 @@ import java.util.List;
 public class AnniversaryRepository {
     private final EntityManager em;
 
-    public List<LocalDate> getAnniversaryList(int month){
+    public List<Object[]> getAnniversaryList(int month){
         LocalDate startDate = LocalDate.of(2022,month,1);
         LocalDate endDate = LocalDate.of(2022,month,startDate.lengthOfMonth());
 
-        return em.createQuery("select a.date from Anniversary a where :startDate<=a.date and a.date <= :endDate", LocalDate.class)
+        return em.createQuery("select a.date,a.content from Anniversary a where :startDate<=a.date and a.date <= :endDate", Object[].class)
                 .setParameter("startDate",startDate)
                 .setParameter("endDate",endDate)
                 .getResultList();

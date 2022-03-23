@@ -164,6 +164,8 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         LocalDate startDate = LocalDate.of(year,month,1);
         LocalDate endDate = LocalDate.of(year,month,startDate.lengthOfMonth());
         Long total = expenditureRepository.calMonth(user,startDate,endDate);
+        if (total==null)
+            total=0L;
         return total;
     }
 
