@@ -4,14 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CalendarResponseDto {
-    List<LocalDate> anniversaryList;
+    Optional<List<Object[]>> anniversaryList;
     CalendarDto calendarDto;
     String content;
 }

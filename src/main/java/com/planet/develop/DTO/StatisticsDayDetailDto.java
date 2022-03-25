@@ -10,5 +10,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StatisticsDayDetailDto extends BaseEntity {
-    List<TypeDetailDto> detailDtoList;
+    List<TypeDetailDto> detailDtoList; // 통계 부분 지출 상세
 }

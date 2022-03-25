@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExpenditureTypeDetailDto {
+    private Long eno; // 아이디
     private Long cost; // 비용
     private money_Type exType; // 유형
     private money_Way exWay; // 방법
@@ -21,9 +22,10 @@ public class ExpenditureTypeDetailDto {
     private String etcMemo; // 기타메모
     private Long exEno; // expenditure_eno
 
-    public ExpenditureTypeDetailDto(Object cost, Object exType, Object exWay,
+    public ExpenditureTypeDetailDto(Object eno, Object cost, Object exType, Object exWay,
                                     Object memo, Object eco, Object ecoDetail,
                                     Object etcMemo, Object exEno) {
+        this.eno = (Long) eno;
         this.cost = (Long) cost;
         this.exType = (money_Type) exType;
         this.exWay = (money_Way) exWay;

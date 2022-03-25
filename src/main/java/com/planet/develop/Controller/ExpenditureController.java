@@ -10,23 +10,17 @@ import com.planet.develop.Service.EcoService;
 import com.planet.develop.Service.ExpenditureDetailService;
 import com.planet.develop.Service.ExpenditureService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
 public class ExpenditureController {
 
-    @Autowired
-    ExpenditureDetailRepository detailRepository;
-    @Autowired
-    ExpenditureRepository expenditureRepository;
-    @Autowired
-    ExpenditureDetailService detailService;
-    @Autowired
-    ExpenditureService expenditureService;
-    @Autowired
-    EcoService ecoService;
+    private final ExpenditureDetailRepository detailRepository;
+    private final ExpenditureRepository expenditureRepository;
+    private final ExpenditureDetailService detailService;
+    private final ExpenditureService expenditureService;
+    private final EcoService ecoService;
 
     /** 지출 데이터 저장 */
     @PostMapping("/api/expenditure/{id}/new")

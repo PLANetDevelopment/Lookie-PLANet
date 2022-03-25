@@ -1,6 +1,5 @@
 package com.planet.develop.DTO;
 
-import com.planet.develop.Enum.TIE;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +24,4 @@ public class StatisticsDto {
         this.inDif = inDif;
         this.exDif = exDif;
     }
-
-
 }

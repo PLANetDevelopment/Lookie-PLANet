@@ -11,6 +11,7 @@ import com.planet.develop.Repository.ExpenditureRepository;
 import com.planet.develop.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,40 +26,49 @@ import java.util.Map;
 public class CalendarServiceImpl implements CalendarService {
 
     private final IncomeService incomeService;
-    private final ExpenditureDetailService expenditureDetailService;
     private final UserRepository userRepository;
     private final ExpenditureRepository expenditureRepository;
     private final AnniversaryRepository anniversaryRepository;
+    @Autowired
+    ExpenditureDetailService expenditureDetailService;
 
-    /** 1일-31일 동안 하루 지출/수입 */
+    /** 1일-31일 동안 하루 지출/수입/eco_count */
     @Override
-    public CalendarDto findCalendar(String id, int month) {
-        Long totalMonthIncome = incomeService.totalMonth(id,month);
+    public CalendarDto findCalendar(String id, int year, int month) {
         User user = userRepository.findById(id).get();
-        Long totalMonthExpenditure = expenditureDetailService.totalMonth(user, month);
+        Long totalMonthIncome = incomeService.totalMonth(user,year,month);
+        Long totalMonthExpenditure = expenditureDetailService.totalMonth(user, year, month);
         List<CalendarDayDto> calendarDayDtos = new ArrayList<>();
-        int days = LocalDate.of(2022,month,month).lengthOfMonth();
+
+        int days = LocalDate.of(year,month,1).lengthOfMonth();
         int sumOfEcoCount=0;
         int sumOfNoneEcoCount=0;
         for(int n=1;n<=days;n++) {
-            Long incomeDay = incomeService.totalDay(id, LocalDate.of(2022, month,n));
-            Long expenditureDay = expenditureDetailService.totalDay(user, LocalDate.of(2022, month, n));
-            int ecoCount = expenditureRepository.getDayEcoList(user, EcoEnum.G, LocalDate.of(2022, month, n)).size();
-            int noneEcoCount = expenditureRepository.getDayEcoList(user, EcoEnum.R, LocalDate.of(2022, month, n)).size();
+            Long incomeDay = incomeService.totalDay(id, LocalDate.of(year, month,n));
+            Long expenditureDay = expenditureDetailService.totalDay(user, LocalDate.of(year, month, n));
+            int ecoCount = expenditureRepository.getDayEcoList(user, EcoEnum.G, LocalDate.of(year, month, n)).size();
+            int noneEcoCount = expenditureRepository.getDayEcoList(user, EcoEnum.R, LocalDate.of(year, month, n)).size();
             sumOfEcoCount+=ecoCount;
             sumOfNoneEcoCount+=noneEcoCount;
-            CalendarDayDto calendarDayDto = new CalendarDayDto(LocalDate.of(2022, month,n), incomeDay, expenditureDay,ecoCount,noneEcoCount);
+            CalendarDayDto calendarDayDto = new CalendarDayDto(LocalDate.of(year, month,n), incomeDay, expenditureDay, ecoCount, noneEcoCount);
             calendarDayDtos.add(calendarDayDto);
         }
         return new CalendarDto(sumOfEcoCount,sumOfNoneEcoCount,totalMonthIncome,totalMonthExpenditure, calendarDayDtos);
     }
 
     /** 유형별 하루 지출/수입 상세 */
-    public Result findDayExTypeDetail(String id, int month, int day) {
-        List<TypeDetailDto> in_detailDtos = inExTypeDetailDto(id, month, day, TIE.T);
-        String content = anniversaryRepository.getAnniversary(month, day).getContent();
+    public Result findDayExTypeDetail(String id, int year,int month, int day) {
+        User user = userRepository.findById(id).get();
+        List<Income> in_days = incomeService.findDay(id, LocalDate.of(year, month, day));
+        List<ExpenditureTypeDetailDto> ex_days = expenditureDetailService.findDay(user, LocalDate.of(year, month, day));
+        String content = anniversaryRepository.getAnniversary(year, month, day);
+        List<TypeDetailDto> in_detailDtos = getIncomeTypeDtos(in_days);
+        List<TypeDetailDto> ex_detailDtos = getExpenditureTypeDtos(ex_days);
+        in_detailDtos.addAll(ex_detailDtos);
+
         Map<money_Type, List<TypeDetailDto>> total = makeListToMap(in_detailDtos);
         Map<money_Type, Long> moneyTotal = new HashMap<>();
+
         for (List<TypeDetailDto> value : total.values()) {
             for (TypeDetailDto typeDetailDto : value) {
                 boolean income = typeDetailDto.isIncome();
@@ -73,9 +83,21 @@ public class CalendarServiceImpl implements CalendarService {
                 } else {
                     moneyTotal.put(typeDetailDto.getType(), now);
                 }
+
             }
         }
-        return new Result(moneyTotal,total, content);
+
+        return new Result(moneyTotal,total,content);
+    }
+
+    private List<TypeDetailDto> getIncomeTypeDtos(List<Income> in_days) {
+        List<TypeDetailDto> in_detailDtos = new ArrayList<>();
+        for (Income dto : in_days) { // 타입 변환
+            TypeDetailDto typeDto = new TypeDetailDto();
+            typeDto.saveIncomeType(dto.getIn_type(), dto.getIn_cost(), dto.getMemo(),dto.getId());
+            in_detailDtos.add(typeDto);
+        }
+        return in_detailDtos;
     }
 
     @Override
@@ -97,18 +119,8 @@ public class CalendarServiceImpl implements CalendarService {
         return in_detailDtos;
     }
 
-    private List<TypeDetailDto> getIncomeTypeDtos(List<Income> in_days) {
-        List<TypeDetailDto> in_detailDtos = new ArrayList<>();
-        for (Income dto : in_days) { // 타입 변환
-            TypeDetailDto typeDto = new TypeDetailDto();
-            typeDto.saveIncomeType(dto.getIn_type(), dto.getIn_cost(), dto.getMemo());
-            in_detailDtos.add(typeDto);
-        }
-        return in_detailDtos;
-    }
-
     /** 중복 선택한 친/반환경 데이터를 TypeDetailDto로 변환해서 List<TypeDetailDto> 타입으로 리턴 */
-    private List<TypeDetailDto> getExpenditureTypeDtos(List<ExpenditureTypeDetailDto> ex_days) {
+    public List<TypeDetailDto> getExpenditureTypeDtos(List<ExpenditureTypeDetailDto> ex_days) {
         List<TypeDetailDto> ex_detailDtos = new ArrayList<>();
         List<Long> exEnoList = new ArrayList<>();
         Long dupCheck = null;
@@ -122,7 +134,8 @@ public class CalendarServiceImpl implements CalendarService {
                 // 중복 선택한 친/반환경 데이터를 List<EcoDto> 타입으로 변환해서 리턴
                 List<EcoDto> dupEcoList = dupEcoList(ex_days, dupCheck);
                 TypeDetailDto typeDto = new TypeDetailDto();
-                typeDto.saveExpenditureType(dto.getExType(), dto.getCost(), dto.getMemo(), dupEcoList);
+                // TODO: 수정
+                typeDto.saveExpenditureType(dto.getExType(), dto.getEno(), dto.getCost(), dto.getMemo(), dupEcoList);
                 typeDto.setIncome(false);
                 ex_detailDtos.add(typeDto);
             }

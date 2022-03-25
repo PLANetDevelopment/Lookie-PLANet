@@ -5,7 +5,6 @@ import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Entity.User;
-import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
 
@@ -18,8 +17,6 @@ public interface ExpenditureDetailService {
 
     ExpenditureRequestDto getSingleDetail(Long eno);
 
-    Long totalEcoDay(User user, EcoEnum eco, LocalDate date);
-
     Long totalDay(User user, LocalDate date);
 
     Long totalTypeDay(User user, money_Type type, LocalDate date);
@@ -28,25 +25,21 @@ public interface ExpenditureDetailService {
 
     List<ExpenditureTypeDetailDto> findDay(User user, LocalDate date);
 
-    List<Expenditure> getMonthList(User user, int month);
+    Long totalMonth(User user, int year, int month);
 
-    List<Expenditure> getMonthList(User user, int month, int day);
+    Long totalMonthType(User user, int year, int month, money_Type type);
 
-    List<Expenditure> getMonthTypeList(User user, int month, money_Type type);
+    Long totalWayMonth(User user, int year, int month, money_Way way);
 
-    List<Expenditure> getMonthWayList(User user, int i, money_Way way);
+    Long totalMonthDay(User user, int year, int month, int day);
 
-    List<Expenditure> getMonthEcoList(User user, int month, EcoEnum eco);
+    List<Expenditure> getMonthList(User user, int year, int month);
 
-    Long totalMonth(User user, int month);
+    List<Expenditure> getMonthList(User user, int year, int month, int day);
 
-    Long totalMonthDay(User user, int month, int day);
+    List<Expenditure> getMonthTypeList(User user, int year, int month, money_Type type);
 
-    Long totalMonthType(User user, int month, money_Type type);
-
-    Long totalEcoMonth(User user, int month, EcoEnum eco);
-
-    Long totalWayMonth(User user, int month, money_Way way);
+    List<Expenditure> getMonthWayList(User user, int year, int month, money_Way way);
 
     Long update(Long id, ExpenditureRequestDto dto) throws IllegalAccessException;
 

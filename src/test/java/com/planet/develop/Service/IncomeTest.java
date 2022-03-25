@@ -26,10 +26,10 @@ public class IncomeTest {
                     .userId("user1@naver.com")
                     .build();
             Income income = Income.builder()
-                    .date(LocalDate.of(2022, 03, 12))
-                    .memo("용돈 받음")
+                    .date(LocalDate.of(2022, 01, 17))
+                    .memo("생일 선물로 돈 받음")
                     .user(user)
-                    .in_cost(Long.valueOf(random.nextInt(100000)))
+                    .in_cost(Long.valueOf(random.nextInt(100) * 1000))
                     .in_type(money_Type.values()[new Random().nextInt(money_Type.values().length)])
                     .in_way(money_Way.values()[new Random().nextInt(money_Way.values().length)])
                     .build();

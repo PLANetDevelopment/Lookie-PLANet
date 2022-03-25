@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExpenditureRequestDto {
+    // TODO: 수정
     private String userId; // 사용자 아이디
     private Long ex_cost; // 비용
     private LocalDate date; // 날짜
@@ -26,6 +27,7 @@ public class ExpenditureRequestDto {
     private String etcMemo;
     private EcoEnum eco;
 
+    // TODO: 수정
     public ExpenditureRequestDto(String userId, Long ex_cost, LocalDate date,
                                  money_Type exType, money_Way exWay, String memo,
                                  List<EcoDetail> ecoDetail, String etcMemo) {
