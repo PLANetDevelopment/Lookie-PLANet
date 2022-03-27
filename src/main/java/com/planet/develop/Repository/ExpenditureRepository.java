@@ -24,7 +24,7 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
     /**
      * 특정 사용자의 하루 지출 리스트 가져오기
      */
-    @Query("select e.cost, ed.exType, ed.exWay, ed.memo, ec.eco, ec.ecoDetail, ec.etcMemo, ec.expenditure.eno from Expenditure e " +
+    @Query("select e.eno, e.cost, ed.exType, ed.exWay, ed.memo, ec.eco, ec.ecoDetail, ec.etcMemo, ec.expenditure.eno from Expenditure e " +
             "left join ExpenditureDetail ed on e.eno = ed.eno " +
             "left join Eco ec on e.eno = ec.expenditure.eno " +
             "where e.user = :user and e.date = :date")
@@ -65,4 +65,7 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
     @Query("select sum(e.cost) from Expenditure e " +
             "where e.user = :user and :startDate<=e.date and e.date <= :endDate")
     Long calMonth(@Param("user") User user,@Param("startDate") LocalDate startDate,@Param("endDate") LocalDate endDate);
+
+
+
 }

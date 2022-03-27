@@ -4,6 +4,7 @@ import com.planet.develop.DTO.*;
 import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
+import com.planet.develop.Enum.TIE;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Repository.AnniversaryRepository;
 import com.planet.develop.Repository.ExpenditureRepository;
@@ -25,6 +26,8 @@ public class CalendarServiceImpl implements CalendarService {
     private final UserRepository userRepository;
     private final ExpenditureRepository expenditureRepository;
     private final AnniversaryRepository anniversaryRepository;
+
+
     /** 1일-31일 동안 하루 지출/수입/eco_count */
     @Override
     public CalendarDto findCalendar(String id,int year, int month) {
@@ -144,6 +147,25 @@ public class CalendarServiceImpl implements CalendarService {
             }
         }
         return map;
+    }
+
+    @Override
+    public List<TypeDetailDto> inExTypeDetailDto(String id, int month, int day, TIE tie) {
+        User user = userRepository.findById(id).get();
+        List<Income> in_days = new ArrayList<>();
+        List<ExpenditureTypeDetailDto> ex_days = new ArrayList<>();
+        if (tie == TIE.I) {
+            in_days = incomeService.findDay(id, LocalDate.of(2022, month, day)); // 수입 상세 내역만
+        } else if (tie == TIE.E) {
+            ex_days = expenditureDetailService.findDay(user, LocalDate.of(2022, month, day)); // 지출 상세 내역만
+        } else {
+            in_days = incomeService.findDay(id, LocalDate.of(2022, month, day)); // 수입 상세 내역과
+            ex_days = expenditureDetailService.findDay(user, LocalDate.of(2022, month, day)); // 지출 상세 내역 모두
+        }
+        List<TypeDetailDto> in_detailDtos = getIncomeTypeDtos(in_days);
+        List<TypeDetailDto> ex_detailDtos = getExpenditureTypeDtos(ex_days);
+        in_detailDtos.addAll(ex_detailDtos);
+        return in_detailDtos;
     }
 
 

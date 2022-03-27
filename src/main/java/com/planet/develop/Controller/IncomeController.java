@@ -20,7 +20,7 @@ public class IncomeController {
     //localhost:8080/api/income/yui12@gmail.com/1
 
     /** 수입 데이터 저장*/
-    @PostMapping("/api/income/{id}/new")
+    @PostMapping("/income/{id}/new")
     public IncomeResponseDto create_income(@PathVariable("id") String id, @RequestBody IncomeRequestDto request) {
         Optional<User> user = userRepository.findById(id);
         Income income = Income.builder()
@@ -37,7 +37,7 @@ public class IncomeController {
     }
 
     /**수입 데이터 수정*/
-    @PostMapping("/api/income/{id}/update")
+    @PostMapping("/income/{id}/update")
     public IncomeResponseDto update_income(@PathVariable("id") Long id, @RequestBody IncomeRequestDto request){
         incomeService.update(id,request.getIn_cost(),request.getIn_way(),
                 request.getIn_type(),request.getMemo(),request.getDate());
@@ -46,7 +46,7 @@ public class IncomeController {
     }
 
     /** 수입 데이터 삭제*/
-    @DeleteMapping("/api/income/{id}/delete")
+    @DeleteMapping("/income/{id}/delete")
     public void delete_income(@PathVariable("id") Long id){
         incomeService.delete(id);
     }

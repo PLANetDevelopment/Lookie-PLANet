@@ -61,5 +61,18 @@ public class IncomeRepository {
             return 0L;
     }
 
+    /** 한 달 특정 날짜까지 수입 조회 */
+    public List<Income> findMonthDay(User user, int month, int day) {
+
+        LocalDate startDate = LocalDate.of(2022,month,1);
+        LocalDate endDate = LocalDate.of(2022,month,day);
+
+        return em.createQuery("select u from Income u where u.user= :user and :startDate<=u.date and u.date <= :endDate", Income.class)
+                .setParameter("user",user)
+                .setParameter("startDate",startDate)
+                .setParameter("endDate",endDate)
+                .getResultList();
+    }
+
 
 }

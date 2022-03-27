@@ -119,4 +119,15 @@ public class IncomeService {
         return total;
     }
 
+    /** 한 달 특정 일까지의 총 수입 **/
+    public Long totalMonthDay(String user_id, int month, int day) {
+        Optional<User> findUser = userRepository.findById(user_id);
+        List<Income> incomeList = incomeRepository.findMonthDay(findUser.get(), month, day);
+        Long total = 0L;
+        for (Income income : incomeList) {
+            total += income.getIn_cost();
+        }
+        return total;
+    }
+
 }

@@ -1,26 +1,18 @@
 package com.planet.develop.Repository;
 
-import com.planet.develop.Entity.ExpenditureDetail;
-import com.planet.develop.Entity.Quote;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
-import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
 public class StatisticsRepository {
     private final EntityManager em;
-
-
 
     public Long getMonthEcoCount(User user,EcoEnum eco,int year,int month){
         LocalDate startDate = LocalDate.of(year,month,1);

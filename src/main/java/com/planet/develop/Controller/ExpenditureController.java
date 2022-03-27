@@ -29,7 +29,7 @@ public class ExpenditureController {
     EcoService ecoService;
 
     /** 지출 데이터 저장 */
-    @PostMapping("/api/expenditure/{id}/new")
+    @PostMapping("/expenditure/{id}/new")
     public ExpenditureResponseDto create_expenditure(@PathVariable("id") String id,
                                                      @RequestBody ExpenditureRequestDto reuqest) {
         reuqest.setUserId(id);
@@ -42,7 +42,7 @@ public class ExpenditureController {
     }
 
     /** 지출 데이터 수정 */
-    @PostMapping("/api/expenditure/{id}/update")
+    @PostMapping("/expenditure/{id}/update")
     public ExpenditureResponseDto update_expenditure(@PathVariable("id") Long id,
                                                      @RequestBody ExpenditureRequestDto request) throws IllegalAccessException {
         Long eno = detailService.update(id, request);
@@ -50,7 +50,7 @@ public class ExpenditureController {
     }
 
     /** 지출 데이터 삭제 */
-    @DeleteMapping("/api/expenditure/{id}/delete")
+    @DeleteMapping("/expenditure/{id}/delete")
     public void delete_income(@PathVariable("id") Long id){
         detailService.delete(id);
     }
