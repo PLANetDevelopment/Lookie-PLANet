@@ -63,15 +63,12 @@ public class ExpenditureTest {
         costList.add(20000L);
 
         List<LocalDate> dateList = new ArrayList<>(); // 날짜 리스트트
-        dateList.add(LocalDate.of(2022, 02, 14));
-        dateList.add(LocalDate.of(2022, 02, 23));
-       dateList.add(LocalDate.of(2022, 01, 27));
-       dateList.add(LocalDate.of(2022, 01, 15));
-       dateList.add(LocalDate.of(2022, 03, 2));
-       dateList.add(LocalDate.of(2022, 03, 16));
-       dateList.add(LocalDate.of(2022, 03, 21));
-       dateList.add(LocalDate.of(2022, 03, 23));
-       dateList.add(LocalDate.of(2022, 03, 4));
+        dateList.add(LocalDate.of(2022, 03, 12));
+        dateList.add(LocalDate.of(2022, 03, 12));
+        dateList.add(LocalDate.of(2022, 03, 12));
+        dateList.add(LocalDate.of(2022, 03, 12));
+        dateList.add(LocalDate.of(2022, 03, 12));
+        dateList.add(LocalDate.of(2022, 03, 12));
 
         List<EcoDetail> eco = new ArrayList<>();
         eco.add(EcoDetail.sharing);

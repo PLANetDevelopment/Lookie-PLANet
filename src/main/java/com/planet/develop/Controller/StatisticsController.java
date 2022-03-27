@@ -64,31 +64,31 @@ public class StatisticsController {
     }
 
     /** 지난 달 대비 수입/지출 차액 + 한 달 일별 상세 내역 페이지 */
-    @GetMapping("/api/statistics/total/{id}/{year}/{month}")
+    @GetMapping("/statistics/total/{id}/{year}/{month}")
     public StatisticsDto findTotalStatistics(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
         return statisticsDetailService.functionByMonth(id, year, month, TIE.T);
     }
 
     /** 비고) 수입 내역 필터링 */
-    @GetMapping("/api/statistics/total/income/{id}/{year}/{month}")
+    @GetMapping("/statistics/total/income/{id}/{year}/{month}")
     public StatisticsDto filteringIncome(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
         return statisticsDetailService.functionByMonth(id, year, month, TIE.I);
     }
 
     /** 비고) 지출 내역 페이지 */
-    @GetMapping("/api/statistics/total/expenditure/{id}/{year}/{month}")
+    @GetMapping("/statistics/total/expenditure/{id}/{year}/{month}")
     public StatisticsDto filteringExpenditure(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
         return statisticsDetailService.functionByMonth(id, year, month, TIE.E);
     }
 
     /** 수입 페이지 */
-    @GetMapping("/api/statistics/income/{id}/{year}/{month}")
+    @GetMapping("/statistics/income/{id}/{year}/{month}")
     public StatisticsDto findIncomeStatistics(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
         return statisticsDetailService.functionByMonth(id, year, month, TIE.I);
     }
 
     /** 지출 페이지 */
-    @GetMapping("/api/statistics/expenditure/{id}/{year}/{month}")
+    @GetMapping("/statistics/expenditure/{id}/{year}/{month}")
     public StatisticsEcoDto findExpenditureStatistics(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
         return statisticsDetailService.functionEcoByMonth(id, year, month);
     }

@@ -11,7 +11,6 @@ import com.planet.develop.Repository.ExpenditureRepository;
 import com.planet.develop.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -35,8 +34,8 @@ public class CalendarServiceImpl implements CalendarService {
     @Override
     public CalendarDto findCalendar(String id, int year, int month) {
         User user = userRepository.findById(id).get();
-        Long totalMonthIncome = incomeService.totalMonth(user,year,month);
-        Long totalMonthExpenditure = expenditureDetailService.totalMonth(user, year, month);
+        Long totalMonthIncome = incomeService.totalMonth(user,year,month); // 한 달 총 수입
+        Long totalMonthExpenditure = expenditureDetailService.totalMonth(user, year, month); // 한 달 총 지출
         List<CalendarDayDto> calendarDayDtos = new ArrayList<>();
 
         int days = LocalDate.of(year,month,1).lengthOfMonth();
@@ -49,10 +48,12 @@ public class CalendarServiceImpl implements CalendarService {
             int noneEcoCount = expenditureRepository.getDayEcoList(user, EcoEnum.R, LocalDate.of(year, month, n)).size();
             sumOfEcoCount+=ecoCount;
             sumOfNoneEcoCount+=noneEcoCount;
-            CalendarDayDto calendarDayDto = new CalendarDayDto(LocalDate.of(year, month,n), incomeDay, expenditureDay, ecoCount, noneEcoCount);
-            calendarDayDtos.add(calendarDayDto);
+            if (incomeDay!=0 || expenditureDay!=0) { // 수입/지출이 0이면 리스트에 담지 않음.
+                CalendarDayDto calendarDayDto = new CalendarDayDto(LocalDate.of(2022, month, n), incomeDay, expenditureDay, ecoCount, noneEcoCount);
+                calendarDayDtos.add(calendarDayDto);
+            }
         }
-        return new CalendarDto(sumOfEcoCount,sumOfNoneEcoCount,totalMonthIncome,totalMonthExpenditure, calendarDayDtos);
+        return new CalendarDto(sumOfEcoCount, sumOfNoneEcoCount, totalMonthIncome,totalMonthExpenditure, calendarDayDtos);
     }
 
     /** 유형별 하루 지출/수입 상세 */

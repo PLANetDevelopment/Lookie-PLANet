@@ -7,7 +7,7 @@ import com.planet.develop.Entity.Eco;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Repository.EcoRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

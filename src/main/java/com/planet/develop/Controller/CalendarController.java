@@ -25,7 +25,7 @@ public class CalendarController {
     Random random = new Random();
 
     /** 월별 수입/지출 조회 함수 */
-    @GetMapping("/api/calendar/{id}/{year}/{month}")
+    @GetMapping("/calendar/{id}/{year}/{month}")
     public CalendarResponseDto findCalendar(@PathVariable("id") String id,@PathVariable("year") int  year,@PathVariable("month") int month){
         CalendarDto calendar = calendarService.findCalendar(id,year,month);
         int qno = random.nextInt(40) + 1;
@@ -35,7 +35,7 @@ public class CalendarController {
     }
 
     /** 일별 조회 (세부 조회) */
-    @GetMapping("/api/calendar/{id}/{year}/{month}/{day}")
+    @GetMapping("/calendar/{id}/{year}/{month}/{day}")
     public Result findIncomeDetail(@PathVariable("id") String id,@PathVariable("year") int year, @PathVariable("month") int month, @PathVariable("day") int day){
         return  calendarService.findDayExTypeDetail(id,year,month,day);
     }
