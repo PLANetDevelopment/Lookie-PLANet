@@ -18,11 +18,8 @@ import java.util.Map;
 public class ClubAuthMemberDTO extends User implements OAuth2User {
 
     private String email;
-
     private String password;
-
     private String name;
-
     private boolean fromSocial;
 
     // OAuth2User 타입을 ClubAuthMemberDTO 타입으로 사용할 수 있도록 처리

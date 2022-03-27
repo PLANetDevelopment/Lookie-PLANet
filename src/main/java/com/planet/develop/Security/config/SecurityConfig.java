@@ -22,16 +22,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     protected void configure(HttpSecurity http) throws Exception {
-
-        http.formLogin(); // 인가/인증 문제시 로그인 화면
         http.csrf().disable(); // csrf 토큰 비활성화 -> 보안을 위헤
         http.logout(); // 검색창에 logout을 치면 로그아웃 되고 다시 login 창이 뜬다.
-
         http.oauth2Login().successHandler(successHandler()); // Oauth를 이용한 로그인이 가능하도록
-
         http.rememberMe().tokenValiditySeconds(60*60*24*7) // 7일 동안 기억 (쿠키 생성)
                 .userDetailsService(userDetailsService());
-
     }
 
     @Bean
