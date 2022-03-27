@@ -81,7 +81,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         Long total = 0L;
         List<Object[]> exTypeList = expenditureRepository.getDayList(user, date);
         for (Object[] arr : exTypeList) {
-            total += (Long) arr[0];
+            total += (Long) arr[1];
         }
         return total;
     }
@@ -239,11 +239,12 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         ecoService.update(id, dto, expenditure); // 에코 테이블 수정
         return id;
     }
-
     @Override
     public void delete(Long id) {
+        List<Long> ecoByEno = ecoRepository.getEcoByEno(id);
+        for (Long eno : ecoByEno)
+            ecoRepository.deleteById(eno);
         expenditureRepository.deleteById(id);
-        detailRepository.deleteById(id);
     }
 
 }

@@ -46,8 +46,10 @@ public class CalendarServiceImpl implements CalendarService {
             int noneEcoCount = expenditureRepository.getDayEcoList(user, EcoEnum.R, LocalDate.of(2022, month, n)).size();
             sumOfEcoCount+=ecoCount;
             sumOfNoneEcoCount+=noneEcoCount;
-            CalendarDayDto calendarDayDto = new CalendarDayDto(LocalDate.of(2022, month,n), incomeDay, expenditureDay,ecoCount,noneEcoCount);
-            calendarDayDtos.add(calendarDayDto);
+            if (incomeDay!=0 || expenditureDay!=0) {
+                CalendarDayDto calendarDayDto = new CalendarDayDto(LocalDate.of(2022, month, n), incomeDay, expenditureDay, ecoCount, noneEcoCount);
+                calendarDayDtos.add(calendarDayDto);
+            }
         }
         return new CalendarDto(sumOfEcoCount,sumOfNoneEcoCount,totalMonthIncome,totalMonthExpenditure, calendarDayDtos);
     }

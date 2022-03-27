@@ -1,10 +1,11 @@
 package com.planet.develop.Controller;
 
-import com.planet.develop.DTO.mainResponseDto;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Repository.UserRepository;
 import com.planet.develop.Service.ExpenditureDetailService;
 import com.planet.develop.Service.IncomeService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,4 +34,13 @@ public class MainController {
     public void mainNameUpdate(@PathVariable("id") String id,@PathVariable("name") String name){
         userRepository.updateName(name,id);
     }
+
+    @Data
+    @AllArgsConstructor
+    static class mainResponseDto<T>{
+        private T userName;
+        private T totalIncomeMonth;
+        private T totalExpenditureMonth;
+    }
+
 }

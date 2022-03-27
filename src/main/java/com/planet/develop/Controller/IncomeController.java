@@ -46,7 +46,7 @@ public class IncomeController {
     }
 
     /** 수입 데이터 삭제*/
-    @DeleteMapping("/income/{id}/delete")
+    @DeleteMapping("/calendar/{month}/income/{id}")
     public void delete_income(@PathVariable("id") Long id){
         incomeService.delete(id);
     }

@@ -2,8 +2,6 @@ package com.planet.develop.Controller;
 
 import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.DTO.ExpenditureResponseDto;
-import com.planet.develop.DTO.IncomeRequestDto;
-import com.planet.develop.DTO.IncomeResponseDto;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
 import com.planet.develop.Repository.ExpenditureDetailRepository;
@@ -12,21 +10,18 @@ import com.planet.develop.Service.EcoService;
 import com.planet.develop.Service.ExpenditureDetailService;
 import com.planet.develop.Service.ExpenditureService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
 public class ExpenditureController {
 
-    @Autowired
-    ExpenditureDetailRepository detailRepository;
-    @Autowired
-    ExpenditureDetailService detailService;
-    @Autowired
-    ExpenditureService expenditureService;
-    ExpenditureRepository expenditureRepository;
-    EcoService ecoService;
+
+    private final ExpenditureDetailRepository detailRepository;
+    private final ExpenditureDetailService detailService;
+    private final ExpenditureService expenditureService;
+    private final ExpenditureRepository expenditureRepository;
+    private final EcoService ecoService;
 
     /** 지출 데이터 저장 */
     @PostMapping("/expenditure/{id}/new")
@@ -50,11 +45,9 @@ public class ExpenditureController {
     }
 
     /** 지출 데이터 삭제 */
-    @DeleteMapping("/expenditure/{id}/delete")
+    @DeleteMapping("/calendar/{month}/expenditure/{id}")
     public void delete_income(@PathVariable("id") Long id){
         detailService.delete(id);
     }
-
-
 
 }
