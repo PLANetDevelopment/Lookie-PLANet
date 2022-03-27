@@ -29,8 +29,7 @@ public class CalendarServiceImpl implements CalendarService {
     private final UserRepository userRepository;
     private final ExpenditureRepository expenditureRepository;
     private final AnniversaryRepository anniversaryRepository;
-    @Autowired
-    ExpenditureDetailService expenditureDetailService;
+    private final ExpenditureDetailService expenditureDetailService;
 
     /** 1일-31일 동안 하루 지출/수입/eco_count */
     @Override

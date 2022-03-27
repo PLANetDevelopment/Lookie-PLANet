@@ -56,4 +56,11 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
             "where e.user = :user and ed.exWay = :exWay and e.date = :date")
     List<Object[]> getDayExWayList(@Param("user") User user, @Param("exWay") money_Way exWay, @Param("date") LocalDate date);
 
+    /**
+     * 특정 사용자의 하루 지출 총합
+     */
+    @Query("select sum(e.cost) from Expenditure e " +
+            "where e.user = :user and :startDate<=e.date and e.date <= :endDate")
+    Long calMonth(@Param("user") User user,@Param("startDate") LocalDate startDate,@Param("endDate") LocalDate endDate);
+
 }

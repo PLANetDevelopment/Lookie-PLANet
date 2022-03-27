@@ -1,8 +1,6 @@
 package com.planet.develop.Repository;
 
-import com.planet.develop.DTO.EcoDetailDto;
 import com.planet.develop.Entity.Eco;
-import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -2,7 +2,6 @@ package com.planet.develop.Service;
 
 import com.planet.develop.DTO.*;
 import com.planet.develop.Entity.User;
-import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.TIE;
 import com.planet.develop.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,7 @@ import java.util.List;
 @Log4j2
 @Service
 @RequiredArgsConstructor
-public class StatisticsServiceImpl implements StatisticsService {
+public class StatisticsDetailServiceImpl implements StatisticsDetailService {
 
     private final CalendarService calendarService;
     private final IncomeService incomeService;
@@ -136,8 +135,6 @@ public class StatisticsServiceImpl implements StatisticsService {
                 return mergeEco(totalExpenditure, id, year, month, today, lastDayOfMonth);
             } else return mergeEco(totalExpenditure, id, year, month, today, today); // 12월 15일에 조회한다면 -> 11월 15일까지 조회해서 비교
         } else return mergeEco(totalExpenditure, id, year, month, lastDayOfMonth, lastDayOfLastMonth); // 조회하는 월이 현재 월이 아니라면 지난 달 총 수입/지출과 비교해서 계산
-
     }
-
 
 }

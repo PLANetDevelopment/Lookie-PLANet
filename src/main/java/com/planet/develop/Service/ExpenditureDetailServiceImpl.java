@@ -32,10 +32,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
     private final ExpenditureDetailRepository detailRepository;
     private final EcoRepository ecoRepository;
     private final EcoService ecoService;
-    @Autowired
-    ExpenditureService expenditureService;
-    @Autowired
-    CalendarService calendarService;
+    private final ExpenditureService expenditureService;
 
     private final EntityManager em;
 
@@ -117,7 +114,6 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         List<ExpenditureTypeDetailDto> dtoList = new ArrayList<>();
         for (Object[] arr : dayList) {
             ExpenditureTypeDetailDto dto = new ExpenditureTypeDetailDto(
-                    // TODO: 수정
                     arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], arr[7], arr[8]);
             dtoList.add(dto);
         }
@@ -126,13 +122,12 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
 
     /** 한 달 지출 총액 */
     @Override
-    public Long totalMonth(User user, int year, int month) {
-        Long total = 0L;
-        List<Expenditure> exList = getMonthList(user, year, month);
-        for (Expenditure e : exList) {
-            ExpenditureRequestDto dto = expenditureService.entityToDto(e);
-            total += dto.getEx_cost();
-        }
+    public Long totalMonth(User user, int year , int month) {
+        LocalDate startDate = LocalDate.of(year,month,1);
+        LocalDate endDate = LocalDate.of(year,month,startDate.lengthOfMonth());
+        Long total = expenditureRepository.calMonth(user,startDate,endDate);
+        if (total==null)
+            total=0L;
         return total;
     }
 
