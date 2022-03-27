@@ -27,9 +27,7 @@ public class User {
     @Column(name = "user_name")
     private String userName;
 
-    @Column(name = "password")
-    private String password;
-
+    // TODO: 추가
     private boolean fromSocial;
 
     // TODO: 추가
