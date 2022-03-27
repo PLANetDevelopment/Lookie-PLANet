@@ -6,6 +6,7 @@ import com.planet.develop.Repository.AnniversaryRepository;
 import com.planet.develop.Repository.QuoteRepository;
 import com.planet.develop.Service.CalendarService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import java.util.Random;
 
 @RequiredArgsConstructor
 @RestController
+@PreAuthorize("permitAll()") // 모든 사용자가 접근 가능
 public class CalendarController {
 
     private final CalendarService calendarService;

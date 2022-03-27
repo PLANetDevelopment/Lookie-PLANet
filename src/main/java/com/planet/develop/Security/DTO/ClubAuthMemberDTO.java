@@ -26,7 +26,6 @@ public class ClubAuthMemberDTO extends User implements OAuth2User {
     private boolean fromSocial;
 
     // OAuth2User 타입을 ClubAuthMemberDTO 타입으로 사용할 수 있도록 처리
-    // OAuth2USer은 Map 타입으로 인증 결과를 받는다.
     private Map<String, Object> attr;
 
     public ClubAuthMemberDTO(String username,

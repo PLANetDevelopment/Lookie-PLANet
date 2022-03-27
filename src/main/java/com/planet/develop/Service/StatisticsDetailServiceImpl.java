@@ -4,7 +4,7 @@ import com.planet.develop.DTO.*;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.TIE;
 import com.planet.develop.Repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -61,9 +61,12 @@ public class StatisticsDetailServiceImpl implements StatisticsDetailService {
         for(int day=1; day<=days; day++) { // 한 달 상세 내역 조회
             StatisticsDayDetailDto dto = new StatisticsDayDetailDto();
             LocalDate date = LocalDate.of(year, month, day); // 날짜
-            List<TypeDetailDto> list = calendarService.inExTypeDetailDto(id, month, day, tie); // 일별 수입 상세 내역 조회
-            dto.changeDate(date); dto.setDetailDtoList(list); // 날짜와 상세 내역을 하나의 dto로 담는다.
-            detailDtoList.add(dto); // 일별 상세 내역을 리스트에 담는다.
+            List<TypeDetailDto> list = calendarService.inExTypeDetailDto(id, month, day, tie); // 일별 수입/지출 상세 내역 조회
+            // TODO: 수정
+            if (!list.isEmpty()) { // 수입/지출 상세 내역이 존재해야 배열에 담음.
+                dto.changeDate(date); dto.setDetailDtoList(list); // 날짜와 상세 내역을 하나의 dto로 담는다.
+                detailDtoList.add(dto); // 일별 상세 내역을 리스트에 담는다.
+            }
         }
         return detailDtoList;
     }

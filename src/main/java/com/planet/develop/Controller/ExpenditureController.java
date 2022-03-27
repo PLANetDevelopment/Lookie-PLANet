@@ -10,10 +10,12 @@ import com.planet.develop.Service.EcoService;
 import com.planet.develop.Service.ExpenditureDetailService;
 import com.planet.develop.Service.ExpenditureService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
+@PreAuthorize("permitAll()") // 모든 사용자가 접근 가능
 public class ExpenditureController {
 
     private final ExpenditureDetailRepository detailRepository;

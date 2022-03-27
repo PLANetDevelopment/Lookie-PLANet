@@ -5,34 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0fc8f6e-65f9-4033-85e1-cc137d861cc0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/MainController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/DTO/ClubAuthMemberDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/Enum/ClubMemberRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/Handler/ClubLoginSuccessHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/Service/ClubOauth2UserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/Service/ClubUserDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application-oauth.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.3.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.1/checksums/checksums.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Repository/UserRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/CalendarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/ExpenditureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/ExpenditureController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/IncomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/IncomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/StatisticsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/StatisticsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/EcoDetailDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/EcoDetailDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/ExpenditureRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/ExpenditureRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/EcoCostDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/EcoCostDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CalendarServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CalendarServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/ExpenditureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/ExpenditureTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/DTO/ClubAuthMemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/DTO/ClubAuthMemberDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/Service/ClubOauth2UserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/Service/ClubOauth2UserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/StatisticsDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/StatisticsDetailServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,11 +114,11 @@
       <recent name="C:\Users\topjo\OneDrive\바탕 화면\PLANet\src\main\java\com\planet\develop\Service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.planet.develop.Security.config" />
       <recent name="com.planet.develop.Security.Entity" />
       <recent name="com.planet.develop.Security.Repository" />
       <recent name="com.planet.develop.Security.Enum" />
       <recent name="com.planet.develop.Handler" />
-      <recent name="com.planet.develop.Enum" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.DevelopApplication">
@@ -299,7 +283,7 @@
       <workItem from="1646142562907" duration="1264000" />
       <workItem from="1646284032133" duration="5275000" />
       <workItem from="1646457657154" duration="103569000" />
-      <workItem from="1648354862913" duration="12865000" />
+      <workItem from="1648354862913" duration="19185000" />
     </task>
     <servers />
   </component>
