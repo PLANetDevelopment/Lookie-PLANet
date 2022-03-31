@@ -52,7 +52,7 @@ public class ExpenditureController {
     }
 
     /** 지출 데이터 삭제 */
-    @DeleteMapping("/expenditure/{id}")
+    @DeleteMapping("calendar/expenditure/{id}")
     public void delete_income(@PathVariable("id") Long id){
         detailService.delete(id);
     }

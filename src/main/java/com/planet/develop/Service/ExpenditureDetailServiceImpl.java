@@ -75,13 +75,14 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return requestDto;
     }
 
+    // 수정함
     /** 하루 지출 총액 */
     @Override
     public Long totalDay(User user, LocalDate date) {
         Long total = 0L;
-        List<Object[]> exTypeList = expenditureRepository.getDayList(user, date);
+        List<Object[]> exTypeList = expenditureRepository.getDayExpenditure(user, date);
         for (Object[] arr : exTypeList) {
-            total += (Long) arr[1];
+            total += (Long) arr[0];
         }
         return total;
     }

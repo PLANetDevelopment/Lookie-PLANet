@@ -27,7 +27,6 @@ public class EcoServiceImpl implements EcoService {
 
     @Override
     public void save(ExpenditureRequestDto dto, Expenditure expenditure) {
-        System.out.println("save started...");
         List<Eco> ecos = dtoToEntity(dto, expenditure);
         for (Eco eco : ecos) {
             ecoRepository.save(eco);
