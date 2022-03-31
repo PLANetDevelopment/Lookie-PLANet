@@ -135,7 +135,7 @@ public class StatisticsDetailServiceImpl implements StatisticsDetailService {
 
         if (month == (int) LocalDate.now().getMonthValue()) { // 조회하는 월이 현재 월이라면
             if (today > lastDayOfLastMonth) { // 12월 31일에 조회한다면 -> 11월 30일까지 조회해서 비교
-                return mergeEco(totalExpenditure, id, year, month, today, lastDayOfMonth);
+                return mergeEco(totalExpenditure, id, year, month, today, lastDayOfLastMonth);
             } else return mergeEco(totalExpenditure, id, year, month, today, today); // 12월 15일에 조회한다면 -> 11월 15일까지 조회해서 비교
         } else return mergeEco(totalExpenditure, id, year, month, lastDayOfMonth, lastDayOfLastMonth); // 조회하는 월이 현재 월이 아니라면 지난 달 총 수입/지출과 비교해서 계산
     }
