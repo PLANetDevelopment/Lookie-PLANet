@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f0fc8f6e-65f9-4033-85e1-cc137d861cc0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/DTO/ClubAuthMemberDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/DTO/ClubAuthMemberDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Security/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Repository/ExpenditureRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Repository/ExpenditureRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/StatisticsEcoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/StatisticsEcoDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/StatisticsDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/StatisticsDetailServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,7 +277,7 @@
       <workItem from="1646142562907" duration="1264000" />
       <workItem from="1646284032133" duration="5275000" />
       <workItem from="1646457657154" duration="103569000" />
-      <workItem from="1648354862913" duration="21882000" />
+      <workItem from="1648354862913" duration="31359000" />
     </task>
     <servers />
   </component>
@@ -297,58 +300,28 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoService.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoService.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoService.java</url>
-          <line>39</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoService.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoService.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoService.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoServiceImpl.java</url>
-          <line>52</line>
+          <line>51</line>
           <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoServiceImpl.java</url>
-          <line>56</line>
+          <line>55</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoServiceImpl.java</url>
-          <line>89</line>
+          <line>88</line>
           <option name="timeStamp" value="49" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoServiceImpl.java</url>
-          <line>90</line>
+          <line>89</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java</url>
-          <line>172</line>
+          <line>173</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
