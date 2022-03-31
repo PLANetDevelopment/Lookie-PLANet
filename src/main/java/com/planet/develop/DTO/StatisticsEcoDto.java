@@ -17,10 +17,10 @@ public class StatisticsEcoDto {
     Long notEcoCost; // 반환경 지출 총액
     boolean ecoMore = false; // 친환경 지출을 '덜' 함
     boolean notEcoMore = false; // 반환경 지출을 '덜' 함
-    int ecoTag;
-    int notEcoTag;
-    boolean ecoTagMore;
-    boolean notEcoTagMore;
+//    int ecoTag;
+//    int notEcoTag;
+//    boolean ecoTagMore;
+//    boolean notEcoTagMore;
     List<StatisticsDayDetailDto> detailDtoList; // 지출 내역
 
     public StatisticsEcoDto(Long totalMonthExpenditure, Long ecoCost, Long notEcoCost) {
