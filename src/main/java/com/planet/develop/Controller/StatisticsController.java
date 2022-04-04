@@ -40,7 +40,6 @@ public class StatisticsController {
         Long expenditureTotal = expenditureDetailService.totalMonth(user,year,month);
         Map<String,Long> ecoBoard = statisticsService.getEcoCountComparedToLast(user,year,month);
         Map<Integer, Long> ecoCount = statisticsService.getYearEcoCount(user, EcoEnum.G,year);
-
         List<Map<Object, Object>> fiveTagCounts = statisticsService.getFiveTagCounts(user, year, month);
         Long difference = ecoBoard.get("difference");
         Long percentage = ecoBoard.get("percentage");
@@ -49,6 +48,23 @@ public class StatisticsController {
         Map<Object, Object> ecoTagCounts=fiveTagCounts.get(0);
         Map<Object, Object> noEcoTagCounts=fiveTagCounts.get(1);
         return new Result(incomeTotal,expenditureTotal,difference,ecoCount,nowEcoCount,nowNoneEcoCount,percentage,ecoTagCounts,noEcoTagCounts);
+    }
+
+    /** 친환경 태그 통계 */
+    @GetMapping("/statistics/ecoCountsDetail/{id}/{year}/{month}")
+    public statisticsEcoRequestDto statisticsEcoDetail(@PathVariable("id") String userId,@PathVariable("year") int year,@PathVariable("month") int month) {
+        User user = userRepository.findById(userId).get();
+        Map<money_Type,List<Long>> tagCounts = statisticsService.getTagCounts(user, year, month,EcoEnum.G);
+
+        return new statisticsEcoRequestDto(tagCounts);
+    }
+
+    /** 반환경 태그 통계 */
+    @GetMapping("/statistics/noEcoCountsDetail/{id}/{year}/{month}")
+    public statisticsEcoRequestDto statisticsNoEcoDetail(@PathVariable("id") String userId,@PathVariable("year") int year,@PathVariable("month") int month) {
+        User user = userRepository.findById(userId).get();
+        Map<money_Type, List<Long>> tagCounts = statisticsService.getTagCounts(user, year, month,EcoEnum.R);
+        return new statisticsEcoRequestDto(tagCounts);
     }
 
     /** 지난 달 대비 수입/지출 차액 + 한 달 일별 상세 내역 페이지 */
@@ -94,5 +110,12 @@ public class StatisticsController {
         private T ecoTagCounts;
         private T noEcoTagCounts;
     }
+
+    @Data
+    @AllArgsConstructor
+    static class statisticsEcoRequestDto<T>{
+        private T tagCounts;
+    }
+
 
 }

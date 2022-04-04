@@ -9,11 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.KeyStore;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -85,22 +83,23 @@ public class StatisticsService {
         result.add(noEco);
         return result;
     }
-    public List<Map<money_Type,Long>> getTagCounts(User user,int year,int month){
-        List<Map<money_Type,Long>> result=new ArrayList<>();
-        Map<money_Type, Long> eco = new HashMap<>();
-        Map<money_Type, Long> noEco = new HashMap<>();
+    public Map<money_Type,List<Long>> getTagCounts(User user,int year,int month,EcoEnum ecoEnum){
+        Map<money_Type, List<Long>> counts = new HashMap<>();
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.of(year, month, startDate.lengthOfMonth());
         money_Type[] categories = money_Type.values();
+        Long totalTageCount = statisticsRepository.getMonthEcoCount(user,ecoEnum, year, month);
         for (money_Type category : categories) {
-            eco.put(category,statisticsRepository.getCategoryTagCount(user, startDate, endDate,category,EcoEnum.G));
+            List values = new ArrayList();
+            Long tagCount = statisticsRepository.getCategoryTagCount(user, startDate, endDate, category, ecoEnum);
+            double round = (double) tagCount / (double) totalTageCount *100;
+            values.add(tagCount);
+            values.add(round);
+            counts.put(category,values);
         }
-        for (money_Type category : categories) {
-            noEco.put(category,statisticsRepository.getCategoryTagCount(user, startDate, endDate,category,EcoEnum.R));
-        }
-        result.add(eco);
-        result.add(noEco);
-        return result;
+
+        //TODO % 큰 수대로 정렬
+        return counts;
     }
 
 
