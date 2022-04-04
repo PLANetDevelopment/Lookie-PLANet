@@ -20,7 +20,6 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class StatisticsService {
     private final StatisticsRepository statisticsRepository;
-    private final UserRepository userRepository;
 
     public Map<Integer,Long> getYearEcoCount(User user,EcoEnum eco,int year){
         Map<Integer,Long> result=new HashMap<>();
@@ -67,20 +66,36 @@ public class StatisticsService {
         eco.put("noneEcoCount",noneEcoCount);
         return eco;
     }
+    public  List<Map<Object,Object>> getFiveTagCounts(User user,int year,int month){
+        LocalDate startDate = LocalDate.of(year, month, 1);
+        LocalDate endDate=LocalDate.of(year, month, startDate.lengthOfMonth());
+        List<Object[]> categoryFiveTagCount = statisticsRepository.getCategoryFiveTagCount(user, startDate, endDate, EcoEnum.G);
+        List<Object[]> categoryFiveNoTagCount = statisticsRepository.getCategoryFiveTagCount(user, startDate, endDate, EcoEnum.R);
+
+        List<Map<Object,Object>> result=new ArrayList<>();
+        Map<Object, Object> eco = new HashMap<>();
+        Map<Object, Object> noEco = new HashMap<>();
+        for (Object[] tag : categoryFiveTagCount) {
+            eco.put(tag[0],tag[1]);
+        }
+        for (Object[] tag : categoryFiveNoTagCount) {
+            noEco.put(tag[0],tag[1]);
+        }
+        result.add(eco);
+        result.add(noEco);
+        return result;
+    }
     public List<Map<money_Type,Long>> getTagCounts(User user,int year,int month){
         List<Map<money_Type,Long>> result=new ArrayList<>();
         Map<money_Type, Long> eco = new HashMap<>();
         Map<money_Type, Long> noEco = new HashMap<>();
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.of(year, month, startDate.lengthOfMonth());
-        System.out.println("endDate = " + endDate);
         money_Type[] categories = money_Type.values();
         for (money_Type category : categories) {
-            System.out.println("category = " + category);
             eco.put(category,statisticsRepository.getCategoryTagCount(user, startDate, endDate,category,EcoEnum.G));
         }
         for (money_Type category : categories) {
-            System.out.println("category = " + category);
             noEco.put(category,statisticsRepository.getCategoryTagCount(user, startDate, endDate,category,EcoEnum.R));
         }
         result.add(eco);
