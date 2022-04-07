@@ -21,7 +21,8 @@ public class ExpenditureRequestDto {
     private money_Type exType; // 유형
     private money_Way exWay; // 방법
     private String memo; // 메모
-    private List<EcoDetail> ecoDetail; // 친/반환경
-    private String etcMemo;
-    private EcoEnum eco;
+    private List<EcoDetail> ecoDetail; // 친반환경
+    // 수정함
+    private List<String> userAdd;
+    private List<EcoEnum> eco;
 }

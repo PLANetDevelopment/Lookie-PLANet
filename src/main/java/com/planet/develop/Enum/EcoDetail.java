@@ -11,5 +11,6 @@ public enum EcoDetail {
     @JsonProperty("일회용품 사용") disposable,
     @JsonProperty("비닐봉투 소비") plasticBag,
     @JsonProperty("식자재 낭비") wasteFood,
-    @JsonProperty("기타") etc // etc가 들어오면 eco_detail 값을 바꾸도록
+    @JsonProperty("기타") etc,
+    @JsonProperty("사용자 추가") userAdd
 }

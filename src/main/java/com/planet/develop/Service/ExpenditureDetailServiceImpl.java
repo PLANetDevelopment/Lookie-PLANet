@@ -14,7 +14,6 @@ import com.planet.develop.Repository.ExpenditureDetailRepository;
 import com.planet.develop.Repository.ExpenditureRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,6 +43,7 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return entity.getEno();
     }
 
+    // 수정함
     /** 수정 페이지 */
     @Override
     public ExpenditureRequestDto getSingleDetail(Long eno) {
@@ -51,16 +51,19 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         ExpenditureDetail detail = detailRepository.findById(eno).get(); // 지출 상세 테이블 조회
         List<Long> ecoByEno = ecoRepository.getEcoByEno(eno); // 친반환경 테이블 조회
         List<EcoDetail> ecoDetails = new ArrayList<>();
-        String etcMemo = null; EcoEnum eco = null;
-        for (Long ecoEno : ecoByEno) {
+        List<String> userAdds = new ArrayList<>(); List<EcoEnum> ecos = new ArrayList<>();
+        String userAdd = null; EcoEnum eco = null;
+
+        for (Long ecoEno : ecoByEno) { // 하나의 지출에 여러 친반환경 태그들을 가져옴
             Eco ecoEntity = ecoRepository.findById(ecoEno).get();
             EcoDetail ecoDetail = ecoEntity.getEcoDetail();
             ecoDetails.add(ecoDetail);
-            if (ecoEntity.getEtcMemo() != null) {
-                etcMemo = ecoEntity.getEtcMemo();
-                eco = ecoEntity.getEco();
+            ecos.add(ecoEntity.getEco());
+            if (ecoDetail == EcoDetail.userAdd) { // 사용자가 추가한 태그라면
+                userAdds.add(ecoEntity.getUserAdd());
             }
         }
+
         ExpenditureRequestDto requestDto = ExpenditureRequestDto.builder()
                 .userId(expenditure.getUser().getUserId())
                 .ex_cost(expenditure.getCost())
@@ -69,8 +72,8 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
                 .exWay(detail.getExWay())
                 .memo(detail.getMemo())
                 .ecoDetail(ecoDetails)
-                .etcMemo(etcMemo)
-                .eco(eco)
+                .userAdd(userAdds)
+                .eco(ecos)
                 .build();
         return requestDto;
     }

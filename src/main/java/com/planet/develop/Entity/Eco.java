@@ -27,7 +27,7 @@ public class Eco {
     @Column(name = "eco_detail")
     private EcoDetail ecoDetail;
 
-    private String etcMemo;
+    private String userAdd;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Expenditure expenditure;
