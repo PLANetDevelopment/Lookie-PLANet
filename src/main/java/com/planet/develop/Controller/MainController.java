@@ -7,6 +7,7 @@ import com.planet.develop.Service.IncomeService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
+@PreAuthorize("permitAll()") // 모든 사용자가 접근 가능
 public class MainController {
     private final UserRepository userRepository;
     private final IncomeService incomeService;

@@ -125,19 +125,16 @@ public class InitDb {
             Eco eco = Eco.builder()
                     .eco(EcoEnum.G)
                     .ecoDetail(EcoDetail.ecoProducts)
-                    .etcMemo("텀블러 사용")
                     .expenditure(expenditure1)
                     .build();
             Eco eco2 = Eco.builder()
                     .eco(EcoEnum.G)
                     .ecoDetail(EcoDetail.ecoProducts)
-                    .etcMemo("텀블러 사용")
                     .expenditure(expenditure2)
                     .build();
             Eco eco3 = Eco.builder()
                     .eco(EcoEnum.G)
                     .ecoDetail(EcoDetail.ecoProducts)
-                    .etcMemo("텀블러 사용")
                     .expenditure(expenditure3)
                     .build();
 

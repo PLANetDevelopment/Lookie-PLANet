@@ -14,6 +14,7 @@ import com.planet.develop.Service.StatisticsService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
+@PreAuthorize("permitAll()") // 모든 사용자가 접근 가능
 public class StatisticsController {
 
     private final StatisticsDetailService statisticsDetailService;
@@ -40,13 +42,13 @@ public class StatisticsController {
         Long expenditureTotal = expenditureDetailService.totalMonth(user,year,month);
         Map<String,Long> ecoBoard = statisticsService.getEcoCountComparedToLast(user,year,month);
         Map<Integer, Long> ecoCount = statisticsService.getYearEcoCount(user, EcoEnum.G,year);
-        List<Map<Object, Object>> fiveTagCounts = statisticsService.getFiveTagCounts(user, year, month);
+        List<List<Object[]>> fiveTagCounts = statisticsService.getFiveTagCounts(user, year, month);
         Long difference = ecoBoard.get("difference");
         Long percentage = ecoBoard.get("percentage");
         Long nowEcoCount=ecoBoard.get("nowEcoCount");
         Long nowNoneEcoCount=ecoBoard.get("noneEcoCount");
-        Map<Object, Object> ecoTagCounts=fiveTagCounts.get(0);
-        Map<Object, Object> noEcoTagCounts=fiveTagCounts.get(1);
+        List<Object[]> ecoTagCounts=fiveTagCounts.get(0);
+        List<Object[]> noEcoTagCounts=fiveTagCounts.get(1);
         return new Result(incomeTotal,expenditureTotal,difference,ecoCount,nowEcoCount,nowNoneEcoCount,percentage,ecoTagCounts,noEcoTagCounts);
     }
 

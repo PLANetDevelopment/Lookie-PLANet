@@ -4,12 +4,9 @@ import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Repository.StatisticsRepository;
-import com.planet.develop.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.security.KeyStore;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -64,21 +61,34 @@ public class StatisticsService {
         eco.put("noneEcoCount",noneEcoCount);
         return eco;
     }
-    public  List<Map<Object,Object>> getFiveTagCounts(User user,int year,int month){
+    public  List<List<Object[]>> getFiveTagCounts(User user,int year,int month){
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.of(year, month, startDate.lengthOfMonth());
         List<Object[]> categoryFiveTagCount = statisticsRepository.getCategoryFiveTagCount(user, startDate, endDate, EcoEnum.G);
         List<Object[]> categoryFiveNoTagCount = statisticsRepository.getCategoryFiveTagCount(user, startDate, endDate, EcoEnum.R);
+        Long ecoCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.G);
+        Long noneEcoCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.R);
 
-        List<Map<Object,Object>> result=new ArrayList<>();
-        Map<Object, Object> eco = new HashMap<>();
-        Map<Object, Object> noEco = new HashMap<>();
+        List<List<Object[]>> result=new ArrayList<>();
+        List<Object[]> eco = new ArrayList<>();
+        List<Object[]> noEco = new ArrayList<>();
+        Long ecoCnt=0L;
+        Long noEcoCnt=0L;
         for (Object[] tag : categoryFiveTagCount) {
-            eco.put(tag[0],tag[1]);
+            eco.add(tag);
+            ecoCnt+=(Long)tag[1];
         }
         for (Object[] tag : categoryFiveNoTagCount) {
-            noEco.put(tag[0],tag[1]);
+            noEco.add(tag);
+            noEcoCnt+=(Long)tag[1];
         }
+        Object eco_remain[]=new Object[2];
+        eco_remain[0]="더보기";
+        eco_remain[1] = ecoCount - ecoCnt;
+        eco.add(eco_remain);
+        eco_remain[1] = noneEcoCount-noEcoCnt;
+        noEco.add(eco_remain);
+
         result.add(eco);
         result.add(noEco);
         return result;
