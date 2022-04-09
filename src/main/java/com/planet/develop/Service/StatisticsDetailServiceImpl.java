@@ -62,7 +62,7 @@ public class StatisticsDetailServiceImpl implements StatisticsDetailService {
             StatisticsDayDetailDto dto = new StatisticsDayDetailDto();
             LocalDate date = LocalDate.of(year, month, day); // 날짜
             List<TypeDetailDto> list = calendarService.inExTypeDetailDto(id, month, day, tie); // 일별 수입/지출 상세 내역 조회
-            // TODO: 수정
+            // 수정함
             if (!list.isEmpty()) { // 수입/지출 상세 내역이 존재해야 배열에 담음.
                 dto.changeDate(date); dto.setDetailDtoList(list); // 날짜와 상세 내역을 하나의 dto로 담는다.
                 detailDtoList.add(dto); // 일별 상세 내역을 리스트에 담는다.
@@ -89,7 +89,6 @@ public class StatisticsDetailServiceImpl implements StatisticsDetailService {
 
         if (month == (int) LocalDate.now().getMonthValue()) { // 조회하는 월이 현재 월이라면
             if (today > lastDayOfLastMonth) { // 12월 31일에 조회한다면 -> 11월 30일까지 조회해서 비교
-                log.info("step 1 is started...");
                 return merge(id, year, month, today, lastDayOfMonth, tie);
             } else return merge(id, year, month, today, today, tie); // 12월 15일에 조회한다면 -> 11월 15일까지 조회해서 비교
         } else return merge(id, year, month, lastDayOfMonth, lastDayOfLastMonth, tie); // 조회하는 월이 현재 월이 아니라면 지난 달 총 수입/지출과 비교해서 계산

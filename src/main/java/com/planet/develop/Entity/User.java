@@ -15,7 +15,6 @@ import java.util.Set;
 @NoArgsConstructor
 public class User {
 
-    // TODO: 추가
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
     private Set<ClubMemberRole> roleSet = new HashSet<>();
@@ -27,10 +26,8 @@ public class User {
     @Column(name = "user_name")
     private String userName;
 
-    // TODO: 추가
     private boolean fromSocial;
 
-    // TODO: 추가
     public void addMemberRole(ClubMemberRole clubMemberRole) {
         roleSet.add(clubMemberRole);
     }

@@ -45,7 +45,6 @@ public interface EcoService {
         return checkList;
     }
 
-    // 수정함
     default List<Eco> dtoToEntity(ExpenditureRequestDto dto, Expenditure expenditure) {
         List<Eco> ecoList = new ArrayList<>();
         List<EcoDetail> ecoDetails = dto.getEcoDetail();

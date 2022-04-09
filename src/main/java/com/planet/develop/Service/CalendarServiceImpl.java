@@ -94,7 +94,8 @@ public class CalendarServiceImpl implements CalendarService {
         List<TypeDetailDto> in_detailDtos = new ArrayList<>();
         for (Income dto : in_days) { // 타입 변환
             TypeDetailDto typeDto = new TypeDetailDto();
-            typeDto.saveIncomeType(dto.getIn_type(), dto.getIn_cost(), dto.getMemo(),dto.getId());
+            // 수정함
+            typeDto.saveIncomeType(dto.getIn_type(), dto.getIn_way(), dto.getIn_cost(), dto.getMemo(),dto.getId());
             in_detailDtos.add(typeDto);
         }
         return in_detailDtos;
@@ -134,8 +135,8 @@ public class CalendarServiceImpl implements CalendarService {
                 // 중복 선택한 친/반환경 데이터를 List<EcoDto> 타입으로 변환해서 리턴
                 List<EcoDto> dupEcoList = dupEcoList(ex_days, dupCheck);
                 TypeDetailDto typeDto = new TypeDetailDto();
-                // TODO: 수정
-                typeDto.saveExpenditureType(dto.getExType(), dto.getEno(), dto.getCost(), dto.getMemo(), dupEcoList);
+                // 수정함
+                typeDto.saveExpenditureType(dto.getExType(), dto.getExWay(), dto.getEno(), dto.getCost(), dto.getMemo(), dupEcoList);
                 typeDto.setIncome(false);
                 ex_detailDtos.add(typeDto);
             }

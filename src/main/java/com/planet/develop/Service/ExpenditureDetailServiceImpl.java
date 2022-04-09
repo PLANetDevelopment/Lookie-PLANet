@@ -43,7 +43,6 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return entity.getEno();
     }
 
-    // 수정함
     /** 수정 페이지 */
     @Override
     public ExpenditureRequestDto getSingleDetail(Long eno) {
@@ -78,7 +77,6 @@ public class ExpenditureDetailServiceImpl implements ExpenditureDetailService {
         return requestDto;
     }
 
-    // 수정함
     /** 하루 지출 총액 */
     @Override
     public Long totalDay(User user, LocalDate date) {
