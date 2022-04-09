@@ -12,7 +12,8 @@ import lombok.*;
 public class EcoDto {
     private EcoEnum eco;
     private EcoDetail ecoDetail;
-    private String etcMemo;
+    // 수정함
+    private String userAdd;
 
     public EcoDto(EcoEnum eco, EcoDetail ecoDetial) {
         this.eco = eco;
