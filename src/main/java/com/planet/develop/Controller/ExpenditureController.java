@@ -37,14 +37,14 @@ public class ExpenditureController {
         return new ExpenditureResponseDto(eno);
     }
 
-    /** 지출 데이터 수정 전 */
-    @GetMapping("/expenditure/{id}/before_update")
-    public ExpenditureRequestDto single_expenditure(@PathVariable("id") Long id) throws IllegalAccessException {
-        return detailService.getSingleDetail(id);
-    }
+//    /** 지출 데이터 수정 전 */
+//    @GetMapping("/expenditure/{id}/before_update")
+//    public ExpenditureRequestDto single_expenditure(@PathVariable("id") Long id) throws IllegalAccessException {
+//        return detailService.getSingleDetail(id);
+//    }
 
     /** 지출 데이터 수정 후 */
-    @PostMapping("/expenditure/{id}/after_update")
+    @PostMapping("/expenditure/{id}/update")
     public ExpenditureResponseDto update_expenditure(@PathVariable("id") Long id, // 여기서 id는 eno를 의미
                                                      @RequestBody ExpenditureRequestDto request) throws IllegalAccessException {
         Long eno = detailService.update(id, request);

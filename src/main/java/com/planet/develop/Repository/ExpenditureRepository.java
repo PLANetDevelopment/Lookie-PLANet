@@ -31,7 +31,6 @@ public interface ExpenditureRepository extends JpaRepository<Expenditure, Long> 
             "where e.user = :user and e.date = :date")
     List<Object[]> getDayList(@Param("user") User user, @Param("date") LocalDate date);
 
-    // 추가함
     /**
      * 특정 사용자의 하루 지출 금액 가져오기
      */

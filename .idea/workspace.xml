@@ -5,22 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0fc8f6e-65f9-4033-85e1-cc137d861cc0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/CouponController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/CouponDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/CouponDetailRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/CouponRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CouponService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CouponServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/CouponTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/ExpenditureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/ExpenditureController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/IncomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/IncomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/StatisticsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/StatisticsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/EcoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/EcoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/ExpenditureRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/ExpenditureRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/TypeDetailDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/TypeDetailDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/StatisticsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/StatisticsRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CalendarServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CalendarServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/EcoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/Coupon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/Coupon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/CouponDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/CouponDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/StatisticsDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/StatisticsDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/StatisticsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/StatisticsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/ExpenditureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/ExpenditureTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,48 +139,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ExpenditureMonthTest.사용자의_한달_지출유형별_사용내역_구하기" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.planet.develop.Service.ExpenditureMonthTest.사용자의_한달_지출유형별_사용내역_구하기&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="ExpenditureTest.지출_데이터_삽입" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;com.planet.develop.Service.ExpenditureTest.지출_데이터_삽입&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="UpdateTest.updateTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -199,6 +159,22 @@
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
+    </configuration>
+    <configuration name="CouponTest.insertDummmies" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="develop.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.planet.develop.Service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.planet.develop.Service" />
+      <option name="MAIN_CLASS_NAME" value="com.planet.develop.Service.CouponTest" />
+      <option name="METHOD_NAME" value="insertDummmies" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="ExpenditureTest.회원가입" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="develop.test" />
@@ -257,11 +233,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CouponTest.insertDummmies" />
         <item itemvalue="JUnit.ExpenditureTest.지출_데이터_삽입" />
         <item itemvalue="JUnit.IncomeTest.지출_데이터_삽입" />
         <item itemvalue="JUnit.ExpenditureTest.회원가입" />
         <item itemvalue="Gradle.UpdateTest.updateTest" />
-        <item itemvalue="Gradle.ExpenditureTest.지출_데이터_삽입" />
       </list>
     </recent_temporary>
   </component>
@@ -286,7 +262,7 @@
       <workItem from="1646284032133" duration="5275000" />
       <workItem from="1646457657154" duration="103569000" />
       <workItem from="1648354862913" duration="40590000" />
-      <workItem from="1649390245293" duration="7128000" />
+      <workItem from="1649390245293" duration="20163000" />
     </task>
     <servers />
   </component>
@@ -312,6 +288,16 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java</url>
           <line>174</line>
           <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CalendarServiceImpl.java</url>
+          <line>35</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/CalendarController.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/com/planet/develop/Service/IncomeTest.java</url>
