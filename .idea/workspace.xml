@@ -5,24 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0fc8f6e-65f9-4033-85e1-cc137d861cc0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/CouponController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/CouponDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/CouponDetailRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/CouponRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CouponService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CouponServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/CouponTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/planet/develop/Service/ExpenditureDetailServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/ExpenditureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/ExpenditureController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/Coupon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/Coupon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/CouponDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Entity/CouponDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Repository/ExpenditureRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/ExpenditureTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/planet/develop/Service/ExpenditureTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +45,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -73,7 +63,6 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/com/planet/develop/Controller/ExpenditureController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/planet/develop/DTO/ExpenditureRequestDto.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/com/planet/develop/Enum/EcoDetail.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
@@ -233,8 +222,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CouponTest.insertDummmies" />
         <item itemvalue="JUnit.ExpenditureTest.지출_데이터_삽입" />
+        <item itemvalue="JUnit.CouponTest.insertDummmies" />
         <item itemvalue="JUnit.IncomeTest.지출_데이터_삽입" />
         <item itemvalue="JUnit.ExpenditureTest.회원가입" />
         <item itemvalue="Gradle.UpdateTest.updateTest" />
@@ -286,12 +275,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/ExpenditureDetailServiceImpl.java</url>
-          <line>174</line>
+          <line>231</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/planet/develop/Service/CalendarServiceImpl.java</url>
-          <line>35</line>
+          <line>41</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -306,6 +295,14 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/com/planet/develop/Service/ExpenditureTest.java</url>
+          <line>61</line>
+          <properties class="com.planet.develop.Service.ExpenditureTest" method="지출_데이터_삽입">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
