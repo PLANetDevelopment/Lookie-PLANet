@@ -22,14 +22,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'junit:junit:4.13.1'
-	implementation 'junit:junit:4.13.1'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	runtimeOnly 'com.h2database:h2'
-	implementation 'com.google.firebase:firebase-admin:7.1.1'
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.0'
+	testImplementation 'org.springframework.security:spring-security-test' // security
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // oauth
 }
 
 test {

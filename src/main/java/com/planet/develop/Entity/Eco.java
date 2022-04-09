@@ -1,6 +1,5 @@
 package com.planet.develop.Entity;
 
-
 import com.planet.develop.Enum.EcoDetail;
 import com.planet.develop.Enum.EcoEnum;
 import lombok.AllArgsConstructor;
@@ -28,14 +27,9 @@ public class Eco {
     @Column(name = "eco_detail")
     private EcoDetail ecoDetail;
 
-    private String etcMemo;
+    private String userAdd;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Expenditure expenditure;
-
-    public void update(EcoDetail ecoDetail, String etcMemo) {
-        this.ecoDetail = this.getEcoDetail();
-        this.etcMemo = this.getEtcMemo();
-    }
 
 }

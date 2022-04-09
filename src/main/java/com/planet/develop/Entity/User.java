@@ -1,20 +1,23 @@
 package com.planet.develop.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.planet.develop.Security.Enum.ClubMemberRole;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<ClubMemberRole> roleSet = new HashSet<>();
 
     @Id
     @Column(name = "user_id")
@@ -23,5 +26,10 @@ public class User {
     @Column(name = "user_name")
     private String userName;
 
+    private boolean fromSocial;
+
+    public void addMemberRole(ClubMemberRole clubMemberRole) {
+        roleSet.add(clubMemberRole);
+    }
 
 }

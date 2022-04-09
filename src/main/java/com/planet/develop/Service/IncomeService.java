@@ -87,14 +87,10 @@ public class IncomeService {
         return days;
     }
 
-    /** 월별 총합 **/
-    public Long totalMonth(String user_id,int month) {
-        Optional<User> findUser = userRepository.findById(user_id);
-        List<Income> days=incomeRepository.findMonth(findUser.get(),month);
-        Long total=0L;
-        for (Income day : days) {
-            total+=day.getIn_cost();
-        }
+
+    /** 월별 총합2 **/
+    public Long totalMonth(User user,int year,int month) {
+        Long total = incomeRepository.calMonth(user,year,month);
         return total;
 
     }
@@ -119,6 +115,17 @@ public class IncomeService {
         for (Income day : days) {
             if(day.getIn_way()==way)
                 total+=day.getIn_cost();
+        }
+        return total;
+    }
+
+    /** 한 달 특정 일까지의 총 수입 **/
+    public Long totalMonthDay(String user_id, int month, int day) {
+        Optional<User> findUser = userRepository.findById(user_id);
+        List<Income> incomeList = incomeRepository.findMonthDay(findUser.get(), month, day);
+        Long total = 0L;
+        for (Income income : incomeList) {
+            total += income.getIn_cost();
         }
         return total;
     }

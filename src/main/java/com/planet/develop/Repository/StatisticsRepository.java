@@ -1,31 +1,29 @@
 package com.planet.develop.Repository;
 
-import com.planet.develop.Entity.ExpenditureDetail;
-import com.planet.develop.Entity.Quote;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
+import com.planet.develop.Enum.money_Type;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
 public class StatisticsRepository {
     private final EntityManager em;
 
-    public Long getMonthEcoCount(User user,EcoEnum eco,int month){
-        LocalDate startDate = LocalDate.of(2022,month,1);
-        LocalDate endDate = LocalDate.of(2022,month,startDate.lengthOfMonth());
+    public Long getMonthEcoCount(User user,EcoEnum eco,int year,int month){
+        LocalDate startDate = LocalDate.of(year,month,1);
+        LocalDate endDate = LocalDate.of(year,month,startDate.lengthOfMonth());
 
         return em.createQuery("select count(*) from Expenditure e " +
                         "left join ExpenditureDetail ed on e.eno = ed.eno " +
-                        "left join Eco ec on e.eno = ec.expenditure.eno " +
+                        "left join Eco ec on e.eno = ec.eno " +
                         "where e.user = :user and ec.eco = :eco and :startDate<=e.date and e.date <= :endDate", Long.class)
                 .setParameter("user",user)
                 .setParameter("eco",eco)
@@ -34,30 +32,77 @@ public class StatisticsRepository {
                 .getSingleResult();
     }
 
-    public Long getDifference(User user,LocalDate now, LocalDate last){
-        LocalDate startDate = LocalDate.of( now.getYear(),now.getMonthValue(),1);
-        Long nowCount = em.createQuery("select count(*) from Expenditure e " +
+    /** 현재 달의 (구체적인 시작점)친환경 태그 개수 구하기*/
+        public Long getNowEcoCount(User user,LocalDate now,LocalDate startDate,EcoEnum eco) {
+        return em.createQuery("select count(*) from Expenditure e " +
                         "left join ExpenditureDetail ed on e.eno = ed.eno " +
                         "left join Eco ec on e.eno = ec.expenditure.eno " +
-                        "where e.user = :user and ec.eco ='G' and :startDate<=e.date and e.date <= :endDate", Long.class)
+                        "where e.user = :user and ec.eco = :eco and :startDate<=e.date and e.date <= :endDate", Long.class)
                 .setParameter("user", user)
+                .setParameter("eco", eco)
                 .setParameter("startDate", startDate)
                 .setParameter("endDate", now)
                 .getSingleResult();
+    }
 
-        startDate= startDate.minusMonths(1);
-        Long lastCount = em.createQuery("select count(*) from Expenditure e " +
+    /** 현재 달이 아닌 친환경 태그 개수 구하기*/
+    public Long getLastEcoCount(User user, LocalDate last,LocalDate startDate) {
+        return em.createQuery("select count(*) from Expenditure e " +
                         "left join ExpenditureDetail ed on e.eno = ed.eno " +
-                        "left join Eco ec on e.eno = ec.expenditure.eno " +
+                        "left join Eco ec on e.eno = ec.eno " +
                         "where e.user = :user and ec.eco ='G' and :startDate<=e.date and e.date <= :endDate", Long.class)
                 .setParameter("user", user)
                 .setParameter("startDate", startDate)
                 .setParameter("endDate", last)
                 .getSingleResult();
-        System.out.println("now = " + now);
-        System.out.println("last = " + last);
-        System.out.println("nowCount = " + nowCount);
-        System.out.println("lastCount = " + lastCount);
-        return nowCount-lastCount;
+    }
+
+    /** 카테고리/친(반)환경 태그 상위 4개 개수 구하기*/
+    public List<Object[]> getCategoryFiveTagCount(User user, LocalDate startDate, LocalDate endDate, EcoEnum eco){
+
+        List<Object[]> resultList = em.createQuery("select ed.exType,count(*) from Expenditure e " +
+                        "left join ExpenditureDetail ed on e.eno = ed.eno " +
+                        "left join Eco ec on e.eno = ec.eno " +
+                        "where e.user = :user and ec.eco = :eco and :startDate<=e.date and e.date <= :endDate " +
+                        "group by ed.exType " +
+                        "order by count(*) DESC ", Object[].class)
+                .setParameter("user", user)
+                .setParameter("startDate", startDate)
+                .setParameter("endDate", endDate)
+                .setParameter("eco", eco)
+                .setMaxResults(4)
+                .getResultList();
+        return resultList;
+    }
+
+    /** 카테고리/친(반)환경 태그 별 태그 개수 구하기*/
+    public Long getCategoryTagCount(User user, LocalDate startDate, LocalDate endDate, money_Type type,EcoEnum eco){
+        return em.createQuery("select count(*) from Expenditure e " +
+                        "left join ExpenditureDetail ed on e.eno = ed.eno " +
+                        "left join Eco ec on e.eno = ec.eno " +
+                        "where e.user = :user and ec.eco = :eco and :startDate<=e.date and e.date <= :endDate and ed.exType = :type", Long.class)
+                .setParameter("user", user)
+                .setParameter("startDate", startDate)
+                .setParameter("endDate", endDate)
+                .setParameter("eco",eco)
+                .setParameter("type",type)
+                .getSingleResult();
+    }
+
+    /** 카테고리/친(반)환경 태그 별 태그 리스트 구하기*/
+    public List<Object[]> getCategoryList(User user, LocalDate startDate, LocalDate endDate, EcoEnum eco){
+
+        List<Object[]> resultList = em.createQuery("select ed.exType,count(*) from Expenditure e " +
+                        "left join ExpenditureDetail ed on e.eno = ed.eno " +
+                        "left join Eco ec on e.eno = ec.eno " +
+                        "where e.user = :user and ec.eco = :eco and :startDate<=e.date and e.date <= :endDate " +
+                        "group by ed.exType " +
+                        "order by count(*) DESC ", Object[].class)
+                .setParameter("user", user)
+                .setParameter("startDate", startDate)
+                .setParameter("endDate", endDate)
+                .setParameter("eco", eco)
+                .getResultList();
+        return resultList;
     }
 }

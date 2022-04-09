@@ -7,12 +7,14 @@ import com.planet.develop.Entity.User;
 import com.planet.develop.Repository.UserRepository;
 import com.planet.develop.Service.IncomeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
+@PreAuthorize("permitAll()") // 모든 사용자가 접근 가능
 public class IncomeController {
     private final IncomeService incomeService;
     private final UserRepository userRepository;
@@ -20,7 +22,7 @@ public class IncomeController {
     //localhost:8080/api/income/yui12@gmail.com/1
 
     /** 수입 데이터 저장*/
-    @PostMapping("/api/income/{id}/new")
+    @PostMapping("/income/{id}/new")
     public IncomeResponseDto create_income(@PathVariable("id") String id, @RequestBody IncomeRequestDto request) {
         Optional<User> user = userRepository.findById(id);
         Income income = Income.builder()
@@ -37,7 +39,7 @@ public class IncomeController {
     }
 
     /**수입 데이터 수정*/
-    @PostMapping("/api/income/{id}/update")
+    @PostMapping("/income/{id}/update")
     public IncomeResponseDto update_income(@PathVariable("id") Long id, @RequestBody IncomeRequestDto request){
         incomeService.update(id,request.getIn_cost(),request.getIn_way(),
                 request.getIn_type(),request.getMemo(),request.getDate());
@@ -46,7 +48,7 @@ public class IncomeController {
     }
 
     /** 수입 데이터 삭제*/
-    @DeleteMapping("/api/income/{id}/delete")
+    @DeleteMapping("/calendar/{month}/income/{id}")
     public void delete_income(@PathVariable("id") Long id){
         incomeService.delete(id);
     }
