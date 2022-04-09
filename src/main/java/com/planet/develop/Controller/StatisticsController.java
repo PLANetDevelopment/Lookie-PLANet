@@ -40,33 +40,33 @@ public class StatisticsController {
         User user = userRepository.findById(userId).get();
         Long incomeTotal = incomeService.totalMonth(user,year, month);
         Long expenditureTotal = expenditureDetailService.totalMonth(user,year,month);
-        Map<String,Long> ecoBoard = statisticsService.getEcoCountComparedToLast(user,year,month);
+        Map<String,Object> ecoBoard = statisticsService.getEcoCountComparedToLast(user,year,month);
         Map<Integer, Long> ecoCount = statisticsService.getYearEcoCount(user, EcoEnum.G,year);
         List<List<Object[]>> fiveTagCounts = statisticsService.getFiveTagCounts(user, year, month);
-        Long difference = ecoBoard.get("difference");
-        Long percentage = ecoBoard.get("percentage");
-        Long nowEcoCount=ecoBoard.get("nowEcoCount");
-        Long nowNoneEcoCount=ecoBoard.get("noneEcoCount");
+        Object difference = ecoBoard.get("difference");
+        Object percentage = ecoBoard.get("percentage");
+        Object nowEcoCount=ecoBoard.get("nowEcoCount");
+        Object nowNoneEcoCount=ecoBoard.get("noneEcoCount");
         List<Object[]> ecoTagCounts=fiveTagCounts.get(0);
         List<Object[]> noEcoTagCounts=fiveTagCounts.get(1);
-        return new Result(incomeTotal,expenditureTotal,difference,ecoCount,nowEcoCount,nowNoneEcoCount,percentage,ecoTagCounts,noEcoTagCounts);
+        return new Result(user.getUserName(),incomeTotal,expenditureTotal,difference,ecoCount,nowEcoCount,nowNoneEcoCount,percentage,ecoTagCounts,noEcoTagCounts);
     }
 
     /** 친환경 태그 통계 */
     @GetMapping("/statistics/ecoCountsDetail/{id}/{year}/{month}")
     public statisticsEcoRequestDto statisticsEcoDetail(@PathVariable("id") String userId,@PathVariable("year") int year,@PathVariable("month") int month) {
         User user = userRepository.findById(userId).get();
-        Map<money_Type,List<Long>> tagCounts = statisticsService.getTagCounts(user, year, month,EcoEnum.G);
+        List<Object[]> tagCategoryList = statisticsService.getTagCategoryList(user, year, month, EcoEnum.G);
 
-        return new statisticsEcoRequestDto(tagCounts);
+        return new statisticsEcoRequestDto(tagCategoryList);
     }
 
     /** 반환경 태그 통계 */
     @GetMapping("/statistics/noEcoCountsDetail/{id}/{year}/{month}")
     public statisticsEcoRequestDto statisticsNoEcoDetail(@PathVariable("id") String userId,@PathVariable("year") int year,@PathVariable("month") int month) {
         User user = userRepository.findById(userId).get();
-        Map<money_Type, List<Long>> tagCounts = statisticsService.getTagCounts(user, year, month,EcoEnum.R);
-        return new statisticsEcoRequestDto(tagCounts);
+        List<Object[]> tagCategoryList = statisticsService.getTagCategoryList(user, year, month, EcoEnum.R);
+        return new statisticsEcoRequestDto(tagCategoryList);
     }
 
     /** 지난 달 대비 수입/지출 차액 + 한 달 일별 상세 내역 페이지 */
@@ -102,6 +102,7 @@ public class StatisticsController {
     @Data
     @AllArgsConstructor
     static class Result<T>{
+        private T userName;
         private T incomeTotal;
         private T expenditureTotal;
         private T difference;
@@ -116,7 +117,7 @@ public class StatisticsController {
     @Data
     @AllArgsConstructor
     static class statisticsEcoRequestDto<T>{
-        private T tagCounts;
+        private T tagList;
     }
 
 

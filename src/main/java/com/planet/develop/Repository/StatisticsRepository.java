@@ -88,4 +88,21 @@ public class StatisticsRepository {
                 .setParameter("type",type)
                 .getSingleResult();
     }
+
+    /** 카테고리/친(반)환경 태그 별 태그 리스트 구하기*/
+    public List<Object[]> getCategoryList(User user, LocalDate startDate, LocalDate endDate, EcoEnum eco){
+
+        List<Object[]> resultList = em.createQuery("select ed.exType,count(*) from Expenditure e " +
+                        "left join ExpenditureDetail ed on e.eno = ed.eno " +
+                        "left join Eco ec on e.eno = ec.eno " +
+                        "where e.user = :user and ec.eco = :eco and :startDate<=e.date and e.date <= :endDate " +
+                        "group by ed.exType " +
+                        "order by count(*) DESC ", Object[].class)
+                .setParameter("user", user)
+                .setParameter("startDate", startDate)
+                .setParameter("endDate", endDate)
+                .setParameter("eco", eco)
+                .getResultList();
+        return resultList;
+    }
 }

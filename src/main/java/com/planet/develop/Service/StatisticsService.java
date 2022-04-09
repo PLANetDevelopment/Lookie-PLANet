@@ -32,8 +32,8 @@ public class StatisticsService {
         return monthEcoCount;
     }
 
-    public Map<String,Long> getEcoCountComparedToLast(User user,int year,int month){
-        Map<String, Long> eco = new HashMap<>();
+    public Map<String,Object> getEcoCountComparedToLast(User user,int year,int month){
+        Map<String, Object> eco = new HashMap<>();
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.now();
         if(LocalDate.now().getMonthValue()!=month)
@@ -46,9 +46,11 @@ public class StatisticsService {
         Long lastEcoCount=statisticsRepository.getLastEcoCount(user,last,startDate.minusMonths(1));
         Long difference = ecoCount-lastEcoCount;
 
-        Long percentage=0L;
+        double percentage=0L;
         if (ecoCount!=0 & noneEcoCount!=0){
-           percentage = Math.round((double)ecoCount/(noneEcoCount+ecoCount)*100);
+           percentage = Math.round((double)ecoCount/(double)(noneEcoCount+ecoCount)*100);
+
+
         }
         if (ecoCount!=0 & noneEcoCount==0){
             percentage=100L;
@@ -61,6 +63,7 @@ public class StatisticsService {
         eco.put("noneEcoCount",noneEcoCount);
         return eco;
     }
+    /** 상위 4개 + 더보기 태그 보여주기 */
     public  List<List<Object[]>> getFiveTagCounts(User user,int year,int month){
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.of(year, month, startDate.lengthOfMonth());
@@ -93,23 +96,23 @@ public class StatisticsService {
         result.add(noEco);
         return result;
     }
-    public Map<money_Type,List<Long>> getTagCounts(User user,int year,int month,EcoEnum ecoEnum){
-        Map<money_Type, List<Long>> counts = new HashMap<>();
+
+    public List<Object[]> getTagCategoryList(User user,int year,int month,EcoEnum ecoEnum){
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.of(year, month, startDate.lengthOfMonth());
-        money_Type[] categories = money_Type.values();
-        Long totalTageCount = statisticsRepository.getMonthEcoCount(user,ecoEnum, year, month);
-        for (money_Type category : categories) {
-            List values = new ArrayList();
-            Long tagCount = statisticsRepository.getCategoryTagCount(user, startDate, endDate, category, ecoEnum);
-            double round = (double) tagCount / (double) totalTageCount *100;
-            values.add(tagCount);
-            values.add(round);
-            counts.put(category,values);
+        List<Object[]> categoryList= statisticsRepository.getCategoryList(user, startDate, endDate,ecoEnum);
+        Long totalCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.G);
+        List<Object[]> result = new ArrayList<>();
+        for (Object[] objects : categoryList) {
+            Object[] category = new Object[3];
+            category[0]=objects[0];
+            Long tmp= (Long)objects[1];
+            double cnt = (double) tmp;
+            category[1] = Math.round(cnt/(double)totalCount*100);
+            category[2]=objects[1];
+            result.add(category);
         }
-
-        //TODO % 큰 수대로 정렬
-        return counts;
+        return result;
     }
 
 
