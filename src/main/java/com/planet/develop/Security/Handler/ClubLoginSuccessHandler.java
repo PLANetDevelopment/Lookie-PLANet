@@ -28,21 +28,12 @@ public class ClubLoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-
-        log.info("onAuthenticationSuccess");
-
         ClubAuthMemberDTO authMember = (ClubAuthMemberDTO)authentication.getPrincipal();
-
         boolean fromSocial = authMember.isFromSocial();
-
-        log.info("Need Modify Member? " + fromSocial);
-
         boolean passwordResult = passwordEncoder.matches("1111", authMember.getPassword());
-
         if (fromSocial && passwordResult) {
             redirectStrategy.sendRedirect(request, response, "/member/modify?from=social");
         }
-
     }
 
 }
