@@ -30,6 +30,7 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test' // security
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client' // oauth
 	implementation 'org.springframework.boot:spring-boot-starter-batch' //spring-batch
+	implementation 'org.springframework.boot:spring-boot-starter-quartz' // 스케쥴러
 	testImplementation 'org.springframework.batch:spring-batch-test' //spring-batch
 }
 
