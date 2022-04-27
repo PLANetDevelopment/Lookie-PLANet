@@ -36,33 +36,43 @@ public class StatisticsService {
         Map<String, Object> eco = new HashMap<>();
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.now();
-        if(LocalDate.now().getMonthValue()!=month)
+        if(endDate.getMonthValue()!=month)
             endDate = LocalDate.of(year,month,startDate.lengthOfMonth());
 
         LocalDate last=endDate.minusMonths(1);
 
         Long ecoCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.G);
         Long noneEcoCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.R);
-        Long lastEcoCount=statisticsRepository.getLastEcoCount(user,last,startDate.minusMonths(1));
-        Long difference = ecoCount-lastEcoCount;
-
-        double percentage=0L;
-        if (ecoCount!=0 & noneEcoCount!=0){
-           percentage = Math.round((double)ecoCount/(double)(noneEcoCount+ecoCount)*100);
-
-
-        }
-        if (ecoCount!=0 & noneEcoCount==0){
-            percentage=100L;
-        }
+        Long lastEcoCount=statisticsRepository.getLastEcoCount(user,last,startDate.minusMonths(1),EcoEnum.G);
+        Long lastNoEcoCount=statisticsRepository.getLastEcoCount(user,last,startDate.minusMonths(1),EcoEnum.R);
+        Long ecoDifference = ecoCount-lastEcoCount;
+        Long noEcoDifference = noneEcoCount - lastNoEcoCount;
+        double percentage = getPercentage(ecoCount, noneEcoCount);
         System.out.println("ecoCount = " + ecoCount);
         System.out.println("noneEcoCount = " + noneEcoCount);
-        eco.put("difference",difference);
+        eco.put("ecoDifference",ecoDifference);
+        eco.put("noEcoDifference",noEcoDifference);
         eco.put("percentage",percentage);
         eco.put("nowEcoCount",ecoCount);
         eco.put("noneEcoCount",noneEcoCount);
         return eco;
     }
+
+    /** 친/반환경 퍼센테이지 구하는 함수**/
+    public double getPercentage(Long ecoCount, Long noneEcoCount) {
+        double percentage=0L;
+        if (ecoCount !=0 & noneEcoCount !=0){
+           percentage = Math.round((double) ecoCount /(double)(noneEcoCount + ecoCount)*100);
+
+
+        }
+        if (ecoCount !=0 & noneEcoCount ==0){
+            percentage=100L;
+        }
+        return percentage;
+    }
+
+
     /** 상위 4개 + 더보기 태그 보여주기 */
     public  List<List<Object[]>> getFiveTagCounts(User user,int year,int month){
         LocalDate startDate = LocalDate.of(year, month, 1);

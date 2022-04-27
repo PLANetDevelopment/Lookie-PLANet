@@ -21,8 +21,8 @@ public class MissionCompleteService {
         return mission.getId();
     }
 
-    public List<MissionComplete> findMissions(User user){
-        List<MissionComplete> missions = missionCompleteRepository.findMissions(user);
+    public List<MissionComplete> findMissions(User user,int year,int month){
+        List<MissionComplete> missions = missionCompleteRepository.findMissions(user,year,month);
         return missions;
     }
 }

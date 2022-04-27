@@ -43,13 +43,14 @@ public class StatisticsController {
         Map<String,Object> ecoBoard = statisticsService.getEcoCountComparedToLast(user,year,month);
         Map<Integer, Long> ecoCount = statisticsService.getYearEcoCount(user, EcoEnum.G,year);
         List<List<Object[]>> fiveTagCounts = statisticsService.getFiveTagCounts(user, year, month);
-        Object difference = ecoBoard.get("difference");
+        Object ecoDifference = ecoBoard.get("ecoDifference");
+        Object noEcoDifference = ecoBoard.get("noEcoDifference");
         Object percentage = ecoBoard.get("percentage");
         Object nowEcoCount=ecoBoard.get("nowEcoCount");
         Object nowNoneEcoCount=ecoBoard.get("noneEcoCount");
         List<Object[]> ecoTagCounts=fiveTagCounts.get(0);
         List<Object[]> noEcoTagCounts=fiveTagCounts.get(1);
-        return new Result(user.getUserName(),incomeTotal,expenditureTotal,difference,ecoCount,nowEcoCount,nowNoneEcoCount,percentage,ecoTagCounts,noEcoTagCounts);
+        return new Result(user.getUserName(),incomeTotal,expenditureTotal,ecoDifference,noEcoDifference,ecoCount,nowEcoCount,nowNoneEcoCount,percentage,ecoTagCounts,noEcoTagCounts);
     }
 
     /** 친환경 태그 통계 */
@@ -105,7 +106,8 @@ public class StatisticsController {
         private T userName;
         private T incomeTotal;
         private T expenditureTotal;
-        private T difference;
+        private T ecoDifference;
+        private T noEcoDifference;
         private T ecoCount;
         private T nowEcoCount;
         private T nowNoneEcoCount;

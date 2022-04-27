@@ -36,7 +36,7 @@ public class StatisticsRepository {
         public Long getNowEcoCount(User user,LocalDate now,LocalDate startDate,EcoEnum eco) {
         return em.createQuery("select count(*) from Expenditure e " +
                         "left join ExpenditureDetail ed on e.eno = ed.eno " +
-                        "left join Eco ec on e.eno = ec.expenditure.eno " +
+                        "left join Eco ec on e.eno = ec.eno " +
                         "where e.user = :user and ec.eco = :eco and :startDate<=e.date and e.date <= :endDate", Long.class)
                 .setParameter("user", user)
                 .setParameter("eco", eco)
@@ -46,14 +46,15 @@ public class StatisticsRepository {
     }
 
     /** 현재 달이 아닌 친환경 태그 개수 구하기*/
-    public Long getLastEcoCount(User user, LocalDate last,LocalDate startDate) {
+    public Long getLastEcoCount(User user, LocalDate last,LocalDate startDate,EcoEnum eco) {
         return em.createQuery("select count(*) from Expenditure e " +
                         "left join ExpenditureDetail ed on e.eno = ed.eno " +
                         "left join Eco ec on e.eno = ec.eno " +
-                        "where e.user = :user and ec.eco ='G' and :startDate<=e.date and e.date <= :endDate", Long.class)
+                        "where e.user = :user and ec.eco = :eco and :startDate<=e.date and e.date <= :endDate", Long.class)
                 .setParameter("user", user)
                 .setParameter("startDate", startDate)
                 .setParameter("endDate", last)
+                .setParameter("eco",eco)
                 .getSingleResult();
     }
 

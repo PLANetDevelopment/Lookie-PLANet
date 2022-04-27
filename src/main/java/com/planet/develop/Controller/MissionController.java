@@ -37,18 +37,19 @@ public class MissionController {
                 .emoji(emoji)
                 .name(name)
                 .user(user)
+                .date(LocalDate.now())
                 .build();
         missionCompleteService.save(mission);
     }
 
     /** 에코미션 페이지 조회*/
-    @GetMapping("/mission/{id}")
-    public Result mission(@PathVariable("id") String id){
+    @GetMapping("/mission/{id}/{year}/{month}")
+    public Result mission(@PathVariable("id") String id,@PathVariable("year") int year, @PathVariable("month") int month){
         User user = userRepository.findById(id).get();
         Mission mission = missionRepository.findMission(LocalDate.now());
         MissionCompleteDto todayMission = new MissionCompleteDto(mission.getName(),mission.getEmoji());
 
-        List<MissionComplete> missions = missionCompleteService.findMissions(user);
+        List<MissionComplete> missions = missionCompleteService.findMissions(user,year,month);
         List<MissionCompleteDto> missionCompleteDtos = missions.stream()
                 .map(o->new MissionCompleteDto(o.getName(),o.getEmoji()))
                 .collect(Collectors.toList());
