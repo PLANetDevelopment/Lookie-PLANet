@@ -14,6 +14,4 @@ public class Mission {
     private String emoji;
     private String name;
 
-
-
 }
