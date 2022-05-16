@@ -26,19 +26,19 @@ public class MainController {
     private final ExpenditureDetailService expenditureDetailService;
     private final MainService mainService;
 
-    @GetMapping("/main/{id}/{year}/{month}")
-    public mainResponseDto main(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
-        User user = userRepository.findById(id).get();
-        String userName=user.getUserName();
+    @GetMapping("/main/{year}/{month}")
+    public mainResponseDto main(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
+        User user = userRepository.findById(authMemberDTO.getEmail()).get();
+        String userName = authMemberDTO.getName();
         Long totalMonthIncome = incomeService.totalMonth(user,year,month);
         Long totalMonthExpenditure = expenditureDetailService.totalMonth(user,year, month);
         double ecoPercentage = mainService.getPercentage(user, year, month);
-        return new mainResponseDto(authMemberDTO.getEmail(),totalMonthIncome,totalMonthExpenditure,ecoPercentage,100-ecoPercentage);
+        return new mainResponseDto(userName,totalMonthIncome,totalMonthExpenditure,ecoPercentage,100-ecoPercentage);
     }
 
-    @PostMapping("/main/update/{id}/{name}")
-    public void mainNameUpdate(@PathVariable("id") String id,@PathVariable("name") String name){
-        userRepository.updateName(name,id);
+    @PostMapping("/main/update/{name}")
+    public void mainNameUpdate(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("name") String name){
+        userRepository.updateName(name,authMemberDTO.getEmail());
     }
 
     @Data

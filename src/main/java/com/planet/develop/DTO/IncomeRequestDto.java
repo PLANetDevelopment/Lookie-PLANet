@@ -14,5 +14,5 @@ public class IncomeRequestDto {
     private money_Type in_type;
     private String memo;
     private LocalDate date;
-    private User user;
+    private String userId;
 }

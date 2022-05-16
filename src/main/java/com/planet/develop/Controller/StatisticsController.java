@@ -5,9 +5,8 @@ import com.planet.develop.DTO.StatisticsEcoDto;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
 import com.planet.develop.Enum.TIE;
-import com.planet.develop.Enum.money_Type;
-import com.planet.develop.Enum.money_Way;
 import com.planet.develop.Repository.UserRepository;
+import com.planet.develop.Security.DTO.AuthMemberDTO;
 import com.planet.develop.Service.ExpenditureDetailService;
 import com.planet.develop.Service.IncomeService;
 import com.planet.develop.Service.StatisticsDetailService;
@@ -16,17 +15,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-//@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasRole('USER')")
 public class StatisticsController {
 
     private final StatisticsDetailService statisticsDetailService;
@@ -36,9 +35,9 @@ public class StatisticsController {
     private final ExpenditureDetailService expenditureDetailService;
 
     /** 친/반환경 태그 통계 */
-    @GetMapping("/statistics/{id}/{year}/{month}")
-    public Result statistics(@PathVariable("id") String userId,@PathVariable("year") int year,@PathVariable("month") int month){
-        User user = userRepository.findById(userId).get();
+    @GetMapping("/statistics/{year}/{month}")
+    public Result statistics(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
+        User user = userRepository.findById(authMemberDTO.getEmail()).get();
         Long incomeTotal = incomeService.totalMonth(user,year, month);
         Long expenditureTotal = expenditureDetailService.totalMonth(user,year,month);
         Map<String,Object> ecoBoard = statisticsService.getEcoCountComparedToLast(user,year,month);
@@ -55,50 +54,51 @@ public class StatisticsController {
     }
 
     /** 친환경 태그 통계 */
-    @GetMapping("/statistics/ecoCountsDetail/{id}/{year}/{month}")
-    public statisticsEcoRequestDto statisticsEcoDetail(@PathVariable("id") String userId,@PathVariable("year") int year,@PathVariable("month") int month) {
-        User user = userRepository.findById(userId).get();
+    @GetMapping("/statistics/ecoCountsDetail/{year}/{month}")
+    public statisticsEcoRequestDto statisticsEcoDetail(@AuthenticationPrincipal AuthMemberDTO authMemberDTO,@PathVariable("year") int year,@PathVariable("month") int month) {
+        User user = userRepository.findById(authMemberDTO.getEmail()).get();
         List<Object[]> tagCategoryList = statisticsService.getTagCategoryList(user, year, month, EcoEnum.G);
 
         return new statisticsEcoRequestDto(tagCategoryList);
     }
 
     /** 반환경 태그 통계 */
-    @GetMapping("/statistics/noEcoCountsDetail/{id}/{year}/{month}")
-    public statisticsEcoRequestDto statisticsNoEcoDetail(@PathVariable("id") String userId,@PathVariable("year") int year,@PathVariable("month") int month) {
-        User user = userRepository.findById(userId).get();
+    @GetMapping("/statistics/noEcoCountsDetail/{year}/{month}")
+    public statisticsEcoRequestDto statisticsNoEcoDetail(@AuthenticationPrincipal AuthMemberDTO authMemberDTO,@PathVariable("year") int year,@PathVariable("month") int month) {
+        User user = userRepository.findById(authMemberDTO.getEmail()).get();
         List<Object[]> tagCategoryList = statisticsService.getTagCategoryList(user, year, month, EcoEnum.R);
         return new statisticsEcoRequestDto(tagCategoryList);
     }
 
     /** 지난 달 대비 수입/지출 차액 + 한 달 일별 상세 내역 페이지 */
-    @GetMapping("/api/statistics/total/{id}/{year}/{month}")
-    public StatisticsDto findTotalStatistics(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
-        return statisticsDetailService.functionByMonth(id, year, month, TIE.T);
+    @GetMapping("/statistics/total/{year}/{month}")
+    public StatisticsDto findTotalStatistics(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
+
+        return statisticsDetailService.functionByMonth(authMemberDTO.getEmail(), year, month, TIE.T);
     }
 
     /** 비고) 수입 내역 필터링 */
-    @GetMapping("/api/statistics/total/income/{id}/{year}/{month}")
-    public StatisticsDto filteringIncome(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
-        return statisticsDetailService.functionByMonth(id, year, month, TIE.I);
+    @GetMapping("/statistics/total/income/{year}/{month}")
+    public StatisticsDto filteringIncome(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
+        return statisticsDetailService.functionByMonth(authMemberDTO.getEmail(), year, month, TIE.I);
     }
 
     /** 비고) 지출 내역 페이지 */
-    @GetMapping("/api/statistics/total/expenditure/{id}/{year}/{month}")
-    public StatisticsDto filteringExpenditure(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
-        return statisticsDetailService.functionByMonth(id, year, month, TIE.E);
+    @GetMapping("/statistics/total/expenditure/{year}/{month}")
+    public StatisticsDto filteringExpenditure(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
+        return statisticsDetailService.functionByMonth(authMemberDTO.getEmail(), year, month, TIE.E);
     }
 
     /** 수입 페이지 */
-    @GetMapping("/api/statistics/income/{id}/{year}/{month}")
-    public StatisticsDto findIncomeStatistics(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
-        return statisticsDetailService.functionByMonth(id, year, month, TIE.I);
+    @GetMapping("/statistics/income/{year}/{month}")
+    public StatisticsDto findIncomeStatistics(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
+        return statisticsDetailService.functionByMonth(authMemberDTO.getEmail(), year, month, TIE.I);
     }
 
     /** 지출 페이지 */
-    @GetMapping("/api/statistics/expenditure/{id}/{year}/{month}")
-    public StatisticsEcoDto findExpenditureStatistics(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
-        return statisticsDetailService.functionEcoByMonth(id, year, month);
+    @GetMapping("/statistics/expenditure/{year}/{month}")
+    public StatisticsEcoDto findExpenditureStatistics(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
+        return statisticsDetailService.functionEcoByMonth(authMemberDTO.getEmail(), year, month);
     }
 
     @Data

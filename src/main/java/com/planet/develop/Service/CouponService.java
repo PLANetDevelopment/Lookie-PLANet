@@ -14,7 +14,5 @@ public interface CouponService {
     void couponRegister(String id, String cno);
 
     /** 쿠폰 사용 */
-    void useCoupon(String id, String cno) throws IllegalAccessException;
-
-
+    void useCoupon(String cno) throws IllegalAccessException;
 }

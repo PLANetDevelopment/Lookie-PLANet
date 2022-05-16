@@ -69,7 +69,7 @@ public class CouponServiceImpl implements CouponService {
 
     /** 쿠폰 사용 */
     @Transactional
-    public void useCoupon(String id, String cno) throws IllegalAccessException {
+    public void useCoupon(String cno) throws IllegalAccessException {
         Coupon coupon = couponRepository.findById(cno).orElseThrow(() ->
                 new IllegalArgumentException("해당 쿠폰이 없습니다. cno = " + cno));
         coupon.update(0, false); // 쿠폰 테이블 수정

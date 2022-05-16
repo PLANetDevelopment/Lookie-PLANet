@@ -2,7 +2,6 @@ package com.planet.develop.Service;
 
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
-import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Repository.StatisticsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,9 +18,8 @@ public class StatisticsService {
     public Map<Integer,Long> getYearEcoCount(User user,EcoEnum eco,int year){
         Map<Integer,Long> result=new HashMap<>();
         for(int n=1;n<=12;n++){
-            Long monthEcoCount =getMonthEcoCount(user,eco,year,n);
-            if (monthEcoCount!=0)
-                result.put(n,monthEcoCount);
+            Long monthEcoCount=getMonthEcoCount(user,eco,year,n);
+            result.put(n,monthEcoCount);
         }
         return result;
     }
@@ -58,7 +56,7 @@ public class StatisticsService {
         return eco;
     }
 
-    /** 친/반환경 퍼센테이지 구하는 함수 **/
+    /** 친/반환경 퍼센테이지 구하는 함수**/
     public double getPercentage(Long ecoCount, Long noneEcoCount) {
         double percentage=0L;
         if (ecoCount !=0 & noneEcoCount !=0){
@@ -111,18 +109,21 @@ public class StatisticsService {
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.of(year, month, startDate.lengthOfMonth());
         List<Object[]> categoryList= statisticsRepository.getCategoryList(user, startDate, endDate,ecoEnum);
-        Long totalCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.G);
+        Long totalCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,ecoEnum);
         List<Object[]> result = new ArrayList<>();
         for (Object[] objects : categoryList) {
             Object[] category = new Object[3];
             category[0]=objects[0];
             Long tmp= (Long)objects[1];
             double cnt = (double) tmp;
+            // 퍼센테이지
             category[1] = Math.round(cnt/(double)totalCount*100);
+            //개수
             category[2]=objects[1];
             result.add(category);
         }
         return result;
     }
+
 
 }
