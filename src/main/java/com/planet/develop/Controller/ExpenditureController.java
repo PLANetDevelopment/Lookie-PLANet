@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
-@PreAuthorize("permitAll()") // 모든 사용자가 접근 가능
+@PreAuthorize("hasRole('USER')")
 public class ExpenditureController {
 
     private final ExpenditureDetailRepository detailRepository;

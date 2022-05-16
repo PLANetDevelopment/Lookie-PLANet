@@ -17,7 +17,7 @@ import java.util.Random;
 
 @RequiredArgsConstructor
 @RestController
-@PreAuthorize("permitAll()") // 모든 사용자가 접근 가능
+@PreAuthorize("hasRole('USER')")
 public class CalendarController {
 
     private final CalendarService calendarService;

@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@PreAuthorize("permitAll()") // 모든 사용자가 접근 가능
+@PreAuthorize("hasRole('USER')")
 public class IncomeController {
 
     private final IncomeService incomeService;
