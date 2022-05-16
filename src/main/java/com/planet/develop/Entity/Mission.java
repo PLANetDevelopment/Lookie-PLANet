@@ -11,12 +11,6 @@ public class Mission {
     @Id @GeneratedValue
     @Column(name="mno")
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private User user;
-
-    private Long point;
-    private boolean status;
-
+    private String emoji;
+    private String name;
 }
