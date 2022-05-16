@@ -15,16 +15,22 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CouponDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cno;
-
-    private String couponNum; // 쿠폰 번호
-
+    private String cno;
     private LocalDate startDate; // 시작 날짜
-
     private String usageInfo; // 사용 정보
-
     private String couponInfo; // 쿠폰 정보
-
     private String detailInfo; // 상세 정보
+
+    /** 생성자 */
+    public CouponDetail(String cno, String usageInfo, String couponInfo, String detailInfo) {
+        this.cno = cno;
+        this.usageInfo = usageInfo;
+        this.couponInfo = couponInfo;
+        this.detailInfo = detailInfo;
+    }
+
+    /** CouponStorage -> CouponDetail */
+    public CouponDetail couponStorageToCouponDetail(CouponStorage storage) {
+        return new CouponDetail(storage.getCno(), storage.getUsageInfo(), storage.getCouponInfo(), storage.getDetailInfo());
+    }
 }

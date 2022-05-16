@@ -1,29 +1,25 @@
 package com.planet.develop.Entity;
 
 import com.planet.develop.DTO.CouponDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Builder
-@AllArgsConstructor
+@Getter @Setter
 @NoArgsConstructor
 public class Coupon {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cno;
-
+    private String cno;
     private String coupon; // 쿠폰명
-    private String image; // 쿠폰 이미지
+    @Column(nullable = false)
+    private int remainingDays; // 남은 날짜
     private int discount; // 할인율
+    @Column(nullable = false)
     private LocalDate endDate; // 종료 날짜
-    private int remainigDays; // 남은 날짜
     private boolean availability; // 사용 가능 여부
     private boolean expiration; // 만료 여부
 
@@ -38,7 +34,29 @@ public class Coupon {
 
     public CouponDto entityToDto() {
         CouponDto couponDto = new CouponDto(
-                coupon, discount, image, remainigDays, availability, expiration);
+                cno, coupon, remainingDays, discount, availability, expiration);
         return couponDto;
+    }
+
+    public void update(int remainingDays, boolean availability) {
+        this.remainingDays = remainingDays;
+        this.availability = availability;
+    }
+
+    /** 생성자 */
+    public Coupon(String cno, String coupon, int discount, LocalDate endDate, boolean availability, boolean expiration) {
+        this.cno = cno;
+        this.coupon = coupon;
+        this.remainingDays = remainingDays;
+        this.discount = discount;
+        this.endDate = endDate;
+        this.availability = availability;
+        this.expiration = expiration;
+    }
+
+    /** CouponStorage -> Coupon */
+    public Coupon couponStorageToCoupon(CouponStorage storage) {
+        return new Coupon(storage.getCno(), storage.getCoupon(), storage.getDiscount(),
+                storage.getEndDate(), true, false);
     }
 }
