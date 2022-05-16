@@ -1,6 +1,6 @@
 package com.planet.develop.Security.Enum;
 
-public enum ClubMemberRole {
+public enum MemberRole {
 
     USER, MEMBER, ADMIN
 

@@ -1,6 +1,6 @@
 package com.planet.develop.Security.config;
 
-import com.planet.develop.Security.Handler.ClubLoginSuccessHandler;
+import com.planet.develop.Security.Handler.LoginSuccessHandler;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @Log4j2
-// Controller에서 @PreAuthorize를 사용하기 위해 선언
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -31,8 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     // 인증이 성공하거나 실패한 후에 처리를 지정하는 용도
-    public ClubLoginSuccessHandler successHandler() {
-        return new ClubLoginSuccessHandler(passwordEncoder());
+    public LoginSuccessHandler successHandler() {
+        return new LoginSuccessHandler(passwordEncoder());
     }
 
 }
