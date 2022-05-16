@@ -62,7 +62,6 @@ public class StatisticsDetailServiceImpl implements StatisticsDetailService {
             StatisticsDayDetailDto dto = new StatisticsDayDetailDto();
             LocalDate date = LocalDate.of(year, month, day); // 날짜
             List<TypeDetailDto> list = calendarService.inExTypeDetailDto(id, month, day, tie); // 일별 수입/지출 상세 내역 조회
-            // 수정함
             if (!list.isEmpty()) { // 수입/지출 상세 내역이 존재해야 배열에 담음.
                 dto.changeDate(date); dto.setDetailDtoList(list); // 날짜와 상세 내역을 하나의 dto로 담는다.
                 detailDtoList.add(dto); // 일별 상세 내역을 리스트에 담는다.

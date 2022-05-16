@@ -94,7 +94,6 @@ public class CalendarServiceImpl implements CalendarService {
         List<TypeDetailDto> in_detailDtos = new ArrayList<>();
         for (Income dto : in_days) { // 타입 변환
             TypeDetailDto typeDto = new TypeDetailDto();
-            // 수정함
             typeDto.saveIncomeType(dto.getIn_type(), dto.getIn_way(), dto.getIn_cost(), dto.getMemo(),dto.getId());
             in_detailDtos.add(typeDto);
         }

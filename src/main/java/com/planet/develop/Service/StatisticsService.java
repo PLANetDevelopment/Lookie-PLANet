@@ -7,7 +7,6 @@ import com.planet.develop.Repository.StatisticsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -27,76 +26,103 @@ public class StatisticsService {
         return result;
     }
 
+
     public Long getMonthEcoCount(User user,EcoEnum eco,int year,int month){
         Long monthEcoCount = statisticsRepository.getMonthEcoCount(user, eco,year, month);
         return monthEcoCount;
     }
 
-    public Map<String,Long> getEcoCountComparedToLast(User user,int year,int month){
-        Map<String, Long> eco = new HashMap<>();
+    public Map<String,Object> getEcoCountComparedToLast(User user,int year,int month){
+        Map<String, Object> eco = new HashMap<>();
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.now();
-        if(LocalDate.now().getMonthValue()!=month)
+        if(endDate.getMonthValue()!=month)
             endDate = LocalDate.of(year,month,startDate.lengthOfMonth());
 
         LocalDate last=endDate.minusMonths(1);
 
         Long ecoCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.G);
         Long noneEcoCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.R);
-        Long lastEcoCount=statisticsRepository.getLastEcoCount(user,last,startDate.minusMonths(1));
-        Long difference = ecoCount-lastEcoCount;
-
-        Long percentage=0L;
-        if (ecoCount!=0 & noneEcoCount!=0){
-            percentage = Math.round((double)ecoCount/(noneEcoCount+ecoCount)*100);
-        }
-        if (ecoCount!=0 & noneEcoCount==0){
-            percentage=100L;
-        }
+        Long lastEcoCount=statisticsRepository.getLastEcoCount(user,last,startDate.minusMonths(1),EcoEnum.G);
+        Long lastNoEcoCount=statisticsRepository.getLastEcoCount(user,last,startDate.minusMonths(1),EcoEnum.R);
+        Long ecoDifference = ecoCount-lastEcoCount;
+        Long noEcoDifference = noneEcoCount - lastNoEcoCount;
+        double percentage = getPercentage(ecoCount, noneEcoCount);
         System.out.println("ecoCount = " + ecoCount);
         System.out.println("noneEcoCount = " + noneEcoCount);
-        eco.put("difference",difference);
+        eco.put("ecoDifference",ecoDifference);
+        eco.put("noEcoDifference",noEcoDifference);
         eco.put("percentage",percentage);
         eco.put("nowEcoCount",ecoCount);
         eco.put("noneEcoCount",noneEcoCount);
         return eco;
     }
-    public  List<Map<Object,Object>> getFiveTagCounts(User user,int year,int month){
+
+    /** 친/반환경 퍼센테이지 구하는 함수 **/
+    public double getPercentage(Long ecoCount, Long noneEcoCount) {
+        double percentage=0L;
+        if (ecoCount !=0 & noneEcoCount !=0){
+            percentage = Math.round((double) ecoCount /(double)(noneEcoCount + ecoCount)*100);
+
+
+        }
+        if (ecoCount !=0 & noneEcoCount ==0){
+            percentage=100L;
+        }
+        return percentage;
+    }
+
+
+    /** 상위 4개 + 더보기 태그 보여주기 */
+    public  List<List<Object[]>> getFiveTagCounts(User user,int year,int month){
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.of(year, month, startDate.lengthOfMonth());
         List<Object[]> categoryFiveTagCount = statisticsRepository.getCategoryFiveTagCount(user, startDate, endDate, EcoEnum.G);
         List<Object[]> categoryFiveNoTagCount = statisticsRepository.getCategoryFiveTagCount(user, startDate, endDate, EcoEnum.R);
+        Long ecoCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.G);
+        Long noneEcoCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.R);
 
-        List<Map<Object,Object>> result=new ArrayList<>();
-        Map<Object, Object> eco = new HashMap<>();
-        Map<Object, Object> noEco = new HashMap<>();
+        List<List<Object[]>> result=new ArrayList<>();
+        List<Object[]> eco = new ArrayList<>();
+        List<Object[]> noEco = new ArrayList<>();
+        Long ecoCnt=0L;
+        Long noEcoCnt=0L;
         for (Object[] tag : categoryFiveTagCount) {
-            eco.put(tag[0],tag[1]);
+            eco.add(tag);
+            ecoCnt+=(Long)tag[1];
         }
         for (Object[] tag : categoryFiveNoTagCount) {
-            noEco.put(tag[0],tag[1]);
+            noEco.add(tag);
+            noEcoCnt+=(Long)tag[1];
         }
+        Object eco_remain[]=new Object[2];
+        eco_remain[0]="더보기";
+        eco_remain[1] = ecoCount - ecoCnt;
+        eco.add(eco_remain);
+        eco_remain[1] = noneEcoCount-noEcoCnt;
+        noEco.add(eco_remain);
+
         result.add(eco);
         result.add(noEco);
         return result;
     }
-    public Map<money_Type,List<Long>> getTagCounts(User user,int year,int month,EcoEnum ecoEnum){
-        Map<money_Type, List<Long>> counts = new HashMap<>();
+
+    public List<Object[]> getTagCategoryList(User user,int year,int month,EcoEnum ecoEnum){
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.of(year, month, startDate.lengthOfMonth());
-        money_Type[] categories = money_Type.values();
-        Long totalTageCount = statisticsRepository.getMonthEcoCount(user,ecoEnum, year, month);
-        for (money_Type category : categories) {
-            List values = new ArrayList();
-            Long tagCount = statisticsRepository.getCategoryTagCount(user, startDate, endDate, category, ecoEnum);
-            double round = (double) tagCount / (double) totalTageCount *100;
-            values.add(tagCount);
-            values.add(round);
-            counts.put(category,values);
+        List<Object[]> categoryList= statisticsRepository.getCategoryList(user, startDate, endDate,ecoEnum);
+        Long totalCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.G);
+        List<Object[]> result = new ArrayList<>();
+        for (Object[] objects : categoryList) {
+            Object[] category = new Object[3];
+            category[0]=objects[0];
+            Long tmp= (Long)objects[1];
+            double cnt = (double) tmp;
+            category[1] = Math.round(cnt/(double)totalCount*100);
+            category[2]=objects[1];
+            result.add(category);
         }
-
-        //TODO % 큰 수대로 정렬
-        return counts;
+        return result;
     }
 
 }

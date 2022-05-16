@@ -15,8 +15,6 @@ public interface ExpenditureDetailService {
 
     Long save(ExpenditureRequestDto dto);
 
-//    ExpenditureRequestDto getSingleDetail(Long eno);
-
     Long totalDay(User user, LocalDate date);
 
     Long totalTypeDay(User user, money_Type type, LocalDate date);
