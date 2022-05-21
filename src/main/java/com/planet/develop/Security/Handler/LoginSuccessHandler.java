@@ -33,8 +33,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         AuthMemberDTO authMember = (AuthMemberDTO)authentication.getPrincipal();
-        String redirectUrl = "/main/" + authMember.getEmail() + "/" + year + "/" + month;
-//        redirectStrategy.sendRedirect(request, response, "http://3.39.87.115:8080/login/oauth2/code/kakao");
+        LocalDate curDate = LocalDate.now();
+        String redirectUrl = "https://updating.d9uf6j6zzft4r.amplifyapp.com";
+        redirectStrategy.sendRedirect(request, response, redirectUrl);
     }
 
 }

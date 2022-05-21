@@ -25,16 +25,29 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
-@PreAuthorize("hasRole('USER')")
+//@PreAuthorize("hasRole('USER')")
 public class MissionController {
     private final UserRepository userRepository;
     private final MissionCompleteService missionCompleteService;
     private final MissionRepository missionRepository;
 
     /** 에코미션 데이터 저장*/
-    @PostMapping("/mission/{emoji}/{name}")
-    public void main(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("emoji") String emoji, @PathVariable("name")String name){
-        User user = userRepository.findById(authMemberDTO.getEmail()).get();
+//    @PostMapping("/mission/{emoji}/{name}")
+//    public void main(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("emoji") String emoji, @PathVariable("name")String name){
+//        User user = userRepository.findById(authMemberDTO.getEmail()).get();
+//        MissionComplete mission = MissionComplete.builder()
+//                .emoji(emoji)
+//                .name(name)
+//                .user(user)
+//                .date(LocalDate.now())
+//                .build();
+//        missionCompleteService.save(mission);
+//    }
+    
+    /** 에코미션 데이터 저장 - 테스트용 */
+    @PostMapping("/{id}/mission/{emoji}/{name}")
+    public void main(@PathVariable("id") String id, @PathVariable("emoji") String emoji, @PathVariable("name")String name){
+        User user = userRepository.findById(id).get();
         MissionComplete mission = MissionComplete.builder()
                 .emoji(emoji)
                 .name(name)
@@ -45,9 +58,24 @@ public class MissionController {
     }
 
     /** 에코미션 페이지 조회*/
-    @GetMapping("/mission/{year}/{month}")
-    public Result mission(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
-        User user = userRepository.findById(authMemberDTO.getEmail()).get();
+//    @GetMapping("/mission/{year}/{month}")
+//    public Result mission(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
+//        User user = userRepository.findById(authMemberDTO.getEmail()).get();
+//        Mission mission = missionRepository.findMission(LocalDate.now());
+//        MissionCompleteDto todayMission = new MissionCompleteDto(mission.getName(),mission.getEmoji());
+//
+//        List<MissionComplete> missions = missionCompleteService.findMissions(user,year,month);
+//        List<MissionCompleteDto> missionCompleteDtos = missions.stream()
+//                .map(o->new MissionCompleteDto(o.getName(),o.getEmoji()))
+//                .collect(Collectors.toList());
+//        return new Result(todayMission,missionCompleteDtos);
+//
+//    }    
+    
+    /** 에코미션 페이지 조회 - 테스트용 */
+    @GetMapping("/{id}/mission/{year}/{month}")
+    public Result mission(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month){
+        User user = userRepository.findById(id).get();
         Mission mission = missionRepository.findMission(LocalDate.now());
         MissionCompleteDto todayMission = new MissionCompleteDto(mission.getName(),mission.getEmoji());
 

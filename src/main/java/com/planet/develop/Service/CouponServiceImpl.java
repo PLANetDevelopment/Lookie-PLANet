@@ -10,10 +10,14 @@ import com.planet.develop.Repository.CouponStorageRepository;
 import com.planet.develop.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service
@@ -33,8 +37,8 @@ public class CouponServiceImpl implements CouponService {
         List<CouponDto> couponDtoList = new ArrayList<>();
         for (Object[] obj : couponList) {
             CouponDto couponDto = new CouponDto(
-                    obj[0], obj[1], obj[2], obj[3], obj[4], obj[5]
-            ); // entity -> dto
+                    obj[0], obj[1], obj[2], obj[3], obj[4], obj[5], obj[6], obj[7], obj[8], obj[9], obj[10]
+                    ); // entity -> dto
             couponDtoList.add(couponDto);
         }
         int couponCount = couponRepository.getCouponCount(id); // 쿠폰 개수
@@ -72,7 +76,47 @@ public class CouponServiceImpl implements CouponService {
     public void useCoupon(String cno) throws IllegalAccessException {
         Coupon coupon = couponRepository.findById(cno).orElseThrow(() ->
                 new IllegalArgumentException("해당 쿠폰이 없습니다. cno = " + cno));
-        coupon.update(0, false); // 쿠폰 테이블 수정
+        coupon.updateAvailability(0, false); // 쿠폰 사용 불가능 처리
+    }
+
+    /** 쿠폰 만료: 쿠폰 종료 날짜 지남 */
+    @Transactional
+    public void couponExpires(String cno, boolean b) throws IllegalAccessException {
+        Coupon coupon = couponRepository.findById(cno).orElseThrow(() ->
+                new IllegalArgumentException("해당 쿠폰이 없습니다. cno = " + cno));
+        coupon.updateExpiration(0, true); // 쿠폰 만료 처리
+    }
+
+    /** 쿠폰 남은 날짜 업데이트 */
+    @Transactional
+    public void couponUpdate(String cno, int remainingDays) throws IllegalAccessException {
+        Coupon coupon = couponRepository.findById(cno).orElseThrow(() ->
+                new IllegalArgumentException("해당 쿠폰이 없습니다. cno = " + cno));
+        coupon.update(remainingDays); // 쿠폰 테이블 수정
+    }
+
+    /** 쿠폰 남은 날짜 계산 */
+    @Transactional
+    public void remainingDaysUpdate(String id) throws IllegalAccessException {
+        List<Object[]> couponList = couponRepository.getCouponDate(id); // 사용 가능한 쿠폰들만 가져옴
+        for (Object[] coupon : couponList) {
+            LocalDate now = LocalDate.now(); // 현재 날짜
+            LocalDate endDate = (LocalDate)coupon[2]; // 종료 날짜
+            Calendar cur = new GregorianCalendar(now.getYear(), now.getMonthValue(), now.getDayOfMonth());
+            Calendar end = new GregorianCalendar(endDate.getYear(), endDate.getMonthValue(), endDate.getDayOfMonth());
+
+            long diffSec = end.getTimeInMillis() - cur.getTimeInMillis(); // 밀리초로 차이 계산
+            if (diffSec <= 0) { // 종료 날짜가 지났다면 쿠폰 사용 만료 처리
+                couponExpires((String) coupon[0], true);
+            } else {
+                long diffDays = diffSec / (24 * 60 * 60 * 1000); // 밀리초 -> 일로 변환
+                // db의 남은 날짜와 비교해서 다르면 db 업데이트
+                long exRemainingDays = (int) coupon[1];
+                if (exRemainingDays != diffDays) {
+                    couponUpdate((String) coupon[0], (int) diffDays);
+                }
+            }
+        }
     }
 
 }

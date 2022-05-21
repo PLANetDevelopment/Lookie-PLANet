@@ -30,6 +30,26 @@ public class StatisticsService {
         return monthEcoCount;
     }
 
+    public Long getGuessMonthEcoCount(User user,int year,int month,int day){
+        LocalDate startDate = LocalDate.of(year,month,day);
+        LocalDate endDate = LocalDate.of(year,month,startDate.lengthOfMonth());
+        Long nowEcoCount = statisticsRepository.getNowEcoCount(user,LocalDate.of(year, month, 1),startDate,EcoEnum.G);
+        Long sum=0L;
+        startDate=startDate.plusDays(1);
+        for(int i=1;i<=12;i++) {
+            startDate= startDate.minusMonths(i);
+            endDate = LocalDate.of(startDate.getYear(), startDate.getMonthValue(), startDate.lengthOfMonth());
+            sum+=statisticsRepository.getNowEcoCount(user, startDate,endDate, EcoEnum.G);
+        }
+        Long avg= 0L;
+        if (sum<12)
+            avg= sum;
+        else
+            avg=sum/12;
+
+        return avg+nowEcoCount;
+    }
+
     public Map<String,Object> getEcoCountComparedToLast(User user,int year,int month){
         Map<String, Object> eco = new HashMap<>();
         LocalDate startDate = LocalDate.of(year, month, 1);
@@ -124,6 +144,5 @@ public class StatisticsService {
         }
         return result;
     }
-
 
 }

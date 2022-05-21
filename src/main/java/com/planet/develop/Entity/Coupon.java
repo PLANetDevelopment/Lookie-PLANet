@@ -38,16 +38,24 @@ public class Coupon {
         return couponDto;
     }
 
-    public void update(int remainingDays, boolean availability) {
+    public void updateAvailability(int remainingDays, boolean availability) {
         this.remainingDays = remainingDays;
         this.availability = availability;
+    }
+
+    public void updateExpiration(int remainingDays, boolean expiration) {
+        this.remainingDays = remainingDays;
+        this.expiration = expiration;
+    }
+
+    public void update(int remainingDays) {
+        this.remainingDays = remainingDays;
     }
 
     /** 생성자 */
     public Coupon(String cno, String coupon, int discount, LocalDate endDate, boolean availability, boolean expiration) {
         this.cno = cno;
         this.coupon = coupon;
-        this.remainingDays = remainingDays;
         this.discount = discount;
         this.endDate = endDate;
         this.availability = availability;

@@ -15,4 +15,7 @@ public interface CouponService {
 
     /** 쿠폰 사용 */
     void useCoupon(String cno) throws IllegalAccessException;
+
+    /** 쿠폰 남은 날짜 계산 */
+    void remainingDaysUpdate(String id) throws IllegalAccessException;
 }

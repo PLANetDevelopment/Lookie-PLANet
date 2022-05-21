@@ -25,7 +25,8 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
-@PreAuthorize("hasRole('USER')")
+//@PreAuthorize("hasRole('USER')")
+
 public class StatisticsController {
 
     private final StatisticsDetailService statisticsDetailService;
@@ -35,13 +36,15 @@ public class StatisticsController {
     private final ExpenditureDetailService expenditureDetailService;
 
     /** 친/반환경 태그 통계 */
-    @GetMapping("/statistics/{year}/{month}")
-    public Result statistics(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
-        User user = userRepository.findById(authMemberDTO.getEmail()).get();
+    @GetMapping("/statistics/{id}/{year}/{month}/{day}")
+    public Result statistics(@PathVariable("id") String id, @PathVariable("year") int year, @PathVariable("month") int month,@PathVariable("day") int day){
+        User user = userRepository.findById(id).get();
         Long incomeTotal = incomeService.totalMonth(user,year, month);
         Long expenditureTotal = expenditureDetailService.totalMonth(user,year,month);
         Map<String,Object> ecoBoard = statisticsService.getEcoCountComparedToLast(user,year,month);
         Map<Integer, Long> ecoCount = statisticsService.getYearEcoCount(user, EcoEnum.G,year);
+        Long guessCount=statisticsService.getGuessMonthEcoCount(user,year,month,day);
+        ecoCount.replace(month,guessCount);
         List<List<Object[]>> fiveTagCounts = statisticsService.getFiveTagCounts(user, year, month);
         Object ecoDifference = ecoBoard.get("ecoDifference");
         Object noEcoDifference = ecoBoard.get("noEcoDifference");
@@ -122,6 +125,5 @@ public class StatisticsController {
     static class statisticsEcoRequestDto<T>{
         private T tagList;
     }
-
 
 }
