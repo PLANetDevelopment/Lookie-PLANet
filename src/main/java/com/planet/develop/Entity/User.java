@@ -1,6 +1,6 @@
 package com.planet.develop.Entity;
 
-import com.planet.develop.Security.Enum.ClubMemberRole;
+import com.planet.develop.Security.Enum.MemberRole;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +17,7 @@ public class User {
 
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default
-    private Set<ClubMemberRole> roleSet = new HashSet<>();
+    private Set<MemberRole> roleSet = new HashSet<>();
 
     @Id
     @Column(name = "user_id")
@@ -26,9 +26,8 @@ public class User {
     @Column(name = "user_name")
     private String userName;
 
-    private boolean fromSocial;
 
-    public void addMemberRole(ClubMemberRole clubMemberRole) {
+    public void addMemberRole(MemberRole clubMemberRole) {
         roleSet.add(clubMemberRole);
     }
 

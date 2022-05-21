@@ -4,7 +4,7 @@ import com.planet.develop.DTO.*;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.TIE;
 import com.planet.develop.Repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
@@ -61,9 +61,11 @@ public class StatisticsDetailServiceImpl implements StatisticsDetailService {
         for(int day=1; day<=days; day++) { // 한 달 상세 내역 조회
             StatisticsDayDetailDto dto = new StatisticsDayDetailDto();
             LocalDate date = LocalDate.of(year, month, day); // 날짜
-            List<TypeDetailDto> list = calendarService.inExTypeDetailDto(id, month, day, tie); // 일별 수입 상세 내역 조회
-            dto.changeDate(date); dto.setDetailDtoList(list); // 날짜와 상세 내역을 하나의 dto로 담는다.
-            detailDtoList.add(dto); // 일별 상세 내역을 리스트에 담는다.
+            List<TypeDetailDto> list = calendarService.inExTypeDetailDto(id, month, day, tie); // 일별 수입/지출 상세 내역 조회
+            if (!list.isEmpty()) { // 수입/지출 상세 내역이 존재해야 배열에 담음.
+                dto.changeDate(date); dto.setDetailDtoList(list); // 날짜와 상세 내역을 하나의 dto로 담는다.
+                detailDtoList.add(dto); // 일별 상세 내역을 리스트에 담는다.
+            }
         }
         return detailDtoList;
     }
@@ -86,7 +88,6 @@ public class StatisticsDetailServiceImpl implements StatisticsDetailService {
 
         if (month == (int) LocalDate.now().getMonthValue()) { // 조회하는 월이 현재 월이라면
             if (today > lastDayOfLastMonth) { // 12월 31일에 조회한다면 -> 11월 30일까지 조회해서 비교
-                log.info("step 1 is started...");
                 return merge(id, year, month, today, lastDayOfMonth, tie);
             } else return merge(id, year, month, today, today, tie); // 12월 15일에 조회한다면 -> 11월 15일까지 조회해서 비교
         } else return merge(id, year, month, lastDayOfMonth, lastDayOfLastMonth, tie); // 조회하는 월이 현재 월이 아니라면 지난 달 총 수입/지출과 비교해서 계산
@@ -132,10 +133,9 @@ public class StatisticsDetailServiceImpl implements StatisticsDetailService {
 
         if (month == (int) LocalDate.now().getMonthValue()) { // 조회하는 월이 현재 월이라면
             if (today > lastDayOfLastMonth) { // 12월 31일에 조회한다면 -> 11월 30일까지 조회해서 비교
-                return mergeEco(totalExpenditure, id, year, month, today, lastDayOfMonth);
+                return mergeEco(totalExpenditure, id, year, month, today, lastDayOfLastMonth);
             } else return mergeEco(totalExpenditure, id, year, month, today, today); // 12월 15일에 조회한다면 -> 11월 15일까지 조회해서 비교
         } else return mergeEco(totalExpenditure, id, year, month, lastDayOfMonth, lastDayOfLastMonth); // 조회하는 월이 현재 월이 아니라면 지난 달 총 수입/지출과 비교해서 계산
-
     }
 
 }

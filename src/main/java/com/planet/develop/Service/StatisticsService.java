@@ -2,7 +2,6 @@ package com.planet.develop.Service;
 
 import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
-import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Repository.StatisticsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,9 +18,8 @@ public class StatisticsService {
     public Map<Integer,Long> getYearEcoCount(User user,EcoEnum eco,int year){
         Map<Integer,Long> result=new HashMap<>();
         for(int n=1;n<=12;n++){
-            Long monthEcoCount =getMonthEcoCount(user,eco,year,n);
-            if (monthEcoCount!=0)
-                result.put(n,monthEcoCount);
+            Long monthEcoCount=getMonthEcoCount(user,eco,year,n);
+            result.put(n,monthEcoCount);
         }
         return result;
     }
@@ -30,6 +28,26 @@ public class StatisticsService {
     public Long getMonthEcoCount(User user,EcoEnum eco,int year,int month){
         Long monthEcoCount = statisticsRepository.getMonthEcoCount(user, eco,year, month);
         return monthEcoCount;
+    }
+
+    public Long getGuessMonthEcoCount(User user,int year,int month,int day){
+        LocalDate startDate = LocalDate.of(year,month,day);
+        LocalDate endDate = LocalDate.of(year,month,startDate.lengthOfMonth());
+        Long nowEcoCount = statisticsRepository.getNowEcoCount(user,LocalDate.of(year, month, 1),startDate,EcoEnum.G);
+        Long sum=0L;
+        startDate=startDate.plusDays(1);
+        for(int i=1;i<=12;i++) {
+            startDate= startDate.minusMonths(i);
+            endDate = LocalDate.of(startDate.getYear(), startDate.getMonthValue(), startDate.lengthOfMonth());
+            sum+=statisticsRepository.getNowEcoCount(user, startDate,endDate, EcoEnum.G);
+        }
+        Long avg= 0L;
+        if (sum<12)
+            avg= sum;
+        else
+            avg=sum/12;
+
+        return avg+nowEcoCount;
     }
 
     public Map<String,Object> getEcoCountComparedToLast(User user,int year,int month){
@@ -111,14 +129,16 @@ public class StatisticsService {
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.of(year, month, startDate.lengthOfMonth());
         List<Object[]> categoryList= statisticsRepository.getCategoryList(user, startDate, endDate,ecoEnum);
-        Long totalCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,EcoEnum.G);
+        Long totalCount=statisticsRepository.getNowEcoCount(user, endDate, startDate,ecoEnum);
         List<Object[]> result = new ArrayList<>();
         for (Object[] objects : categoryList) {
             Object[] category = new Object[3];
             category[0]=objects[0];
             Long tmp= (Long)objects[1];
             double cnt = (double) tmp;
+            // 퍼센테이지
             category[1] = Math.round(cnt/(double)totalCount*100);
+            //개수
             category[2]=objects[1];
             result.add(category);
         }

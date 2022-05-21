@@ -6,11 +6,13 @@ import com.planet.develop.Entity.MissionComplete;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Repository.MissionRepository;
 import com.planet.develop.Repository.UserRepository;
+import com.planet.develop.Security.DTO.AuthMemberDTO;
 import com.planet.develop.Service.MissionCompleteService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,16 +25,16 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @RestController
-@PreAuthorize("permitAll()") // 모든 사용자가 접근 가능
+@PreAuthorize("hasRole('USER')")
 public class MissionController {
     private final UserRepository userRepository;
     private final MissionCompleteService missionCompleteService;
     private final MissionRepository missionRepository;
 
     /** 에코미션 데이터 저장*/
-    @PostMapping("/mission/{id}/{emoji}/{name}")
-    public void main(@PathVariable("id") String id, @PathVariable("emoji") String emoji, @PathVariable("name")String name){
-        User user = userRepository.findById(id).get();
+    @PostMapping("/mission/{emoji}/{name}")
+    public void main(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("emoji") String emoji, @PathVariable("name")String name){
+        User user = userRepository.findById(authMemberDTO.getEmail()).get();
         MissionComplete mission = MissionComplete.builder()
                 .emoji(emoji)
                 .name(name)
@@ -43,9 +45,9 @@ public class MissionController {
     }
 
     /** 에코미션 페이지 조회*/
-    @GetMapping("/mission/{id}/{year}/{month}")
-    public Result mission(@PathVariable("id") String id,@PathVariable("year") int year, @PathVariable("month") int month){
-        User user = userRepository.findById(id).get();
+    @GetMapping("/mission/{year}/{month}")
+    public Result mission(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
+        User user = userRepository.findById(authMemberDTO.getEmail()).get();
         Mission mission = missionRepository.findMission(LocalDate.now());
         MissionCompleteDto todayMission = new MissionCompleteDto(mission.getName(),mission.getEmoji());
 

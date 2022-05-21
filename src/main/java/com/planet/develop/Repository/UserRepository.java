@@ -21,7 +21,7 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     // 이미 가입된 계정인지 찾기
     @EntityGraph(attributePaths = {"roleSet"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query(" select u from User u where u.userId = :email and u.fromSocial = :social ")
-    Optional<User> findByEmail(@Param("email") String emial, @Param("social") boolean social);
+    @Query(" select u from User u where u.userId = :email")
+    Optional<User> findByEmail(@Param("email") String emial);
 
 }

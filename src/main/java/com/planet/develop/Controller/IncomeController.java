@@ -5,36 +5,29 @@ import com.planet.develop.DTO.IncomeResponseDto;
 import com.planet.develop.Entity.Income;
 import com.planet.develop.Entity.User;
 import com.planet.develop.Repository.UserRepository;
+import com.planet.develop.Security.DTO.AuthMemberDTO;
 import com.planet.develop.Service.IncomeService;
+import com.planet.develop.Service.IncomeServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@PreAuthorize("permitAll()") // 모든 사용자가 접근 가능
+@PreAuthorize("hasRole('USER')")
 public class IncomeController {
     private final IncomeService incomeService;
     private final UserRepository userRepository;
 
-    //localhost:8080/api/income/yui12@gmail.com/1
 
     /** 수입 데이터 저장*/
+    /** id는 사용자 id가 아니라 income의 pk값*/
     @PostMapping("/income/{id}/new")
-    public IncomeResponseDto create_income(@PathVariable("id") String id, @RequestBody IncomeRequestDto request) {
-        Optional<User> user = userRepository.findById(id);
-        Income income = Income.builder()
-                .in_cost(request.getIn_cost())
-                .date(request.getDate())
-                .in_type(request.getIn_type())
-                .in_way(request.getIn_way())
-                .memo(request.getMemo())
-                .user(user.get())
-                .build();
-
-        Long incomeId = incomeService.save(income);
+    public IncomeResponseDto create_income(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @RequestBody IncomeRequestDto dto) {
+        dto.setUserId(authMemberDTO.getEmail());
+        Long incomeId = incomeService.save(dto);
         return new IncomeResponseDto(incomeId);
     }
 

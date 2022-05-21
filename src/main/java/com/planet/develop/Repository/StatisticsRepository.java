@@ -31,7 +31,7 @@ public class StatisticsRepository {
     }
 
     /** 현재 달의 (구체적인 시작점)친환경 태그 개수 구하기*/
-        public Long getNowEcoCount(User user,LocalDate now,LocalDate startDate,EcoEnum eco) {
+        public Long getNowEcoCount(User user,LocalDate startDate,LocalDate endDate,EcoEnum eco) {
         return em.createQuery("select count(*) from Eco ec " +
                         "left join ExpenditureDetail ed on ec.expenditure.eno = ed.eno " +
                         "left join Expenditure e on e.eno = ed.eno " +
@@ -39,7 +39,7 @@ public class StatisticsRepository {
                 .setParameter("user", user)
                 .setParameter("eco", eco)
                 .setParameter("startDate", startDate)
-                .setParameter("endDate", now)
+                .setParameter("endDate", endDate)
                 .getSingleResult();
     }
 
@@ -91,9 +91,9 @@ public class StatisticsRepository {
     /** 카테고리/친(반)환경 태그 별 태그 리스트 구하기*/
     public List<Object[]> getCategoryList(User user, LocalDate startDate, LocalDate endDate, EcoEnum eco){
 
-        List<Object[]> resultList = em.createQuery("select ed.exType,count(*) from Expenditure e " +
-                        "left join ExpenditureDetail ed on e.eno = ed.eno " +
-                        "left join Eco ec on e.eno = ec.eno " +
+        List<Object[]> resultList = em.createQuery("select ed.exType,count(*) from Eco ec " +
+                        "left join ExpenditureDetail ed on ec.expenditure.eno = ed.eno " +
+                        "left join Expenditure e on e.eno = ed.eno " +
                         "where e.user = :user and ec.eco = :eco and :startDate<=e.date and e.date <= :endDate " +
                         "group by ed.exType " +
                         "order by count(*) DESC ", Object[].class)
