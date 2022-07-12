@@ -2,9 +2,9 @@ package com.planet.develop.Service;
 
 import com.planet.develop.DTO.IncomeRequestDto;
 import com.planet.develop.Entity.Income;
-import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
+import com.planet.develop.Login.Model.User;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,7 +35,7 @@ public interface IncomeService {
     public List<Income> findMonth(String user_id,int month);
 
     /** 월별 총합2 **/
-    public Long totalMonth(User user,int year,int month);
+    Long totalMonth(User user, int year, int month);
 
     /** type 월별 총합 **/
     public Long typeMonth(String user_id, int Month, money_Type type);
@@ -48,7 +48,7 @@ public interface IncomeService {
 
     default Income dtoToEntity(IncomeRequestDto dto) {
         User user = User.builder()
-                .userId(dto.getUserId())
+                .kakaoEmail(dto.getUserId())
                 .build();
         Income income = Income.builder()
                 .in_cost(dto.getIn_cost())

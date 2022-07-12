@@ -1,6 +1,5 @@
 package com.planet.develop.Entity;
 
-import com.planet.develop.DTO.CouponDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,25 +1,21 @@
 package com.planet.develop.Controller;
 
-import com.planet.develop.Entity.User;
-import com.planet.develop.Repository.UserRepository;
-import com.planet.develop.Security.DTO.AuthMemberDTO;
+import com.planet.develop.Login.JWT.JwtProperties;
+import com.planet.develop.Login.Model.User;
+import com.planet.develop.Login.Repository.UserRepository;
 import com.planet.develop.Service.ExpenditureDetailService;
 import com.planet.develop.Service.IncomeService;
 import com.planet.develop.Service.MainService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://main.d2f9fwhj50mv28.amplifyapp.com")
 @RequiredArgsConstructor
+@RequestMapping(value = "/api")
 @RestController
-@PreAuthorize("hasRole('USER')")
 public class MainController {
     private final UserRepository userRepository;
     private final IncomeService incomeService;
@@ -27,18 +23,18 @@ public class MainController {
     private final MainService mainService;
 
     @GetMapping("/main/{year}/{month}")
-    public mainResponseDto main(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("year") int year, @PathVariable("month") int month){
-        User user = userRepository.findById(authMemberDTO.getEmail()).get();
-        String userName = authMemberDTO.getName();
+    public mainResponseDto main(@RequestHeader(JwtProperties.USER_ID) String userId, @PathVariable("year") int year, @PathVariable("month") int month){
+        User user = userRepository.findByKakaoEmail(userId);
+        String userName = user.getNickname();
         Long totalMonthIncome = incomeService.totalMonth(user,year,month);
         Long totalMonthExpenditure = expenditureDetailService.totalMonth(user,year, month);
         double ecoPercentage = mainService.getPercentage(user, year, month);
         return new mainResponseDto(userName,totalMonthIncome,totalMonthExpenditure,ecoPercentage,100-ecoPercentage);
     }
 
-    @PostMapping("/main/update/{name}")
-    public void mainNameUpdate(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @PathVariable("name") String name){
-        userRepository.updateName(name,authMemberDTO.getEmail());
+    @PostMapping("/main/update")
+    public void mainNameUpdate(@RequestHeader(JwtProperties.USER_ID) String userId, @RequestParam String userName){
+        userRepository.updateName(userId, userName);
     }
 
     @Data

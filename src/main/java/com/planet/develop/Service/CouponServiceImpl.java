@@ -4,13 +4,13 @@ import com.planet.develop.DTO.CouponDetailDto;
 import com.planet.develop.DTO.CouponDto;
 import com.planet.develop.DTO.CouponListDto;
 import com.planet.develop.Entity.*;
+import com.planet.develop.Login.Model.User;
+import com.planet.develop.Login.Repository.UserRepository;
 import com.planet.develop.Repository.CouponDetailRepository;
 import com.planet.develop.Repository.CouponRepository;
 import com.planet.develop.Repository.CouponStorageRepository;
-import com.planet.develop.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -65,7 +65,7 @@ public class CouponServiceImpl implements CouponService {
         detailRepository.save(couponDetail);
         // 쿠폰 테이블에 쿠폰 정보 저장하기
         Coupon coupon = new Coupon().couponStorageToCoupon(couponStorage); // CouponStorage -> Coupon 변환
-        User user = userRepository.findById(id).get();
+        User user = userRepository.findByKakaoEmail(id);
         CouponDetail detail = detailRepository.findById(cno).get();
         coupon.setUser(user); coupon.setCouponDetail(detail);
         couponRepository.save(coupon);

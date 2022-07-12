@@ -1,6 +1,7 @@
 package com.planet.develop.Entity;
 
 import com.planet.develop.DTO.CouponDto;
+import com.planet.develop.Login.Model.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,7 +30,7 @@ public class Coupon {
     private CouponDetail couponDetail; // 쿠폰 상세 테이블과 일대일 매핑
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_code")
     private User user; // 사용자 테이블과 일대다 매핑
 
     public CouponDto entityToDto() {

@@ -1,7 +1,7 @@
 package com.planet.develop.Repository;
 
 import com.planet.develop.Entity.Income;
-import com.planet.develop.Entity.User;
+import com.planet.develop.Login.Model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

@@ -1,10 +1,9 @@
 package com.planet.develop.Service;
 
 import com.planet.develop.DTO.ExpenditureRequestDto;
-import com.planet.develop.Entity.Eco;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
-import com.planet.develop.Entity.User;
+import com.planet.develop.Login.Model.User;
 
 public interface ExpenditureService {
 
@@ -13,7 +12,7 @@ public interface ExpenditureService {
     default Expenditure dtoToEntity(ExpenditureRequestDto dto,
                                     ExpenditureDetail detail) {
         User user = User.builder()
-                .userId(dto.getUserId())
+                .kakaoEmail(dto.getUserId())
                 .build();
         Expenditure exEntity = Expenditure.builder()
                 .eno(detail.getEno())
@@ -27,7 +26,7 @@ public interface ExpenditureService {
 
     default ExpenditureRequestDto entityToDto(Expenditure entity) {
         ExpenditureRequestDto dto = ExpenditureRequestDto.builder()
-                .userId(entity.getUser().getUserId())
+                .userId(entity.getUser().getKakaoEmail())
                 .ex_cost(entity.getCost())
                 .date(entity.getDate())
                 .build();

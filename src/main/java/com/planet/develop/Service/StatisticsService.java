@@ -1,7 +1,7 @@
 package com.planet.develop.Service;
 
-import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.EcoEnum;
+import com.planet.develop.Login.Model.User;
 import com.planet.develop.Repository.StatisticsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -92,7 +92,7 @@ public class StatisticsService {
 
 
     /** 상위 4개 + 더보기 태그 보여주기 */
-    public  List<List<Object[]>> getFiveTagCounts(User user,int year,int month){
+    public  List<List<Object[]>> getFiveTagCounts(User user, int year, int month){
         LocalDate startDate = LocalDate.of(year, month, 1);
         LocalDate endDate=LocalDate.of(year, month, startDate.lengthOfMonth());
         List<Object[]> categoryFiveTagCount = statisticsRepository.getCategoryFiveTagCount(user, startDate, endDate, EcoEnum.G);

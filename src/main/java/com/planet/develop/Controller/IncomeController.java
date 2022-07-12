@@ -2,25 +2,24 @@ package com.planet.develop.Controller;
 
 import com.planet.develop.DTO.IncomeRequestDto;
 import com.planet.develop.DTO.IncomeResponseDto;
-import com.planet.develop.Security.DTO.AuthMemberDTO;
+import com.planet.develop.Login.JWT.JwtProperties;
 import com.planet.develop.Service.IncomeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://main.d2f9fwhj50mv28.amplifyapp.com")
 @RequiredArgsConstructor
+@RequestMapping("/api")
 @RestController
-@PreAuthorize("hasRole('USER')")
 public class IncomeController {
 
     private final IncomeService incomeService;
 
     /** 수입 데이터 저장*/
-    /** id는 사용자 id가 아니라 income의 pk값*/
-    @PostMapping("/income/{id}/new")
-    public IncomeResponseDto create_income(@AuthenticationPrincipal AuthMemberDTO authMemberDTO, @RequestBody IncomeRequestDto dto) {
-        dto.setUserId(authMemberDTO.getEmail());
+    @PostMapping("/income/new")
+    public IncomeResponseDto create_income(@RequestHeader(JwtProperties.USER_ID) String userId, @RequestBody IncomeRequestDto dto) {
+        dto.setUserId(userId);
         Long incomeId = incomeService.save(dto);
         return new IncomeResponseDto(incomeId);
     }

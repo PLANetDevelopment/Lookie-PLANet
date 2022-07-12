@@ -1,7 +1,7 @@
 package com.planet.develop.Service;
 
 import com.planet.develop.Entity.MissionComplete;
-import com.planet.develop.Entity.User;
+import com.planet.develop.Login.Model.User;
 import com.planet.develop.Repository.MissionCompleteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class MissionCompleteService {
         return mission.getId();
     }
 
-    public List<MissionComplete> findMissions(User user,int year,int month){
+    public List<MissionComplete> findMissions(User user, int year, int month){
         List<MissionComplete> missions = missionCompleteRepository.findMissions(user,year,month);
         return missions;
     }

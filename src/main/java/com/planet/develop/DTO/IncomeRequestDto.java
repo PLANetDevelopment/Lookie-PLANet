@@ -1,6 +1,5 @@
 package com.planet.develop.DTO;
 
-import com.planet.develop.Entity.User;
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
 import lombok.Data;

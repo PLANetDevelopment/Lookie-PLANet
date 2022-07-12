@@ -4,25 +4,22 @@ import com.planet.develop.DTO.ExpenditureRequestDto;
 import com.planet.develop.DTO.ExpenditureResponseDto;
 import com.planet.develop.Entity.Expenditure;
 import com.planet.develop.Entity.ExpenditureDetail;
-import com.planet.develop.Entity.User;
+import com.planet.develop.Login.JWT.JwtProperties;
 import com.planet.develop.Repository.ExpenditureDetailRepository;
 import com.planet.develop.Repository.ExpenditureRepository;
-import com.planet.develop.Repository.UserRepository;
-import com.planet.develop.Security.DTO.AuthMemberDTO;
 import com.planet.develop.Service.EcoService;
 import com.planet.develop.Service.ExpenditureDetailService;
 import com.planet.develop.Service.ExpenditureService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "https://main.d2f9fwhj50mv28.amplifyapp.com")
 @RequiredArgsConstructor
+@RequestMapping(value = "/api")
 @RestController
-@PreAuthorize("hasRole('USER')")
 public class ExpenditureController {
 
-    private final UserRepository userRepository;
     private final ExpenditureDetailRepository detailRepository;
     private final ExpenditureRepository expenditureRepository;
     private final ExpenditureDetailService detailService;
@@ -31,10 +28,9 @@ public class ExpenditureController {
 
     /** 지출 데이터 저장 */
     @PostMapping("/expenditure/new")
-    public ExpenditureResponseDto create_expenditure(@AuthenticationPrincipal AuthMemberDTO authMemberDTO,
+    public ExpenditureResponseDto create_expenditure(@RequestHeader(JwtProperties.USER_ID) String userId,
                                                 @RequestBody ExpenditureRequestDto reuqest) {
-        User user = userRepository.findById(authMemberDTO.getEmail()).get();
-        reuqest.setUserId(user.getUserId());
+        reuqest.setUserId(userId);
         Long deno = detailService.save(reuqest); // 지출 상세 테이블 저장
         ExpenditureDetail detail = detailRepository.findById(deno).get(); // 지출 테이블과 매핑
         Long eno = expenditureService.save(reuqest, detail); // 지출 테이블 저장

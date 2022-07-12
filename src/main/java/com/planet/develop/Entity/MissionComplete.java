@@ -1,12 +1,10 @@
 package com.planet.develop.Entity;
 
-import com.planet.develop.Enum.money_Type;
-import com.planet.develop.Enum.money_Way;
+import com.planet.develop.Login.Model.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -25,7 +23,7 @@ public class MissionComplete extends BaseEntity{
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_code")
     private User user;
 
     @Builder

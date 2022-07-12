@@ -2,6 +2,7 @@ package com.planet.develop.Entity;
 
 import com.planet.develop.Enum.money_Type;
 import com.planet.develop.Enum.money_Way;
+import com.planet.develop.Login.Model.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,9 +30,8 @@ public class Income extends BaseEntity {
     private String memo;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_code")
     private User user;
-
 
     @Builder
     public Income(Long in_cost, money_Way in_way, money_Type in_type, String memo, LocalDate date, User user){

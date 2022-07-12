@@ -1,5 +1,6 @@
 package com.planet.develop.Entity;
 
+import com.planet.develop.Login.Model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class Expenditure extends BaseEntity {
     private ExpenditureDetail detail;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_code")
     private User user;
 
     public void update(Long cost, LocalDate date) {
